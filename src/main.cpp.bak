@@ -1,0 +1,31 @@
+/** @mainpage Serendipity Booksellers POS and Inventory Management System
+ * @authors Jacob Pratt
+ * @authors Deven Vong
+ * @authors Ryan McDonald
+ * 
+ * - Section Header!
+ * text
+*/
+
+#include "serendipity.hpp"
+#include "book.hpp"
+#include "mainmenu.hpp"
+#include "linkedList.hpp"
+#include "orderedLinkedList.hpp"
+
+/**
+ * The entry point for Serendipity Booksellers POS and Inventory Management System.
+ * 
+ * 
+*/
+int main() {
+    orderedLinkedList<Book> db;
+    db.initializeList();
+
+	mainmenu::start(db);
+
+	db.destroyList();
+
+	cout << padMenu() << "Exiting" << endl;
+	return 0;
+}
