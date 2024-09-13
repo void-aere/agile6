@@ -4,8 +4,12 @@ SYMBOLS = helpers mainmenu
 GPPFLAGS = -std=c++20 -Wall -Werror -Wpedantic
 
 # Make a link in the root directory to the compiled executable
-default: build/output
+default: build build/output
 	ln -sf build/output output
+
+# Create the output directory
+build:
+	mkdir build
 
 # Assemble an executble from the compiled objects
 build/output: build/main.o $(addprefix build/, $(SYMBOLS:=.o))
