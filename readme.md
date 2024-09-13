@@ -11,5 +11,6 @@ Note: `make clean` removes all compiler output.
 ### Best Practices for Git
 
 - Don't stage your `.vscode` or other environment-specific files for commit.
+- Don't commit anything compiled (`make clean` before staging)
 - Don't push a version that doesn't compile.
 - Try not to commit on the main branch.
