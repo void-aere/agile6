@@ -1,28 +1,36 @@
-# Add all new symbol names to this list!
+# Add all new cpp-hpp combo names to this list!
 SYMBOLS = helpers mainmenu
+
+ENTRYPOINT = main
+
+# Configure where things go
+OUT_DIR = out
+SRC_DIR = src
+EXE = run-me
 
 GPPFLAGS = -std=c++20 -Wall -Werror -Wpedantic
 
-# Make a link in the root directory to the compiled executable
-default: build build/output
-	ln -sf build/output output
+# Make a link in the root directory to the compiled EXE
+default: ${OUT_DIR} ${OUT_DIR}/${EXE}
+	@ln -sf ${OUT_DIR}/${EXE} ${EXE}
+	$(info Done! Run the program with: ./${EXE})
 
 # Create the output directory
-build:
-	mkdir build
+${OUT_DIR}:
+	mkdir ${OUT_DIR}
 
 # Assemble an executble from the compiled objects
-build/output: build/main.o $(addprefix build/, $(SYMBOLS:=.o))
-	g++ ${GPPFLAGS} build/*.o -o build/output
+${OUT_DIR}/${EXE}: ${OUT_DIR}/${ENTRYPOINT}.o $(addprefix ${OUT_DIR}/, $(SYMBOLS:=.o))
+	g++ ${GPPFLAGS} ${OUT_DIR}/*.o -o ${OUT_DIR}/${EXE}
 
 # Compile the main function separately from other modules
-build/main.o: src/main.cpp
-	g++ ${GPPFLAGS} -c src/main.cpp -o build/main.o
+${OUT_DIR}/${ENTRYPOINT}.o: ${SRC_DIR}/${ENTRYPOINT}.cpp
+	g++ ${GPPFLAGS} -c ${SRC_DIR}/${ENTRYPOINT}.cpp -o ${OUT_DIR}/${ENTRYPOINT}.o
 
-# Magic to compile each of the modules specified in $SYMBOLS and put objects in build/
-build/%.o: src/%.cpp src/%.hpp
-	g++ ${GPPFLAGS} -c src/$*.cpp -o $@
+# Magic to compile each of the modules specified in $SYMBOLS and put objects in $OUT_DIR/
+${OUT_DIR}/%.o: ${SRC_DIR}/%.cpp ${SRC_DIR}/%.hpp
+	g++ ${GPPFLAGS} -c ${SRC_DIR}/$*.cpp -o $@
 
 clean:
-	rm -f build/*
-	rm -f output
+	rm -f ${OUT_DIR}/*
+	rm -f ${EXE}
