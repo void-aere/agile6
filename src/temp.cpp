@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "Account.h"
+#include "Account.hpp"
 using namespace std;
 
 void addAccount(fstream& db);
