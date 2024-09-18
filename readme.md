@@ -14,3 +14,10 @@ Note: `make clean` removes all compiler output.
 - Don't commit anything compiled (`make clean` before staging)
 - Don't push a version that doesn't compile.
 - Try not to commit on the main branch.
+
+### Feature Paradise
+
+- Tab completion in functions that search and choose (see trie structure).
+- Obfuscate typeface for passwords (see bash text decoration, [link](https://github.com/scop/bash-completion)).
+- Boxes with curved edges (see unicode Box Drawing block 256D, 256E).
+- This thing: 🯁🯂🯃.
