@@ -1,5 +1,5 @@
 # Add all new cpp-hpp combo names to this list!
-SYMBOLS = helpers mainmenu login account
+SYMBOLS = helpers mainmenu login account accounts/bankAccount accounts/certificateOfDeposit accounts/checkingAccount accounts/highInterestChecking accounts/highInterestSavings accounts/noChargeChecking accounts/savingsAccount accounts/serviceChargeChecking
 
 ENTRYPOINT = main
 
@@ -8,7 +8,7 @@ OUT_DIR = out
 SRC_DIR = src
 EXE = run-me
 
-GPPFLAGS = -std=c++20 -Wall -Werror -Wpedantic
+GPPFLAGS = -std=c++20 -Wall -Werror -Wpedantic -Isrc
 
 # Make a link in the root directory to the compiled EXE
 default: ${OUT_DIR} ${OUT_DIR}/${EXE}
@@ -17,7 +17,7 @@ default: ${OUT_DIR} ${OUT_DIR}/${EXE}
 
 # Create the output directory
 ${OUT_DIR}:
-	mkdir ${OUT_DIR}
+	mkdir -p ${OUT_DIR}/accounts
 
 # Assemble an executble from the compiled objects
 ${OUT_DIR}/${EXE}: ${OUT_DIR}/${ENTRYPOINT}.o $(addprefix ${OUT_DIR}/, $(SYMBOLS:=.o))
@@ -32,5 +32,5 @@ ${OUT_DIR}/%.o: ${SRC_DIR}/%.cpp ${SRC_DIR}/%.hpp
 	g++ ${GPPFLAGS} -c ${SRC_DIR}/$*.cpp -o $@
 
 clean:
-	rm -f ${OUT_DIR}/*
+	rm -rf ${OUT_DIR}
 	rm -f ${EXE}

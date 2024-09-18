@@ -145,6 +145,21 @@ string inputString() {
 }
 
 /**
+ * Get a string input
+ * 
+ * This function prints a user prompt, then returns the next string in the input buffer.
+ * 
+ * @param prompt The prompt to present the user.
+ * @return The next string.
+*/
+string inputString(const string &prompt) {
+    cout << prompt << endl;
+	string out;
+	getline(cin, out);
+	return out;
+}
+
+/**
  * Get an integral input.
  * 
  * This non-printing function returns the next integer passed to the input buffer.
