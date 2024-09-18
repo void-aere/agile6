@@ -1,18 +1,20 @@
 #pragma once
-#define highInterestSavings_hpp
 
 #include "savingsAccount.hpp"
 
 class highInterestSavings : public savingsAccount {
 	public:
-		highInterestSavings(string name, int accountNumber, double balance);
-		highInterestSavings(string name, int accountNumber, double balance, double interestRate, double minBalance);
+		highInterestSavings(std::string name, int accountNumber, double balance);
+		highInterestSavings(std::string name, int accountNumber, double balance, double interestRate, double minBalance);
+        highInterestSavings(const nlohmann::json &j);
 		double getMinimumBalance();
 		bool verifyMinimumBalance(double amount);
-		virtual void withdraw(double amount);
-		virtual void print();
-		virtual void createAccountMenu();
-		virtual void editAccountMenu();
+		void withdraw(double amount);
+		void print();
+
+        nlohmann::json toJson();
+		void createAccountMenu();
+		void editAccountMenu();
 	
 	protected:
 		double minimumBalance;

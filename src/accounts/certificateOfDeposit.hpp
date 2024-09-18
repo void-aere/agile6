@@ -1,12 +1,13 @@
 #pragma once
-#define certificateOfDeposit_hpp
 
 #include "bankAccount.hpp"
 
 class certificateOfDeposit : public bankAccount {
 	public:
-		certificateOfDeposit(string name, int accountNumber, double balance);
-		certificateOfDeposit(string name, int accountNumber, double balance, double interestRate, int maturityMonth);
+		certificateOfDeposit(std::string name, int accountNumber, double balance);
+		certificateOfDeposit(std::string name, int accountNumber, double balance, double interestRate, int maturityMonth);
+        certificateOfDeposit(std::string name, int accountNumber, double balance, double interestRate, int maturityMonth, int currentMonth);
+        certificateOfDeposit(const nlohmann::json &j);
 		double getInterestRate();
 		void setInterestRate(double interestRate);
 		double getCurrentMonth();
@@ -17,10 +18,12 @@ class certificateOfDeposit : public bankAccount {
 		void withdraw(double amount);
 		void withdraw();
 		void createMonthlyStatement();
+		void print();
+
+        nlohmann::json toJson();
 		void createAccountMenu();
 		void editAccountMenu();
 
-		void print();
 
 	private:
 		static const double INTEREST_RATE; // = 0.05

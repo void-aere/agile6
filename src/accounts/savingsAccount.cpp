@@ -1,18 +1,23 @@
 #include "savingsAccount.hpp"
+#include "helpers.hpp"
 #include <iostream>
 #include <iomanip>
+
+using std::string, std::cout, std::endl;
+using json = nlohmann::json;
 
 const double savingsAccount::INTEREST_RATE = 0.03;
 
 savingsAccount::savingsAccount(string name, int accountNumber, double balance)
-	: bankAccount(name, accountNumber, balance) {
-	interestRate = INTEREST_RATE;
-}
+	: savingsAccount(name, accountNumber, balance, INTEREST_RATE) { }
 
 savingsAccount::savingsAccount(string name, int accountNumber, double balance, double interestRate)
 	: bankAccount(name, accountNumber, balance) {
 	this->interestRate = interestRate;
 }
+
+savingsAccount::savingsAccount(const json &j) 
+    : savingsAccount(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("interestRate")) { }
 
 double savingsAccount::getInterestRate() {
 	return interestRate;
@@ -33,6 +38,10 @@ void savingsAccount::createMonthlyStatement() {
 void savingsAccount::print() {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
 	std::cout << "Savings account: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
+}
+
+json savingsAccount::toJson() {
+    return json{{"name", name}, {"accountNumber", accountNumber}, {"balance", balance}, {"interestRate", interestRate}};
 }
 
 void savingsAccount::createAccountMenu() {

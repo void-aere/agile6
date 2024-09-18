@@ -1,5 +1,4 @@
 #pragma once
-#define noChargeChecking_h
 
 #include "checkingAccount.hpp"
 
@@ -7,7 +6,7 @@ class noChargeChecking : public checkingAccount {
 	public:
 		noChargeChecking(string name, int accountNumber, double balance);
 		noChargeChecking(string name, int accountNumber, double balance, double minimumBalance, double interestRate);
-
+        noChargeChecking(const nlohmann::json &j);
 		double getMinimumBalance();
 		void setMinimumBalance(double minumumBalance);
 		bool verifyMinimumBalance(double balance);
@@ -15,6 +14,8 @@ class noChargeChecking : public checkingAccount {
 		void withdraw(double amount);
 		virtual void createMonthlyStatement();
 		virtual void print();
+
+        virtual nlohmann::json toJson();
 		virtual void createAccountMenu();
 		virtual void editAccountMenu();
 

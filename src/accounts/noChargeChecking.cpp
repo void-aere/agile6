@@ -1,21 +1,25 @@
 #include "noChargeChecking.hpp"
+#include "helpers.hpp"
 #include <iomanip>
 #include <iostream>
+
+using std::string, std::cout, std::endl;
+using json = nlohmann::json;
 
 const double noChargeChecking::MINIMUM_BALANCE = 1000.00;
 const double noChargeChecking::INTEREST_RATE = 0.02;
 
 noChargeChecking::noChargeChecking(string name, int accountNumber, double balance)
-	: checkingAccount(name, accountNumber, balance) {
-	minimumBalance = MINIMUM_BALANCE;
-	interestRate = INTEREST_RATE;
-}
+	: noChargeChecking(name, accountNumber, balance, MINIMUM_BALANCE, INTEREST_RATE) { }
 
 noChargeChecking::noChargeChecking(string name, int accountNumber, double balance, double minimumBalance, double interestRate)
 	: checkingAccount(name, accountNumber, balance) {
 	this->minimumBalance = minimumBalance;
 	this->interestRate = interestRate;
 }
+
+noChargeChecking::noChargeChecking(const json &j) 
+    : noChargeChecking(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("minimumBalance"), j.at("interestRate")) { }
 
 double noChargeChecking::getMinimumBalance() {
 	return minimumBalance;
@@ -42,6 +46,10 @@ void noChargeChecking::createMonthlyStatement() {}
 void noChargeChecking::print() {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
 	std::cout << "No Charge Checking: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
+}
+
+json noChargeChecking::toJson() {
+    return json{{"name", name}, {"accountNumber", accountNumber}, {"balance", balance}, {"interestRate", interestRate}, {"minimumBalance", minimumBalance}};
 }
 
 void noChargeChecking::createAccountMenu() {

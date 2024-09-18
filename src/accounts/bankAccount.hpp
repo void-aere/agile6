@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-using std::string;
+#include <nlohmann/json.hpp>
 
 class bankAccount {
 	public:
@@ -14,6 +14,8 @@ class bankAccount {
 		void deposit(double amount);
 		virtual void createMonthlyStatement() = 0;
 		virtual void print();
+
+        virtual nlohmann::json toJson();
 		virtual void createAccountMenu();
 		virtual void editAccountMenu();
 

@@ -1,31 +1,37 @@
 #include "serviceChargeChecking.hpp"
+#include "helpers.hpp"
 #include <iomanip>
 #include <iostream>
 
-const double serviceChargeChecking::SERVICE_CHARGE_ACCOUNT = 10.00;
+using std::string, std::cout, std::endl;
+using json = nlohmann::json;
+
+const double serviceChargeChecking::SERVICE_CHARGE_AMOUNT = 10.00;
 const int serviceChargeChecking::MAXIMUM_CHECK_QUANTITY = 5;
 const double serviceChargeChecking::SERVICE_CHARGE_CHECKS_EXCEEDED = 5;
 
 serviceChargeChecking::serviceChargeChecking(string name, int accountNumber, double balance)
-	: checkingAccount(name, accountNumber, balance) {
-	serviceChargeAccount = SERVICE_CHARGE_ACCOUNT;
-	serviceChargeChecksExceeded = 0;
-	checksWritten = 0;
-}
+	: serviceChargeChecking(name, accountNumber, balance, SERVICE_CHARGE_AMOUNT, 0, 0) { }
 
 serviceChargeChecking::serviceChargeChecking(string name, int accountNumber, double balance, double serviceChargeAccount, double serviceChargeChecksExceeded)
-	: checkingAccount(name, accountNumber, balance) {
-	serviceChargeAccount = serviceChargeAccount;
-	this->serviceChargeChecksExceeded = serviceChargeChecksExceeded;
-	this->checksWritten = 0;
+	: serviceChargeChecking(name, accountNumber, balance, serviceChargeAccount, serviceChargeChecksExceeded, 0) { }
+
+serviceChargeChecking::serviceChargeChecking(std::string name, int accountNumber, double balance, double serviceChargeAmount, double serviceChargeChecksExceeded, int checksWritten)
+    : checkingAccount(name, accountNumber, balance) {
+    this->serviceChargeAmount = serviceChargeAmount;
+    this->serviceChargeChecksExceeded = serviceChargeChecksExceeded;
+    this->checksWritten = checksWritten;
 }
 
-double serviceChargeChecking::getServiceChargeAccount() {
-	return serviceChargeAccount;
+serviceChargeChecking::serviceChargeChecking(const json &j)
+    : serviceChargeChecking(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("serviceChargeAmount"), j.at("serviceChargeChecksExceeded"), j.at("checksWritten")) { }
+
+double serviceChargeChecking::getServiceChargeAmount() {
+	return serviceChargeAmount;
 }
 
-void serviceChargeChecking::setServiceChargeAccount(double amount) {
-	serviceChargeAccount = amount;
+void serviceChargeChecking::setServiceChargeAmount(double amount) {
+	serviceChargeAmount = amount;
 }
 
 double serviceChargeChecking::getServiceChargeChecksExceeded() {
@@ -45,7 +51,7 @@ void serviceChargeChecking::setChecksWritten(int num) {
 }
 
 void serviceChargeChecking::postServiceCharge() {
-	balance -= serviceChargeAccount;
+	balance -= serviceChargeAmount;
 }
 
 void serviceChargeChecking::writeCheck(double amount) {
@@ -62,7 +68,11 @@ void serviceChargeChecking::createMonthlyStatement() {
 
 void serviceChargeChecking::print() {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
-	std::cout << "Service CHarge Checking: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
+	std::cout << "Service Charge Checking: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
+}
+
+json serviceChargeChecking::toJson() {
+    return json{{"name", name}, {"accountNumber", accountNumber}, {"balance", balance}, {"serviceChargeAmount", serviceChargeAmount}, {"serviceChargeChecksExceeded", serviceChargeChecksExceeded}, {"checksWritten", checksWritten}};
 }
 
 void serviceChargeChecking::createAccountMenu() {
@@ -88,7 +98,7 @@ void serviceChargeChecking::editAccountMenu() {
 	std::cout << "Account Name: " << name << endl;
 	std::cout << "Account Number: " << accountNumber << endl;
 	std::cout << "Account Balance: " << balance << endl;
-	std::cout << "Service Charge Account: " << serviceChargeAccount << endl;
+	std::cout << "Service Charge Amount: " << serviceChargeAmount << endl;
 	std::cout << "Service Charge Checks Exceeded: " << serviceChargeChecksExceeded << endl;
 	std::cout << "Checks Written: " << checksWritten << endl;
 	
@@ -110,10 +120,10 @@ void serviceChargeChecking::editAccountMenu() {
 			balance = inputDouble("Enter the new Account Balance: ");
 	}
 
-	prompt = confirm("\nWould you like to edit Service Charge Account? (Y/N): ");
+	prompt = confirm("\nWould you like to edit Service Charge Amount? (Y/N): ");
 	if (prompt)
 	{
-			serviceChargeAccount = inputDouble("Enter the new Service Charge Account: ");
+			serviceChargeAmount = inputDouble("Enter the new Service Charge Amount: ");
 	}
 
 	prompt = confirm("\nWould you like to edit Service Charge Checks Exceeded? (Y/N): ");
@@ -132,7 +142,7 @@ void serviceChargeChecking::editAccountMenu() {
 	std::cout << "Account Name: " << name << endl;
 	std::cout << "Account Number: " << accountNumber << endl;
 	std::cout << "Account Balance: " << balance << endl;
-	std::cout << "Service Charge Account: " << serviceChargeAccount << endl;
+	std::cout << "Service Charge Amount: " << serviceChargeAmount << endl;
 	std::cout << "Service Charge Checks Exceeded: " << serviceChargeChecksExceeded << endl;
 	std::cout << "Checks Written: " << checksWritten << endl;
 

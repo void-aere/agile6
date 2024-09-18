@@ -1,18 +1,22 @@
 #include "highInterestChecking.hpp"
+#include "helpers.hpp"
 #include <iostream>
 #include <iomanip>
+
+using std::string, std::cout, std::endl;
+using json = nlohmann::json;
 
 const double highInterestChecking::INTEREST_RATE = 0.05;
 const double highInterestChecking::MINIMUM_BALANCE = 5000.00;
 
 highInterestChecking::highInterestChecking(string name, int accountNumber, double balance)
-	: noChargeChecking(name, accountNumber, balance) {
-	minimumBalance = MINIMUM_BALANCE;
-	interestRate = INTEREST_RATE;
-}
+	: highInterestChecking(name, accountNumber, balance, MINIMUM_BALANCE, INTEREST_RATE) { }
 
 highInterestChecking::highInterestChecking(string name, int accountNumber, double balance, double minimumBalance, double interestRate)
 	: noChargeChecking(name, accountNumber, balance, minimumBalance, interestRate) {}
+
+highInterestChecking::highInterestChecking(const json &j)
+    : highInterestChecking(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("minimumBalance"), j.at("interestRate")) { }
 
 double highInterestChecking::getInterestRate() {
 	return interestRate;
@@ -33,6 +37,10 @@ void highInterestChecking::createMonthlyStatement() {
 void highInterestChecking::print() {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
 	std::cout << "High Interest Checking: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
+}
+
+json highInterestChecking::toJson() {
+    return json{{"name", name}, {"accountNumber", accountNumber}, {"balance", balance}, {"interestRate", interestRate}, {"minimumBalance", minimumBalance}}; 
 }
 
 void highInterestChecking::createAccountMenu() {

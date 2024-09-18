@@ -1,23 +1,31 @@
 #include "certificateOfDeposit.hpp"
+#include "helpers.hpp"
 #include <iostream>
 #include <iomanip>
+
+using std::string, std::cout, std::endl;
+using json = nlohmann::json;
 
 const double certificateOfDeposit::INTEREST_RATE = 0.05;
 const double certificateOfDeposit::MATURITY_MONTH = 6;
 
 certificateOfDeposit::certificateOfDeposit(string name, int accountNumber, double balance)
-	: bankAccount(name, accountNumber, balance) {
-	interestRate = INTEREST_RATE;
-	//maturityMonth = MATURITY_MONTH;
-	maturityMonth = 0;
-	currentMonth = 0;
+	: certificateOfDeposit(name, accountNumber, balance, INTEREST_RATE, MATURITY_MONTH, 0) {
 }
 
 certificateOfDeposit::certificateOfDeposit(string name, int accountNumber, double balance, double interestRate, int maturityMonth)
-	: bankAccount(name, accountNumber, balance) {
-	this->interestRate = interestRate;
-	this->maturityMonth = maturityMonth;
-	currentMonth = 0;
+	: certificateOfDeposit(name, accountNumber, balance, interestRate, maturityMonth, 0) {
+}
+
+certificateOfDeposit::certificateOfDeposit(std::string name, int accountNumber, double balance, double interestRate, int maturityMonth, int currentMonth) 
+    : bankAccount(name, accountNumber, balance) {
+        this->interestRate = interestRate;
+        this->maturityMonth = maturityMonth;
+        this->currentMonth = currentMonth;
+}
+
+certificateOfDeposit::certificateOfDeposit(const json &j) 
+    : certificateOfDeposit(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("interestRate"), j.at("maturityMonth"), j.at("currentMonth")) {
 }
 
 double certificateOfDeposit::getInterestRate() {
@@ -65,6 +73,10 @@ void certificateOfDeposit::createMonthlyStatement() {
 void certificateOfDeposit::print() {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
 	std::cout << "Certificate of Deposit: " << name << "\t ACCT# " << accountNumber << "\t Balance: $" << balance << std::endl;
+}
+
+json certificateOfDeposit::toJson() {
+    return json{{"name", name}, {"accountNumber", accountNumber}, {"balance", balance}, {"interestRate", interestRate}, {"maturityMonth", maturityMonth}, {"currentMonth", currentMonth}};
 }
 
 void certificateOfDeposit::createAccountMenu() {

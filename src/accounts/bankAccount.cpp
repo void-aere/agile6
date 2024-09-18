@@ -4,6 +4,8 @@
 #include "bankAccount.hpp"
 #include "helpers.hpp"
 
+using std::cout, std::endl;
+
 bankAccount::bankAccount(string name, int accountNumber, double balance) {
 	this->name = name;
 	this->accountNumber = accountNumber;
@@ -58,21 +60,20 @@ void bankAccount::editAccountMenu() {
 	std::cout << "Account Balance: " << balance << endl;
 
 	prompt = confirm("\nWould you like to edit Account Name? (Y/N): ");
-	if (prompt)
-	{
-			name = inputString("Enter the new Account Name: ");
+	if (prompt) {
+		name = inputString("Enter the new Account Name: ");
 	}
 
 	prompt = confirm("\nWould you like to edit Account Number? (Y/N): ");
 	if (prompt)
 	{
-			accountNumber = inputDouble("Enter the new Account Number: ");
+        accountNumber = inputDouble("Enter the new Account Number: ");
 	}
 
 	prompt = confirm("\nWould you like to edit Account Balance? (Y/N): ");
 	if (prompt)
 	{
-			balance = inputDouble("Enter the new Account Balance: ");
+        balance = inputDouble("Enter the new Account Balance: ");
 	}
 
 	std::cout << "\nHere are the new account details:\n";

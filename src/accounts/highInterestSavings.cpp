@@ -1,20 +1,24 @@
 #include "highInterestSavings.hpp"
+#include "helpers.hpp"
 #include <iostream>
 #include <iomanip>
+
+using std::string, std::cout, std::endl;
+using json = nlohmann::json;
 
 const double highInterestSavings::MINIMUM_BALANCE = 2500.00;
 const double highInterestSavings::INTEREST_RATE = 0.05;
 
 highInterestSavings::highInterestSavings(string name, int accountNumber, double balance)
-	: savingsAccount(name, accountNumber, balance) {
-	minimumBalance = MINIMUM_BALANCE;
-	interestRate = INTEREST_RATE;
-}
+	: highInterestSavings(name, accountNumber, balance, INTEREST_RATE, MINIMUM_BALANCE) { }
 
 highInterestSavings::highInterestSavings(string name, int accountNumber, double balance, double interestRate, double minimumBalance)
 	: savingsAccount(name, accountNumber, balance, interestRate) {
 	this->minimumBalance = minimumBalance;
 }
+
+highInterestSavings::highInterestSavings(const json &j)
+    : highInterestSavings(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("interestRate"), j.at("minimumBalance")) { }
 	
 double highInterestSavings::getMinimumBalance() {
 	return minimumBalance;
@@ -31,6 +35,10 @@ void highInterestSavings::withdraw(double amount) {
 void highInterestSavings::print() {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
 	std::cout << "High Interest Savings: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
+}
+
+json highInterestSavings::toJson() {
+    return json{{"name", name}, {"accountNumber", accountNumber}, {"balance", balance}, {"interestRate", interestRate}, {"minimumBalance", minimumBalance}};
 }
 
 void highInterestSavings::createAccountMenu() {
