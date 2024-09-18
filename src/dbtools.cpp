@@ -1,101 +1,94 @@
+#include "dbtools.hpp"
+
 #include <iostream>
 #include <fstream>
-#include "Account.hpp"
+#include <string.h>
+#include "account.hpp"
 using namespace std;
 
-void addAccount(fstream& db);
-void listAllAccounts(fstream& db);
-void updateUsername(fstream& db, char uName[]);
-void updateFile(fstream& db, char uName[], char fName[]);
-bool findAccount(fstream& db, char uName[]);
-bool fileInUse(fstream& db, char fName[]);
+// int main()
+// {
+// 	// Universal fstream variable that will be defined
+// 	// when first opening menu
+// 	fstream database;
 
-int main()
-{
-	// Universal fstream variable that will be defined
-	// when first opening menu
-	fstream database;
+// 	// test data
+// 	char currentUserName[64] = "chamedani0";
+// 	char currentFileName[64] = "BankAccount1.txt";
+// 	char currentFileName2[64] = "BankAccount2.txt";
 
-	// test data
-	char currentUserName[64] = "chamedani0";
-	char currentFileName[64] = "BankAccount1.txt";
-	char currentFileName2[64] = "BankAccount2.txt";
+// 	// for adding account just pass in the fstream variable
+// 	addAccount(database);
 
-	// for adding account just pass in the fstream variable
-	addAccount(database);
+// 	addAccount(database);
 
-	addAccount(database);
+// 	addAccount(database);
 
-	addAccount(database);
+// 	// for listing accounts just pass in fstream
+// 	listAllAccounts(database);
 
-	// for listing accounts just pass in fstream
-	listAllAccounts(database);
+// 	// commented out during testing but pass in fstream as
+// 	// well as the current user name logged in so the
+// 	// computer knows which username to update
+// 	// 
+// 	// this is an extra function that is really only needed
+// 	// if we want to allow users to chnage their name on the
+// 	// database, not a priority
+// 	//updateUsername(database, currentUserName);
 
-	// commented out during testing but pass in fstream as
-	// well as the current user name logged in so the
-	// computer knows which username to update
-	// 
-	// this is an extra function that is really only needed
-	// if we want to allow users to chnage their name on the
-	// database, not a priority
-	//updateUsername(database, currentUserName);
+// 	// this will be used to update the current user, pass in
+// 	// fstream, the current user's name, as well as the file
+// 	// they are trying to access/if they are leaving
+// 	//
+// 	// this function will be called whenever a user attempts to
+// 	// access the data of a bank account so when other database
+// 	// users try to edit any account we can run fileInUse and
+// 	// find that file name in the database to tell the user
+// 	// if the file is in use
+// 	//
+// 	// when using updateFile to "leave" an account just pass
+// 	// in a literal of "Not in a file." or whatever, it shouldn't
+// 	// matter
+// 	updateFile(database, currentUserName, currentFileName);
 
-	// this will be used to update the current user, pass in
-	// fstream, the current user's name, as well as the file
-	// they are trying to access/if they are leaving
-	//
-	// this function will be called whenever a user attempts to
-	// access the data of a bank account so when other database
-	// users try to edit any account we can run fileInUse and
-	// find that file name in the database to tell the user
-	// if the file is in use
-	//
-	// when using updateFile to "leave" an account just pass
-	// in a literal of "Not in a file." or whatever, it shouldn't
-	// matter
-	updateFile(database, currentUserName, currentFileName);
+// 	listAllAccounts(database);
 
-	listAllAccounts(database);
+// 	addAccount(database);
 
-	addAccount(database);
+// 	listAllAccounts(database);
 
-	listAllAccounts(database);
+// 	updateFile(database, currentUserName, currentFileName2);
 
-	updateFile(database, currentUserName, currentFileName2);
+// 	listAllAccounts(database);
 
-	listAllAccounts(database);
+// 	// use findAccount and fileInUse to return boolean variables
+// 	// that can be used to either direct user to the edit menu
+// 	// for an account or just shoot them back to the main menu
+// 	if (findAccount(database, currentUserName))
+// 	{
+// 		cout << "Account found!" << endl;
+// 	}
 
-	// use findAccount and fileInUse to return boolean variables
-	// that can be used to either direct user to the edit menu
-	// for an account or just shoot them back to the main menu
-	if (findAccount(database, currentUserName))
-	{
-		cout << "Account found!" << endl;
-	}
-
-	if (fileInUse(database, currentFileName2))
-	{
-		cout << "BACK TO MENU..." << endl;
-	}
-}
+// 	if (fileInUse(database, currentFileName2))
+// 	{
+// 		cout << "BACK TO MENU..." << endl;
+// 	}
+// }
 
 // creates an account with the entered username and stores it on the
 // database, could create a check to see if said account is already
 // on the database but maybe in the next build
-void addAccount(fstream& db)
+void addAccount(fstream& db, char uName[])
 {
 	db.open("database.dat", ios::out | ios::binary | ios::app);
 
 	Account newAccount;
 
-	cout << "Please enter a username: ";
-	cin.getline(newAccount.userName, 64);
+	strncpy(newAccount.userName, uName, 64);
 
 	db.seekp(0L, ios::end);
 
 	db.write(reinterpret_cast<char*>(&newAccount), sizeof(newAccount));
-
-	cout << "Account has been created!\n";
 
 	db.close();
 }
@@ -143,7 +136,7 @@ void updateUsername(fstream& db, char uName[])
 	{
 		if (strncmp(showAccount.userName, uName, sizeof(showAccount.userName)) == 0)
 		{
-			strncpy_s(showAccount.userName, newName, sizeof(showAccount.userName));
+			strncpy(showAccount.userName, newName, sizeof(showAccount.userName));
 			found = true;
 		}
 		else
@@ -196,7 +189,7 @@ void updateFile(fstream& db, char uName[], char fName[])
 
 	db.seekp(seekNum * sizeof(showAccount), ios::beg);
 
-	strncpy_s(showAccount.fileName, fName, sizeof(showAccount.fileName));
+	strncpy(showAccount.fileName, fName, sizeof(showAccount.fileName));
 
 	db.write(reinterpret_cast<char*>(&showAccount), sizeof(showAccount));
 
@@ -323,3 +316,4 @@ bool fileInUse(fstream& db, char fName[])
 //Account found!
 //The file you are trying to access, "BankAccount2.txt" is currently being edited by chamedani0 and cannot be accessed right now.
 //BACK TO MENU...
+

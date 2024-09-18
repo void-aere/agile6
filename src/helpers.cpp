@@ -213,6 +213,40 @@ float inputFloat(const string& prompt) {
 }
 
 /**
+ * Get a double-precision floating-point input (double).
+ * 
+ * This non-printing function returns the next double passed to the input buffer.
+ * ignoreLine() is called automatically, so CIN will always be clean after use.
+ * 
+ * @return The next double, or -1 on fail.
+*/
+double inputDouble() {
+	double input;
+	cin >> input;
+	ignoreLine();
+
+	if (!cin.good()) {
+		cin.clear();
+		ignoreLine();
+		return -1;
+	} else return input;
+}
+
+/**
+ * Get a double-precision floating-point input (double).
+ * 
+ * This function prints a user prompt, then returns the next double passed to the input buffer.
+ * ignoreLine() is called automatically, so CIN will always be clean after use.
+ * 
+ * @param prompt The prompt to present the user.
+ * @return The next double, or -1 on fail.
+*/
+double inputDouble(const string& prompt) {
+	cout << prompt;
+	return inputDouble();
+}
+
+/**
  * Get a constrained integral input for use with menus.
  * 
  * This function gets the next int in the input buffer, and checks that it falls between 0 and \p high.

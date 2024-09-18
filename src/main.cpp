@@ -1,6 +1,6 @@
 #include "helpers.hpp"
-#include "mainmenu.hpp"
+#include "login.hpp"
 
 int main() {
-    mainmenu::start();
+    login::start();
 }

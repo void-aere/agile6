@@ -18,6 +18,8 @@ int inputInt();
 int inputInt(const string& prompt);
 float inputFloat();
 float inputFloat(const string& prompt);
+double inputDouble();
+double inputDouble();
 int getMenuOption(int high); //gets a menu selection option between 1 and $high
 int getMenuOptionAuto(int high); //works better but will return -1 on error
 void ignoreLine(); // refined usage of cin.ignore()
