@@ -8,7 +8,7 @@ OUT_DIR = out
 SRC_DIR = src
 EXE = run-me
 
-GPPFLAGS = -std=c++20 -Wall -Werror -Wpedantic -Isrc
+GPPFLAGS = -std=c++20 -Wall -Werror -Wpedantic -Isrc -iquote src/accounts
 
 # Make a link in the root directory to the compiled EXE
 default: ${OUT_DIR} ${OUT_DIR}/${EXE}
