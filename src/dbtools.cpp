@@ -78,8 +78,10 @@ using namespace std;
 // creates an account with the entered username and stores it on the
 // database, could create a check to see if said account is already
 // on the database but maybe in the next build
-void addAccount(fstream& db, char uName[])
+void addAccount(char uName[])
 {
+	fstream db;
+
 	db.open("database.dat", ios::out | ios::binary | ios::app);
 
 	Account newAccount;
@@ -95,8 +97,10 @@ void addAccount(fstream& db, char uName[])
 
 // simply lists all accounts, if you want to clear database just
 // delete "database.dat" from file directory
-void listAllAccounts(fstream& db)
+void listAllAccounts()
 {
+	fstream db;
+
 	db.open("database.dat", ios::in | ios::binary);
 
 	db.seekg(0L, ios::beg);
@@ -116,8 +120,10 @@ void listAllAccounts(fstream& db)
 
 // updates the current user's name, complicated though as we also need to
 // update the user's name in the main-menu, maybe don't add this in yet
-void updateUsername(fstream& db, char uName[])
+void updateUsername(char uName[])
 {
+	fstream db;
+
 	db.open("database.dat", ios::in | ios::binary);
 
 	char newName[64] = "";
@@ -161,8 +167,10 @@ void updateUsername(fstream& db, char uName[])
 // updateFile will be called whenever ANY ACCOUNT IS BEING ACCESSED
 // OR EXITED; when accessing an account pass in the file name, and
 // when leaving the account pass in some random literal like "Not in a file."
-void updateFile(fstream& db, char uName[], char fName[])
+void updateFile(char uName[], char fName[])
 {
+	fstream db;
+
 	db.open("database.dat", ios::in | ios::binary);
 
 	db.seekg(0L, ios::beg);
@@ -197,8 +205,10 @@ void updateFile(fstream& db, char uName[], char fName[])
 }
 
 // check used at login to see whether they are a new or returning user
-bool findAccount(fstream& db, char uName[])
+bool findAccount(char uName[])
 {
+	fstream db;
+
 	db.open("database.dat", ios::in | ios::binary);
 
 	db.seekg(0L, ios::beg);
@@ -224,8 +234,10 @@ bool findAccount(fstream& db, char uName[])
 
 // checked used BEFORE EVERY SINGLE TIME AN ACCOUNT IS ACCESSED to ensure nobody else
 // is editing
-bool fileInUse(fstream& db, char fName[])
+bool fileInUse(char fName[])
 {
+	fstream db;
+
 	db.open("database.dat", ios::in | ios::binary);
 
 	db.seekg(0L, ios::beg);

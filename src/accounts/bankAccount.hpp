@@ -14,6 +14,8 @@ class bankAccount {
 		void deposit(double amount);
 		virtual void createMonthlyStatement() = 0;
 		virtual void print();
+		virtual void createAccountMenu();
+		virtual void editAccountMenu();
 
 	protected:
 		int accountNumber;

@@ -12,6 +12,8 @@ class highInterestChecking : public noChargeChecking {
 		void postInterest();
 		void createMonthlyStatement();
 		virtual void print();
+		virtual void createAccountMenu();
+		virtual void editAccountMenu();
 
 	private:
 		static const double INTEREST_RATE;

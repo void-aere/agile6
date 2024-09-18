@@ -17,6 +17,8 @@ class serviceChargeChecking: public checkingAccount {
 		void writeCheck(double amount);
 		virtual void createMonthlyStatement();
 		virtual void print();
+		virtual void createAccountMenu();
+		virtual void editAccountMenu();
 
 	protected:
 		double serviceChargeAccount;

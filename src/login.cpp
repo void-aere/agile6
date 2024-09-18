@@ -41,7 +41,7 @@ void login::print() {
 			std::cout << "Username: ";
       inputString().copy(username, 64);
 
-			if (findAccount(database, username)) {
+			if (findAccount(username)) {
 				std::cout << "Welcome back " << username << "!\n";
 				loggedIn = true;
 			} else {
@@ -49,12 +49,11 @@ void login::print() {
         prompt = confirm(string(username) + " is not registered yet, would you like to create an account? (Y/N): ");
 
 				if (prompt) {
-					addAccount(database, username);
+					addAccount(username);
 					std::cout << "Thank you for making an account!";
 					loggedIn = true;
 				}
 			}
 
 		} while(!loggedIn);
-
 }

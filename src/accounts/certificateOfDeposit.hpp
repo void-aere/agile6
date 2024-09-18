@@ -17,7 +17,9 @@ class certificateOfDeposit : public bankAccount {
 		void withdraw(double amount);
 		void withdraw();
 		void createMonthlyStatement();
-		
+		void createAccountMenu();
+		void editAccountMenu();
+
 		void print();
 
 	private:

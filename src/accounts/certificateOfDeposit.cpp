@@ -68,7 +68,6 @@ void certificateOfDeposit::print() {
 }
 
 void certificateOfDeposit::createAccountMenu() {
-	double floatTemp;
 
 	name = inputString("Account Name: ");
 
@@ -76,7 +75,7 @@ void certificateOfDeposit::createAccountMenu() {
 
 	balance = inputDouble("Account Balance: ");
 
-	interestRate = inputDouble("Interest Rate: ");
+	// interestRate = inputDouble("Interest Rate: ");
 
 	maturityMonth = inputInt("Maturity Month: ");
 
@@ -111,25 +110,25 @@ void certificateOfDeposit::editAccountMenu() {
 	prompt = confirm("\nWould you like to edit Account Balance? (Y/N): ");
 	if (prompt)
 	{
-			accountNumber = inputDouble("Enter the new Account Balance: ");
+			balance = inputDouble("Enter the new Account Balance: ");
 	}
 
 	prompt = confirm("\nWould you like to edit Interest Rate? (Y/N): ");
 	if (prompt)
 	{
-			accountNumber = inputDouble("Enter the new Interest Rate: ");
+			interestRate = inputDouble("Enter the new Interest Rate: ");
 	}
 
 	prompt = confirm("\nWould you like to edit Maturity Month? (Y/N): ");
 	if (prompt)
 	{
-			accountNumber = inputDouble("Enter the new Maturity Month: ");
+			maturityMonth = inputInt("Enter the new Maturity Month: ");
 	}
 
 	prompt = confirm("\nWould you like to edit Current Month? (Y/N): ");
 	if (prompt)
 	{
-			accountNumber = inputDouble("Enter the new Current Month: ");
+			currentMonth = inputInt("Enter the new Current Month: ");
 	}
 
 	std::cout << "\nHere are the new account details:\n";

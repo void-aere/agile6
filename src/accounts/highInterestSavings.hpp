@@ -11,6 +11,8 @@ class highInterestSavings : public savingsAccount {
 		bool verifyMinimumBalance(double amount);
 		virtual void withdraw(double amount);
 		virtual void print();
+		virtual void createAccountMenu();
+		virtual void editAccountMenu();
 	
 	protected:
 		double minimumBalance;

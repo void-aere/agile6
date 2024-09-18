@@ -15,6 +15,8 @@ class noChargeChecking : public checkingAccount {
 		void withdraw(double amount);
 		virtual void createMonthlyStatement();
 		virtual void print();
+		virtual void createAccountMenu();
+		virtual void editAccountMenu();
 
 	protected:
 		double minimumBalance;

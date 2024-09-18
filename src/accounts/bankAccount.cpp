@@ -40,16 +40,12 @@ void bankAccount::print() {
 }
 
 void bankAccount::createAccountMenu() {
-	double floatTemp;
 
-	std::cout << "Account Name: ";
-	name = inputString();
+	name = inputString("Account Name: ");
 
-	std::cout << "Account Number: ";
-	accountNumber = inputDouble();
+	accountNumber = inputDouble("Account Number: ");
 
-	std::cout << "Account Balance: ";
-	balance = inputDouble();
+	balance = inputDouble("Account Balance: ");
 
 	std::cout << "Account has been created!\n";
 }
@@ -59,30 +55,27 @@ void bankAccount::editAccountMenu() {
 	std::cout << "Here are the current account details:\n";
 	std::cout << "Account Name: " << name << endl;
 	std::cout << "Account Number: " << accountNumber << endl;
-	std::cout << "Account Balance: " << balance << endl << endl;
+	std::cout << "Account Balance: " << balance << endl;
 
-	prompt = confirm("Would you like to edit Account Name? (Y/N): ");
+	prompt = confirm("\nWould you like to edit Account Name? (Y/N): ");
 	if (prompt)
 	{
-		std::cout << "Enter the new Account Name: ";
-		name = inputString();
+			name = inputString("Enter the new Account Name: ");
 	}
 
-	prompt = confirm("Would you like to edit Account Number? (Y/N): ");
+	prompt = confirm("\nWould you like to edit Account Number? (Y/N): ");
 	if (prompt)
 	{
-		std::cout << "Enter the new Account Number: ";
-			accountNumber = inputDouble();
+			accountNumber = inputDouble("Enter the new Account Number: ");
 	}
 
-	prompt = confirm("Would you like to edit Account Balance? (Y/N): ");
+	prompt = confirm("\nWould you like to edit Account Balance? (Y/N): ");
 	if (prompt)
 	{
-		std::cout << "Enter the new Account Balance: ";
-			accountNumber = inputDouble();
+			balance = inputDouble("Enter the new Account Balance: ");
 	}
 
-	std::cout << "Here are the new account details:\n";
+	std::cout << "\nHere are the new account details:\n";
 	std::cout << "Account Name: " << name << endl;
 	std::cout << "Account Number: " << accountNumber << endl;
 	std::cout << "Account Balance: " << balance << endl << endl;
