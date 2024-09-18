@@ -72,7 +72,15 @@ void serviceChargeChecking::print() {
 }
 
 json serviceChargeChecking::toJson() {
-    return json{{"name", name}, {"accountNumber", accountNumber}, {"balance", balance}, {"serviceChargeAmount", serviceChargeAmount}, {"serviceChargeChecksExceeded", serviceChargeChecksExceeded}, {"checksWritten", checksWritten}};
+    return json{
+        {"name", name},
+        {"accountNumber", accountNumber},
+        {"balance", balance},
+        {"serviceChargeAmount", serviceChargeAmount},
+        {"serviceChargeChecksExceeded", serviceChargeChecksExceeded},
+        {"checksWritten", checksWritten},
+        {"type", "serviceChargeChecking"}
+    };
 }
 
 void serviceChargeChecking::createAccountMenu() {

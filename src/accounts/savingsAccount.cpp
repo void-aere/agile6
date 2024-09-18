@@ -41,7 +41,13 @@ void savingsAccount::print() {
 }
 
 json savingsAccount::toJson() {
-    return json{{"name", name}, {"accountNumber", accountNumber}, {"balance", balance}, {"interestRate", interestRate}};
+    return json{
+        {"name", name},
+        {"accountNumber", accountNumber},
+        {"balance", balance},
+        {"interestRate", interestRate},
+        {"type", "savingsAccount"}
+    };
 }
 
 void savingsAccount::createAccountMenu() {

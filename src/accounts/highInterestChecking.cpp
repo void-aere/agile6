@@ -40,7 +40,14 @@ void highInterestChecking::print() {
 }
 
 json highInterestChecking::toJson() {
-    return json{{"name", name}, {"accountNumber", accountNumber}, {"balance", balance}, {"interestRate", interestRate}, {"minimumBalance", minimumBalance}}; 
+    return json{
+        {"name", name},
+        {"accountNumber", accountNumber},
+        {"balance", balance},
+        {"interestRate", interestRate},
+        {"minimumBalance", minimumBalance},
+        {"type", "highInterestChecking"}
+    }; 
 }
 
 void highInterestChecking::createAccountMenu() {

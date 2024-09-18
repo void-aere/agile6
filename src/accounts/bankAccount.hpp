@@ -5,11 +5,11 @@
 
 class bankAccount {
 	public:
-		bankAccount(string name, int accountNumber, double balance);
+		bankAccount(std::string name, int accountNumber, double balance);
 		int getAccountNumber();
 		double getBalance();
-		string getName();
-		void setName(string name);
+		std::string getName();
+		void setName(std::string name);
 		virtual void withdraw(double amount);
 		void deposit(double amount);
 		virtual void createMonthlyStatement() = 0;
@@ -21,7 +21,7 @@ class bankAccount {
 
 	protected:
 		int accountNumber;
-		string name;
+		std::string name;
 		double balance;
 };
 

@@ -49,7 +49,14 @@ void noChargeChecking::print() {
 }
 
 json noChargeChecking::toJson() {
-    return json{{"name", name}, {"accountNumber", accountNumber}, {"balance", balance}, {"interestRate", interestRate}, {"minimumBalance", minimumBalance}};
+    return json{
+        {"name", name},
+        {"accountNumber", accountNumber},
+        {"balance", balance},
+        {"interestRate", interestRate},
+        {"minimumBalance", minimumBalance},
+        {"type", "noChargeChecking"}
+    };
 }
 
 void noChargeChecking::createAccountMenu() {

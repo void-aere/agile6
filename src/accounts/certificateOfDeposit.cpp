@@ -76,7 +76,15 @@ void certificateOfDeposit::print() {
 }
 
 json certificateOfDeposit::toJson() {
-    return json{{"name", name}, {"accountNumber", accountNumber}, {"balance", balance}, {"interestRate", interestRate}, {"maturityMonth", maturityMonth}, {"currentMonth", currentMonth}};
+    return json{
+        {"name", name},
+        {"accountNumber", accountNumber},
+        {"balance", balance},
+        {"interestRate", interestRate},
+        {"maturityMonth", maturityMonth},
+        {"currentMonth", currentMonth},
+        {"type", "certificateOfDDeposit"}
+    };
 }
 
 void certificateOfDeposit::createAccountMenu() {
