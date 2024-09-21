@@ -17,7 +17,7 @@ Note: `make clean` removes all compiler output.
 
 ### Feature Paradise
 
-- Tab completion in functions that search and choose (see trie structure).
-- Obfuscate typeface for passwords (see bash text decoration, [link](https://github.com/scop/bash-completion)).
+- Tab completion in functions that search and choose (see trie structure, [this link](https://github.com/scop/bash-completion)).
+- Obfuscate typeface for passwords (see bash text decoration).
 - Boxes with curved edges (see unicode Box Drawing block 256D, 256E).
 - This thing: 🯁🯂🯃.
