@@ -26,7 +26,7 @@ serviceChargeChecking::serviceChargeChecking(std::string name, int accountNumber
 serviceChargeChecking::serviceChargeChecking(const json &j)
     : serviceChargeChecking(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("serviceChargeAmount"), j.at("serviceChargeChecksExceeded"), j.at("checksWritten")) { }
 
-double serviceChargeChecking::getServiceChargeAmount() {
+double serviceChargeChecking::getServiceChargeAmount() const {
 	return serviceChargeAmount;
 }
 
@@ -34,7 +34,7 @@ void serviceChargeChecking::setServiceChargeAmount(double amount) {
 	serviceChargeAmount = amount;
 }
 
-double serviceChargeChecking::getServiceChargeChecksExceeded() {
+double serviceChargeChecking::getServiceChargeChecksExceeded() const {
 	return serviceChargeChecksExceeded;
 }
 
@@ -42,7 +42,7 @@ void serviceChargeChecking::setServiceChargeChecksExceeded(double amount) {
 	serviceChargeChecksExceeded = amount;
 }
 
-int serviceChargeChecking::getChecksWritten() {
+int serviceChargeChecking::getChecksWritten() const {
 	return checksWritten;
 }
 
@@ -66,12 +66,12 @@ void serviceChargeChecking::createMonthlyStatement() {
 	postServiceCharge();
 }
 
-void serviceChargeChecking::print() {
+void serviceChargeChecking::print() const {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
 	std::cout << "Service Charge Checking: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
 }
 
-json serviceChargeChecking::toJson() {
+json serviceChargeChecking::toJson() const {
     return json{
         {"name", name},
         {"accountNumber", accountNumber},

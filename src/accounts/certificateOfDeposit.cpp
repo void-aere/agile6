@@ -28,7 +28,7 @@ certificateOfDeposit::certificateOfDeposit(const json &j)
     : certificateOfDeposit(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("interestRate"), j.at("maturityMonth"), j.at("currentMonth")) {
 }
 
-double certificateOfDeposit::getInterestRate() {
+double certificateOfDeposit::getInterestRate() const {
 	return interestRate;
 }
 
@@ -36,7 +36,7 @@ void certificateOfDeposit::setInterestRate(double interestRate) {
 	this->interestRate = interestRate;
 }
 
-double certificateOfDeposit::getCurrentMonth() {
+double certificateOfDeposit::getCurrentMonth() const {
 	return currentMonth;
 }
 
@@ -44,7 +44,7 @@ void certificateOfDeposit::setCurrentMonth(int currentMonth) {
 	this->currentMonth = currentMonth;
 }
 
-double certificateOfDeposit::getMaturityMonth() {
+double certificateOfDeposit::getMaturityMonth() const {
 	return maturityMonth;
 }
 
@@ -70,12 +70,12 @@ void certificateOfDeposit::createMonthlyStatement() {
 	currentMonth++;
 }
 
-void certificateOfDeposit::print() {
+void certificateOfDeposit::print() const {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
 	std::cout << "Certificate of Deposit: " << name << "\t ACCT# " << accountNumber << "\t Balance: $" << balance << std::endl;
 }
 
-json certificateOfDeposit::toJson() {
+json certificateOfDeposit::toJson() const {
     return json{
         {"name", name},
         {"accountNumber", accountNumber},

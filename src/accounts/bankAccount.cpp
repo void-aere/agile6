@@ -12,15 +12,15 @@ bankAccount::bankAccount(string name, int accountNumber, double balance) {
 	this->balance = balance;
 }
 
-int bankAccount::getAccountNumber() {
+int bankAccount::getAccountNumber() const {
 	return accountNumber;
 }
 
-double bankAccount::getBalance() {
+double bankAccount::getBalance() const {
 	return balance;
 }
 
-string bankAccount::getName() {
+string bankAccount::getName() const {
 	return name;
 }
 
@@ -36,9 +36,13 @@ void bankAccount::deposit(double amount) {
 	balance += amount;
 }
 
-void bankAccount::print() {
+void bankAccount::print() const {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
 	std::cout << name << " " << accountNumber << " balance : $" << balance << std::endl;
+}
+
+string bankAccount::getFilename() const {
+    return accountNumber + ".json";
 }
 
 void bankAccount::createAccountMenu() {

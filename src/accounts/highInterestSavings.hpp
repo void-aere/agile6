@@ -7,12 +7,12 @@ class highInterestSavings : public savingsAccount {
 		highInterestSavings(std::string name, int accountNumber, double balance);
 		highInterestSavings(std::string name, int accountNumber, double balance, double interestRate, double minBalance);
         highInterestSavings(const nlohmann::json &j);
-		double getMinimumBalance();
+		double getMinimumBalance() const;
 		bool verifyMinimumBalance(double amount);
 		void withdraw(double amount);
-		void print();
+		void print() const;
 
-        nlohmann::json toJson();
+        nlohmann::json toJson() const;
 		void createAccountMenu();
 		void editAccountMenu();
 	

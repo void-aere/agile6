@@ -8,13 +8,13 @@ class savingsAccount : public bankAccount {
 		savingsAccount(std::string name, int accountNumber, double balance, double interestRate);
 		savingsAccount(std::string name, int accountNumber, double balance);
         savingsAccount(const nlohmann::json &j);
-		double getInterestRate();
+		double getInterestRate() const;
 		void setInterestRate(double interestRate);
 		void postInterest();
 		virtual void createMonthlyStatement();
-		virtual void print();
+		virtual void print() const;
 
-        virtual nlohmann::json toJson();
+        virtual nlohmann::json toJson() const;
 		virtual void createAccountMenu();
 		virtual void editAccountMenu();
 

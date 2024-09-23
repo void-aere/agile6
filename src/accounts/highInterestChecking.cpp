@@ -18,7 +18,7 @@ highInterestChecking::highInterestChecking(string name, int accountNumber, doubl
 highInterestChecking::highInterestChecking(const json &j)
     : highInterestChecking(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("minimumBalance"), j.at("interestRate")) { }
 
-double highInterestChecking::getInterestRate() {
+double highInterestChecking::getInterestRate() const {
 	return interestRate;
 }
 
@@ -34,12 +34,12 @@ void highInterestChecking::createMonthlyStatement() {
 	postInterest();
 }
 
-void highInterestChecking::print() {
+void highInterestChecking::print() const {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
 	std::cout << "High Interest Checking: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
 }
 
-json highInterestChecking::toJson() {
+json highInterestChecking::toJson() const {
     return json{
         {"name", name},
         {"accountNumber", accountNumber},

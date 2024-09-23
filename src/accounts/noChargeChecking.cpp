@@ -21,7 +21,7 @@ noChargeChecking::noChargeChecking(string name, int accountNumber, double balanc
 noChargeChecking::noChargeChecking(const json &j) 
     : noChargeChecking(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("minimumBalance"), j.at("interestRate")) { }
 
-double noChargeChecking::getMinimumBalance() {
+double noChargeChecking::getMinimumBalance() const {
 	return minimumBalance;
 }
 
@@ -43,12 +43,12 @@ void noChargeChecking::withdraw(double amount) {
 
 void noChargeChecking::createMonthlyStatement() {}
 
-void noChargeChecking::print() {
+void noChargeChecking::print() const {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
 	std::cout << "No Charge Checking: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
 }
 
-json noChargeChecking::toJson() {
+json noChargeChecking::toJson() const {
     return json{
         {"name", name},
         {"accountNumber", accountNumber},

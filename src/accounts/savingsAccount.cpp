@@ -19,7 +19,7 @@ savingsAccount::savingsAccount(string name, int accountNumber, double balance, d
 savingsAccount::savingsAccount(const json &j) 
     : savingsAccount(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("interestRate")) { }
 
-double savingsAccount::getInterestRate() {
+double savingsAccount::getInterestRate() const {
 	return interestRate;
 }
 
@@ -35,12 +35,12 @@ void savingsAccount::createMonthlyStatement() {
 	postInterest();
 }
 
-void savingsAccount::print() {
+void savingsAccount::print() const {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
 	std::cout << "Savings account: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
 }
 
-json savingsAccount::toJson() {
+json savingsAccount::toJson() const {
     return json{
         {"name", name},
         {"accountNumber", accountNumber},

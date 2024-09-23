@@ -7,13 +7,13 @@ class highInterestChecking : public noChargeChecking {
 		highInterestChecking(std::string name, int accountNumber, double balance);
 		highInterestChecking(std::string name, int accountNumber, double balance, double minimumBalance, double interestRate);
         highInterestChecking(const nlohmann::json &j);
-		double getInterestRate();
+		double getInterestRate() const;
 		void setInterestRate(double interestRate);
 		void postInterest();
 		void createMonthlyStatement();
-		virtual void print();
+		virtual void print() const;
 
-        nlohmann::json toJson();
+        nlohmann::json toJson() const;
 		virtual void createAccountMenu();
 		virtual void editAccountMenu();
 

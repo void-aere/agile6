@@ -7,15 +7,15 @@ class noChargeChecking : public checkingAccount {
 		noChargeChecking(string name, int accountNumber, double balance);
 		noChargeChecking(string name, int accountNumber, double balance, double minimumBalance, double interestRate);
         noChargeChecking(const nlohmann::json &j);
-		double getMinimumBalance();
+		double getMinimumBalance() const;
 		void setMinimumBalance(double minumumBalance);
 		bool verifyMinimumBalance(double balance);
 		void writeCheck(double amount);
 		void withdraw(double amount);
 		virtual void createMonthlyStatement();
-		virtual void print();
+		virtual void print() const;
 
-        virtual nlohmann::json toJson();
+        virtual nlohmann::json toJson() const;
 		virtual void createAccountMenu();
 		virtual void editAccountMenu();
 

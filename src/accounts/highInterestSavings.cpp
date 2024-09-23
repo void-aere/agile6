@@ -20,7 +20,7 @@ highInterestSavings::highInterestSavings(string name, int accountNumber, double 
 highInterestSavings::highInterestSavings(const json &j)
     : highInterestSavings(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("interestRate"), j.at("minimumBalance")) { }
 	
-double highInterestSavings::getMinimumBalance() {
+double highInterestSavings::getMinimumBalance() const {
 	return minimumBalance;
 }
 
@@ -32,12 +32,12 @@ void highInterestSavings::withdraw(double amount) {
 	if (verifyMinimumBalance(amount)) balance -= amount;
 }
 
-void highInterestSavings::print() {
+void highInterestSavings::print() const {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
 	std::cout << "High Interest Savings: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
 }
 
-json highInterestSavings::toJson() {
+json highInterestSavings::toJson() const {
     return json{
         {"name", name},
         {"accountNumber", accountNumber},
