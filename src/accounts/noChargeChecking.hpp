@@ -4,8 +4,8 @@
 
 class noChargeChecking : public checkingAccount {
 	public:
-		noChargeChecking(string name, int accountNumber, double balance);
-		noChargeChecking(string name, int accountNumber, double balance, double minimumBalance, double interestRate);
+		noChargeChecking(std::string name, int accountNumber, double balance);
+		noChargeChecking(std::string name, int accountNumber, double balance, double minimumBalance, double interestRate);
         noChargeChecking(const nlohmann::json &j);
 		double getMinimumBalance() const;
 		void setMinimumBalance(double minumumBalance);

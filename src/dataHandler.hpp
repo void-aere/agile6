@@ -18,12 +18,12 @@ class DataHandler {
         bankAccount* buildFromJSON(const nlohmann::json &data);
         void saveToJson(const bankAccount* account);
         std::vector<bankAccount*>* getAccounts();
-        std::vector<bankAccount*> getAccountsByName(const string& name);
-        std::vector<bankAccount*> getAccountsByType(const string& type);
+        std::vector<bankAccount*> getAccountsByName(const std::string& name);
+        std::vector<bankAccount*> getAccountsByType(const std::string& type);
         bankAccount* getAccountByID(const int id);
-        bankAccount* search(const string& query);
+        bankAccount* search(const std::string& query);
         
         bool assume(int id);
         void relinquish(int id);
-        string _getLockPath(int id);
+        std::string _getLockPath(int id);
 };

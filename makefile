@@ -32,5 +32,5 @@ ${OUT_DIR}/%.o: ${SRC_DIR}/%.cpp ${SRC_DIR}/%.hpp
 	g++ ${GPPFLAGS} -c ${SRC_DIR}/$*.cpp -o $@
 
 clean:
-	rm -rf ${OUT_DIR}
+	rm -rf ${OUT_DIR}/*
 	rm -f ${EXE}
