@@ -1,20 +1,29 @@
 #pragma once
 
-#include "client.hpp"
+#include "bankAccount.hpp"
 #include <string>
 #include <vector>
+#include <nlohmann/json.hpp>
 
 class DataHandler {
     private:
-        std::vector<Client> clientList;
-        std::vector<std::string> employeeList;
+        std::vector<bankAccount *> accounts;
         std::string dataDir;
 
     public:
-        DataHandler(std::string dataDir);
-
+        DataHandler(const std::string &dataDir);
+        ~DataHandler();
         void loadData();
-
-        std::vector<Client>& getClientList();
-        void writeClient(Client& client);
+        void saveData();
+        bankAccount* buildFromJSON(const nlohmann::json &data);
+        void saveToJson(const bankAccount* account);
+        std::vector<bankAccount*>* getAccounts();
+        std::vector<bankAccount*> getAccountsByName(const string& name);
+        std::vector<bankAccount*> getAccountsByType(const string& type);
+        bankAccount* getAccountByID(const int id);
+        bankAccount* search(const string& query);
+        
+        bool assume(int id);
+        void relinquish(int id);
+        string _getLockPath(int id);
 };
