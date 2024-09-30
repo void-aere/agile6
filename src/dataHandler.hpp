@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bankAccount.hpp"
+#include "accounts/bankAccount.hpp"
 #include <string>
 #include <vector>
 #include <nlohmann/json.hpp>

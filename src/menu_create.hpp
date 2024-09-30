@@ -2,8 +2,8 @@
 
 #include "dataHandler.hpp"
 
-namespace mainmenu {
+namespace menu_create {
 	void start(DataHandler& db);
 	void print();
-	const short QUIT = 4;
+	const short QUIT = 7;
 }

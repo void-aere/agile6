@@ -98,6 +98,10 @@ void DataHandler::saveToJson(const bankAccount* account) {
     file.close();
 }
 
+std::vector<bankAccount*>* DataHandler::getAccounts() {
+    return &accounts;
+}
+
 bankAccount* DataHandler::getAccountByID(const int id) {
     for (bankAccount* account : accounts) {
         if (account->getAccountNumber() == id) return account;

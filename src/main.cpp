@@ -1,6 +1,14 @@
-#include "helpers.hpp"
-#include "login.hpp"
+// #include "helpers.hpp"
+#include "mainmenu.hpp"
+#include "dataHandler.hpp"
 
 int main() {
-    login::start();
+    DataHandler *db = new DataHandler("env");
+    db->loadData();
+
+    mainmenu::start(*db);
+
+    delete db;
+
+    // login::start();
 }
