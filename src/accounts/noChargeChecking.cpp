@@ -21,6 +21,8 @@ noChargeChecking::noChargeChecking(string name, int accountNumber, double balanc
 noChargeChecking::noChargeChecking(const json &j) 
     : noChargeChecking(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("minimumBalance"), j.at("interestRate")) { }
 
+noChargeChecking::~noChargeChecking() { }
+
 double noChargeChecking::getMinimumBalance() const {
 	return minimumBalance;
 }

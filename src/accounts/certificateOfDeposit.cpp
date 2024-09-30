@@ -28,6 +28,8 @@ certificateOfDeposit::certificateOfDeposit(const json &j)
     : certificateOfDeposit(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("interestRate"), j.at("maturityMonth"), j.at("currentMonth")) {
 }
 
+certificateOfDeposit::~certificateOfDeposit() { }
+
 double certificateOfDeposit::getInterestRate() const {
 	return interestRate;
 }

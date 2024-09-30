@@ -8,6 +8,7 @@ class savingsAccount : public bankAccount {
 		savingsAccount(std::string name, int accountNumber, double balance, double interestRate);
 		savingsAccount(std::string name, int accountNumber, double balance);
         savingsAccount(const nlohmann::json &j);
+        ~savingsAccount();
 		double getInterestRate() const;
 		void setInterestRate(double interestRate);
 		void postInterest();

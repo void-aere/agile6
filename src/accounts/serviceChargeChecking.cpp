@@ -26,6 +26,8 @@ serviceChargeChecking::serviceChargeChecking(std::string name, int accountNumber
 serviceChargeChecking::serviceChargeChecking(const json &j)
     : serviceChargeChecking(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("serviceChargeAmount"), j.at("serviceChargeChecksExceeded"), j.at("checksWritten")) { }
 
+serviceChargeChecking::~serviceChargeChecking() { }
+
 double serviceChargeChecking::getServiceChargeAmount() const {
 	return serviceChargeAmount;
 }

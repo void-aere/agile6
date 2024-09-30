@@ -7,6 +7,7 @@ class highInterestSavings : public savingsAccount {
 		highInterestSavings(std::string name, int accountNumber, double balance);
 		highInterestSavings(std::string name, int accountNumber, double balance, double interestRate, double minBalance);
         highInterestSavings(const nlohmann::json &j);
+        ~highInterestSavings();
 		double getMinimumBalance() const;
 		bool verifyMinimumBalance(double amount);
 		void withdraw(double amount);

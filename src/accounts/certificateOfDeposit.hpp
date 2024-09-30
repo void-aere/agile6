@@ -8,6 +8,7 @@ class certificateOfDeposit : public bankAccount {
 		certificateOfDeposit(std::string name, int accountNumber, double balance, double interestRate, int maturityMonth);
         certificateOfDeposit(std::string name, int accountNumber, double balance, double interestRate, int maturityMonth, int currentMonth);
         certificateOfDeposit(const nlohmann::json &j);
+        ~certificateOfDeposit();
 		double getInterestRate() const;
 		void setInterestRate(double interestRate);
 		double getCurrentMonth() const;

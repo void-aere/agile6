@@ -18,6 +18,8 @@ highInterestChecking::highInterestChecking(string name, int accountNumber, doubl
 highInterestChecking::highInterestChecking(const json &j)
     : highInterestChecking(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("minimumBalance"), j.at("interestRate")) { }
 
+highInterestChecking::~highInterestChecking() { }
+
 double highInterestChecking::getInterestRate() const {
 	return interestRate;
 }

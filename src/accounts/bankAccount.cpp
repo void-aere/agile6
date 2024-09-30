@@ -12,6 +12,8 @@ bankAccount::bankAccount(string name, int accountNumber, double balance) {
 	this->balance = balance;
 }
 
+bankAccount::~bankAccount() { }
+
 int bankAccount::getAccountNumber() const {
 	return accountNumber;
 }

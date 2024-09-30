@@ -8,6 +8,7 @@ class serviceChargeChecking: public checkingAccount {
 		serviceChargeChecking(std::string name, int accountNumber, double balance, double serviceChargeAmount, double serviceChargeChecksExceeded);
 		serviceChargeChecking(std::string name, int accountNumber, double balance, double serviceChargeAmount, double serviceChargeChecksExceeded, int checksWritten);
         serviceChargeChecking(const nlohmann::json &j);
+        ~serviceChargeChecking();
 		double getServiceChargeAmount() const;
 		void setServiceChargeAmount(double amount);
 		double getServiceChargeChecksExceeded() const;

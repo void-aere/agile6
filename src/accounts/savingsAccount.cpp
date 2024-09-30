@@ -19,6 +19,8 @@ savingsAccount::savingsAccount(string name, int accountNumber, double balance, d
 savingsAccount::savingsAccount(const json &j) 
     : savingsAccount(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("interestRate")) { }
 
+savingsAccount::~savingsAccount() { }
+
 double savingsAccount::getInterestRate() const {
 	return interestRate;
 }

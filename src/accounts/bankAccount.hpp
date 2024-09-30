@@ -6,7 +6,7 @@
 class bankAccount {
 	public:
 		bankAccount(std::string name, int accountNumber, double balance);
-        virtual ~bankAccount() = 0;
+        virtual ~bankAccount();
 		int getAccountNumber() const;
 		double getBalance() const;
 		std::string getName() const;

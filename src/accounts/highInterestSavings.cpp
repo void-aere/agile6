@@ -19,6 +19,8 @@ highInterestSavings::highInterestSavings(string name, int accountNumber, double 
 
 highInterestSavings::highInterestSavings(const json &j)
     : highInterestSavings(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("interestRate"), j.at("minimumBalance")) { }
+
+highInterestSavings::~highInterestSavings() { }
 	
 double highInterestSavings::getMinimumBalance() const {
 	return minimumBalance;
