@@ -17,51 +17,51 @@
 //This function is called by main() in main.cpp, and is essentially the entry point for the program
 void menu_create::start(DataHandler& db) {
 	int option = 0;
-	do {
-		clearScreen();
-		menu_create::print();
-		option = getMenuOptionAuto(menu_create::QUIT);
-		if (option == -1) continue;
+    do {
+        clearScreen();
+        menu_create::print();
+        option = getMenuOptionAuto(menu_create::QUIT);
+        if (option == -1) continue;
 
-		switch (option) {
-			case 1: {
+        switch (option) {
+            case 1: {
                 bankAccount* add = new certificateOfDeposit("no-name", 0, 0);
                 add->createAccountMenu();
                 db.getAccounts()->push_back(add);
-                db.saveData();
+                db.saveToJson(add);
             }
-			case 2: {
+            case 2: {
                 bankAccount* add = new highInterestChecking("no-name", 0, 0);
                 add->createAccountMenu();
                 db.getAccounts()->push_back(add);
-                db.saveData();
+                db.saveToJson(add);
             }
             case 3: {
                 bankAccount* add = new highInterestSavings("no-name", 0, 0);
                 add->createAccountMenu();
                 db.getAccounts()->push_back(add);
-                db.saveData();
+                db.saveToJson(add);
             }
             case 4: {
                 bankAccount* add = new noChargeChecking("no-name", 0, 0);
                 add->createAccountMenu();
                 db.getAccounts()->push_back(add);
-                db.saveData();
+                db.saveToJson(add);
             }
             case 5: {
                 bankAccount* add = new serviceChargeChecking("no-name", 0, 0);
                 add->createAccountMenu();
                 db.getAccounts()->push_back(add);
-                db.saveData();
+                db.saveToJson(add);
             }
             case 6: {
                 bankAccount* add = new savingsAccount("no-name", 0, 0);
                 add->createAccountMenu();
                 db.getAccounts()->push_back(add);
-                db.saveData();
+                db.saveToJson(add);
             }
-		}
-	} while (option != menu_create::QUIT);
+        }
+    } while (option != menu_create::QUIT);
 }
 
 // Put menu text (without 'pick your option' prompt) here

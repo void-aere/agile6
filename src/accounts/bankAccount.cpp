@@ -44,7 +44,7 @@ void bankAccount::print() const {
 }
 
 string bankAccount::getFilename() const {
-    return accountNumber + ".json";
+    return std::to_string(this->accountNumber) + ".json";
 }
 
 void bankAccount::createAccountMenu() {
