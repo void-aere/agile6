@@ -17,7 +17,8 @@ default: ${OUT_DIR} ${OUT_DIR}/${EXE}
 
 # Create the output directory
 ${OUT_DIR}:
-	mkdir -p ${OUT_DIR}/accounts
+	mkdir ${OUT_DIR}
+	mkdir ${OUT_DIR}/accounts
 
 # Assemble an executble from the compiled objects
 ${OUT_DIR}/${EXE}: ${OUT_DIR}/${ENTRYPOINT}.o $(addprefix ${OUT_DIR}/, $(SYMBOLS:=.o))
