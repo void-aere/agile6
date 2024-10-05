@@ -39,8 +39,8 @@ void DataHandler::loadData() {
             json data = json::parse(file);
             file.close();
 
-            bankAccount* account = this->getAccountByID(data.at("accountNumber"));
             bankAccount* newAccount = this->buildFromJSON(data);
+            size_t account = this->getIndexByID(newAccount->getAccountNumber());
 
             // Assert that loading went correctly
             if (newAccount == nullptr) continue;
@@ -49,14 +49,14 @@ void DataHandler::loadData() {
                 // If no, add it
                 // If yes, update it using pointer magic
 
-            if (account == nullptr) {
+            if (account == (size_t)-1) {
                 // Add account to vector
                 accounts.push_back(newAccount);
 
             } else {
                 // Account already exists
-                bankAccount* temp = account;
-                account = newAccount;
+                bankAccount* temp = accounts[account];
+                accounts[account] = newAccount;
                 delete temp;
             }
         }
@@ -108,6 +108,14 @@ bankAccount* DataHandler::getAccountByID(const int id) {
     }
 
     return nullptr;
+}
+
+size_t DataHandler::getIndexByID(const int id) {
+    for (size_t i = 0; i < accounts.size(); i++) {
+        if (accounts[i]->getAccountNumber() == id) return i;
+    }
+
+    return -1;
 }
 
 bool DataHandler::assume(int id) {
