@@ -5,5 +5,5 @@
 namespace mainmenu {
 	void start(DataHandler& db);
 	void print();
-	const short QUIT = 4;
+	const short QUIT = 5;
 }

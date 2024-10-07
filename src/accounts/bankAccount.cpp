@@ -40,6 +40,11 @@ void bankAccount::deposit(double amount) {
 
 void bankAccount::print() const {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
+
+	//std::cout << std::setw(30) << name << "  ";	
+	//std::cout << std::setw(30) << accountNumber;
+	//std::cout << std::setw(40) << " balance : $" << balance << std::endl;
+
 	std::cout << name << " " << accountNumber << " balance : $" << balance << std::endl;
 }
 

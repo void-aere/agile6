@@ -21,6 +21,7 @@ class DataHandler {
         std::vector<bankAccount*> getAccountsByName(const std::string& name);
         std::vector<bankAccount*> getAccountsByType(const std::string& type);
         bankAccount* getAccountByID(const int id);
+        bankAccount* getAccountByName(const std::string& name);
         size_t getIndexByID(const int id);
         bankAccount* search(const std::string& query);
         

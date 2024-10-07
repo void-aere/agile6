@@ -70,7 +70,12 @@ void serviceChargeChecking::createMonthlyStatement() {
 
 void serviceChargeChecking::print() const {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
-	std::cout << "Service Charge Checking: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
+	std::cout << std::setw(25) << std::left << "Service Charge Checking:";
+	std::cout << std::setw(20) << std::left << name;
+	std::cout << " ACCT# ";
+	std::cout << std::setw(10) << std::left << accountNumber;
+	std::cout << " Balance: $";
+	std::cout << std::setw(8) << std::left << balance << std::endl;
 }
 
 json serviceChargeChecking::toJson() const {

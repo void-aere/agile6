@@ -39,7 +39,12 @@ void savingsAccount::createMonthlyStatement() {
 
 void savingsAccount::print() const {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
-	std::cout << "Savings account: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
+	std::cout << std::setw(25) << std::left << "Savings account: ";
+	std::cout << std::setw(20) << std::left << name;
+	std::cout << " ACCT# ";
+	std::cout << std::setw(10) << std::left << accountNumber;
+	std::cout << " Balance: $";
+	std::cout << std::setw(8) << std::left << balance << std::endl;
 }
 
 json savingsAccount::toJson() const {

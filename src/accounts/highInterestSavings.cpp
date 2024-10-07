@@ -36,7 +36,12 @@ void highInterestSavings::withdraw(double amount) {
 
 void highInterestSavings::print() const {
 	std::cout << std::fixed << std::showpoint << std::setprecision(2);
-	std::cout << "High Interest Savings: " << name << "\t ACCT# " << accountNumber << "\tBalance: $" << balance << std::endl;
+	std::cout << std::setw(25) << std::left << "High Interest Savings:";
+	std::cout << std::setw(20) << std::left << name;
+	std::cout << " ACCT# ";
+	std::cout << std::setw(10) << std::left << accountNumber;
+	std::cout << " Balance: $";
+	std::cout << std::setw(8) << std::left << balance << std::endl;
 }
 
 json highInterestSavings::toJson() const {
