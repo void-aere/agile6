@@ -102,6 +102,20 @@ std::vector<bankAccount*>* DataHandler::getAccounts() {
     return &accounts;
 }
 
+std::vector<bankAccount*> DataHandler::getAccountsByName(const std::string& name) {
+    std::vector<bankAccount*> matchingAccounts;
+
+    // Loop through all the accounts
+    for (bankAccount* account : accounts) {
+        // Compare the account holder's name with the query (case-sensitive)
+        if (account->getName() == name) {
+            matchingAccounts.push_back(account);  // Add matching account to the list
+        }
+    }
+
+    return matchingAccounts;  // Return all matching accounts
+}
+
 bankAccount* DataHandler::getAccountByID(const int id) {
     for (bankAccount* account : accounts) {
         if (account->getAccountNumber() == id) return account;
@@ -109,6 +123,20 @@ bankAccount* DataHandler::getAccountByID(const int id) {
 
     return nullptr;
 }
+
+bankAccount* DataHandler::getAccountByName(const std::string& name) {
+    // Loop through all the accounts
+    for (bankAccount* account : accounts) {
+        // Compare the account holder's name with the query (case-sensitive)
+        if (account->getName() == name) {
+            return account;  // Return the first account that matches
+        }
+    }
+
+    // Return nullptr if no account with the given name is found
+    return nullptr;
+}
+
 
 size_t DataHandler::getIndexByID(const int id) {
     for (size_t i = 0; i < accounts.size(); i++) {

@@ -2,8 +2,6 @@
 
 #include "dataHandler.hpp"
 
-namespace mainmenu {
+namespace menu_search {
 	void start(DataHandler& db);
-	void print();
-	const short QUIT = 5;
 }

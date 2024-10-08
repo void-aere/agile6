@@ -29,36 +29,42 @@ void menu_create::start(DataHandler& db) {
                 add->createAccountMenu();
                 db.getAccounts()->push_back(add);
                 db.saveToJson(add);
+                break;
             }
             case 2: {
                 bankAccount* add = new highInterestChecking("no-name", 0, 0);
                 add->createAccountMenu();
                 db.getAccounts()->push_back(add);
                 db.saveToJson(add);
+                break;
             }
             case 3: {
                 bankAccount* add = new highInterestSavings("no-name", 0, 0);
                 add->createAccountMenu();
                 db.getAccounts()->push_back(add);
                 db.saveToJson(add);
+                break;
             }
             case 4: {
                 bankAccount* add = new noChargeChecking("no-name", 0, 0);
                 add->createAccountMenu();
                 db.getAccounts()->push_back(add);
                 db.saveToJson(add);
+                break;
             }
             case 5: {
                 bankAccount* add = new serviceChargeChecking("no-name", 0, 0);
                 add->createAccountMenu();
                 db.getAccounts()->push_back(add);
                 db.saveToJson(add);
+                break;
             }
             case 6: {
                 bankAccount* add = new savingsAccount("no-name", 0, 0);
                 add->createAccountMenu();
                 db.getAccounts()->push_back(add);
                 db.saveToJson(add);
+                break;
             }
         }
     } while (option != menu_create::QUIT);

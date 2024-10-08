@@ -20,4 +20,6 @@ void menu_list::print(DataHandler& db) {
     for (bankAccount* account : *(db.getAccounts())) {
         account->print();
     }
+
+    std::cout << std::endl;
 }
