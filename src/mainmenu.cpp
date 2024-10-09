@@ -22,8 +22,7 @@ void mainmenu::start(DataHandler& db) {
 		switch (option) {
 			case 1: menu_create::start(db); break;
 			case 2: menu_search::start(db); break;
-			case 3: menu_edit::start(db); break;
-			case 4: menu_list::start(db); break;
+			case 3: menu_list::start(db); break;
 		}
 	} while (option != mainmenu::QUIT);
 }
@@ -32,10 +31,9 @@ void mainmenu::start(DataHandler& db) {
 void mainmenu::print() {
     std::cout << "Welcome to Bank Program Main Menu\n"
         << "[1] Create a Bank Account\n"
-        << "[2] Search for an Account\n"
-        << "[3] Edit a Bank Account\n"
-		<< "[4] View All Database Accounts\n"
-        << "[5] Exit\n" << std::endl;
+        << "[2] Edit a Bank Account\n"
+        << "[3] View All Database Accounts\n"
+        << "[4] Exit\n" << std::endl;
 }
 
 
