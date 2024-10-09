@@ -98,6 +98,15 @@ void DataHandler::saveToJson(const bankAccount* account) {
     file.close();
 }
 
+bool DataHandler::checkForDB() {
+    fs::path path = dataDir;
+
+    if(fs::exists(path) && fs::is_directory(path))
+	return true;
+    else
+	return false;
+}
+
 std::vector<bankAccount*>* DataHandler::getAccounts() {
     return &accounts;
 }
@@ -161,5 +170,5 @@ void DataHandler::relinquish(int id) {
 }
 
 std::string DataHandler::_getLockPath(int id) {
-    return fs::path(dataDir + "/" + std::to_string(id) + ".lock");
+    return (dataDir + "/" + std::to_string(id) + ".lock");
 }

@@ -1,5 +1,5 @@
 # Add all new cpp-hpp combo names to this list!
-SYMBOLS = dataHandler helpers mainmenu menu_create menu_edit menu_list menu_search accounts/bankAccount accounts/certificateOfDeposit accounts/checkingAccount accounts/highInterestChecking accounts/highInterestSavings accounts/noChargeChecking accounts/savingsAccount accounts/serviceChargeChecking
+SYMBOLS = dataHandler exceptionHandler helpers mainmenu menu_create menu_edit menu_list menu_search accounts/bankAccount accounts/certificateOfDeposit accounts/checkingAccount accounts/highInterestChecking accounts/highInterestSavings accounts/noChargeChecking accounts/savingsAccount accounts/serviceChargeChecking
 
 ENTRYPOINT = main
 
