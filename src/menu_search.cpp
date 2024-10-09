@@ -1,5 +1,3 @@
-// Main Menu
-
 #include "dataHandler.hpp"
 #include "bankAccount.hpp"
 #include "menu_search.hpp"
