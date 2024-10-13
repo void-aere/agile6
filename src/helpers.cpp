@@ -17,7 +17,12 @@ using std::cout, std::cin, std::endl;
  * This function can be used anywhere to overwrite whatever's been printed.
 */
 void clearScreen() {
-	std::cout << "\033[2J\033[1;1H";
+    if (system("cls") == 0) {
+	
+    }
+    else {
+        std::cout << "\033[2J\033[1;1H";
+    }
 }
 
 //Use this if you want to use getline() after using cin >>

@@ -17,6 +17,7 @@ class DataHandler {
         void saveData();
         bankAccount* buildFromJSON(const nlohmann::json &data);
         void saveToJson(const bankAccount* account);
+	bool checkForDB();
         std::vector<bankAccount*>* getAccounts();
         std::vector<bankAccount*> getAccountsByName(const std::string& name);
         std::vector<bankAccount*> getAccountsByType(const std::string& type);
