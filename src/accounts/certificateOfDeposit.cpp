@@ -90,7 +90,7 @@ json certificateOfDeposit::toJson() const {
         {"interestRate", interestRate},
         {"maturityMonth", maturityMonth},
         {"currentMonth", currentMonth},
-        {"type", "certificateOfDDeposit"}
+        {"type", "certificateOfDeposit"}
     };
 }
 
