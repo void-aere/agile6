@@ -40,10 +40,12 @@ void DataHandler::loadData() {
             file.close();
 
             bankAccount* newAccount = this->buildFromJSON(data);
-            size_t account = this->getIndexByID(newAccount->getAccountNumber());
-
             // Assert that loading went correctly
-            if (newAccount == nullptr) continue;
+            if (newAccount == nullptr) {
+                continue;
+            }
+
+            size_t account = this->getIndexByID(newAccount->getAccountNumber());
 
             // Is this account in the list?
                 // If no, add it
