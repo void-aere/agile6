@@ -2,14 +2,14 @@
 #include "mainmenu.hpp"
 #include "dataHandler.hpp"
 #include "exceptionHandler.hpp"
+#include "accounts/bankAccount.hpp"
 
 int main() {
 
     try {
-        DataHandler *db = new DataHandler("env");   
+        DataHandler<bankAccount> *db = new DataHandler<bankAccount>("env");   
 
-	if (!db->checkForDB())
-	    throw exceptionHandler("env");
+        if (!db->checkForDB()) throw exceptionHandler("env");
 
         db->loadData();
 
@@ -18,8 +18,7 @@ int main() {
         delete db;
 
         // login::start();
-    }
-    catch (exceptionHandler err) {
+    } catch (exceptionHandler err) {
         err.what();
     }
 }

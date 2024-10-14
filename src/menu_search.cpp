@@ -7,7 +7,7 @@
 // This is the Search Menu called by mainmenu::start
 // It prompts the user to decide whether they would like
 // to search by Account Holder's Name, or Account Number
-void menu_search::start(DataHandler& db)
+void menu_search::start(DataHandler<bankAccount>& db)
 {
     int choice = 0;
 
@@ -46,7 +46,7 @@ void menu_search::start(DataHandler& db)
 }
 
 // Search by Account Holder Name and then Edit
-void menu_search::queryAndEditByName(DataHandler& db) {
+void menu_search::queryAndEditByName(DataHandler<bankAccount>& db) {
 
     clearScreen();
 
@@ -57,7 +57,8 @@ void menu_search::queryAndEditByName(DataHandler& db) {
     std::getline(std::cin, name);  // Get the full name input from the user
 
     // Search for matching accounts by name
-    std::vector<bankAccount*> accounts = db.getAccountsByName(name);
+    //TODO fix
+    std::vector<bankAccount*> accounts = *db.getEntries();
 
     // Check if any accounts were found
     if (!accounts.empty()) {
@@ -120,7 +121,7 @@ void menu_search::queryAndEditByName(DataHandler& db) {
 
 
 // Search by Account Number and then Edit
-void menu_search::queryAndEditByAccountNumber(DataHandler& db) {
+void menu_search::queryAndEditByAccountNumber(DataHandler<bankAccount>& db) {
     int accountNumber;
 
     // Prompt the user to enter the account number
@@ -131,7 +132,7 @@ void menu_search::queryAndEditByAccountNumber(DataHandler& db) {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     // Search for the account by account number
-    bankAccount* selectedAccount = db.getAccountByID(accountNumber);
+    bankAccount* selectedAccount = db.getEntryByID(accountNumber);
 
     // Check if the account was found
     if (selectedAccount != nullptr) {

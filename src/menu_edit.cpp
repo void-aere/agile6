@@ -8,12 +8,12 @@
 #include <fstream>
 
 //This function is called by main() in main.cpp, and is essentially the entry point for the program
-void menu_edit::start(DataHandler& db) {
+void menu_edit::start(DataHandler<bankAccount>& db) {
     clearScreen();
     menu_edit::print();
     int accountNumber = inputInt("Provide an account number to modify: ");
 
-    bankAccount* modify = db.getAccountByID(accountNumber);
+    bankAccount* modify = db.getEntryByID(accountNumber);
 
     if (modify == nullptr) {
         printf("Invalid account number.");

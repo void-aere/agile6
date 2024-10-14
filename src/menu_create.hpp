@@ -3,7 +3,7 @@
 #include "dataHandler.hpp"
 
 namespace menu_create {
-	void start(DataHandler& db);
+	void start(DataHandler<bankAccount>& db);
 	void print();
 	const short QUIT = 7;
 }

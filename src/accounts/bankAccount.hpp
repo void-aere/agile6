@@ -8,6 +8,7 @@ class bankAccount {
 		bankAccount(std::string name, int accountNumber, double balance);
         virtual ~bankAccount();
 		int getAccountNumber() const;
+        int getID() const;
 		double getBalance() const;
 		std::string getName() const;
 		void setName(std::string name);

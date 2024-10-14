@@ -18,6 +18,8 @@ int bankAccount::getAccountNumber() const {
 	return accountNumber;
 }
 
+int bankAccount::getID() const { return getAccountNumber(); }
+
 double bankAccount::getBalance() const {
 	return balance;
 }

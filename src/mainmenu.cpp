@@ -10,7 +10,7 @@
 #include <iostream>
 
 //This function is called by main() in main.cpp, and is essentially the entry point for the program
-void mainmenu::start(DataHandler& db) {
+void mainmenu::start(DataHandler<bankAccount>& db) {
 	int option = 0;
 	do {
 		clearScreen();
