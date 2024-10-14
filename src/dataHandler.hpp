@@ -17,8 +17,7 @@ class DataHandler {
         // Loading and Saving
         void loadData();
         void saveData();
-        void saveToJson(const DataType* account);
-	    bool checkForDB();
+        void saveToJson(const DataType* entry);
         
         // Accessing Members
         std::vector<DataType*>* getEntries();

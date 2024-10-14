@@ -18,6 +18,7 @@ class bankAccount {
 		virtual void print() const;
 
         virtual nlohmann::json toJson() const = 0;
+        static bankAccount* fromJson(const nlohmann::json& data);
         std::string getFilename() const;
 
 		virtual void createAccountMenu();

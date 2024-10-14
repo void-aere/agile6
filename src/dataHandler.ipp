@@ -1,5 +1,4 @@
 #include "dataHandler.hpp"
-#include "accounts/bankTools.hpp"
 
 #include <filesystem>
 #include <fstream>
@@ -12,6 +11,10 @@ namespace fs = std::filesystem;
 template <class DataType>
 DataHandler<DataType>::DataHandler(const string &dataDir) {
     this->dataDir = dataDir;
+
+    // Initialize data directory if it doesn't exist
+    fs::path path = dataDir;
+    if (!fs::exists(path) || !fs::is_directory(path)) fs::create_directory(path);
 }
 
 template <class DataType>
@@ -37,7 +40,7 @@ void DataHandler<DataType>::loadData() {
             json data = json::parse(file);
             file.close();
 
-            DataType* newEntry = bankAccountFromJSON(data);
+            DataType* newEntry = DataType::fromJson(data);
             // Assert that loading went correctly
             if (newEntry == nullptr) {
                 continue;
@@ -79,15 +82,6 @@ void DataHandler<DataType>::saveToJson(const DataType* entry) {
     file.open(path);
     file << entry->toJson().dump();
     file.close();
-}
-
-template <class DataType>
-bool DataHandler<DataType>::checkForDB() {
-    fs::path path = dataDir;
-
-    if(fs::exists(path) && fs::is_directory(path))
-	    return true;
-    else return false;
 }
 
 template <class DataType>
