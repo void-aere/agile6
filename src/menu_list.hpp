@@ -1,9 +1,9 @@
 #pragma once
 
-#include "dataHandler.hpp"
+#include "context.hpp"
 
 namespace menu_list {
-	void start(DataHandler<bankAccount>& db);
+	void start(Context& cx);
 	void print(DataHandler<bankAccount>& db);
 	const short QUIT = 4;
 }

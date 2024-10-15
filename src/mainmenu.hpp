@@ -1,10 +1,10 @@
 #pragma once
 
-#include "dataHandler.hpp"
+#include "context.hpp"
 #include "accounts/bankAccount.hpp"
 
 namespace mainmenu {
-	void start(DataHandler<bankAccount>& db);
+	void start(Context& cx);
 	void print();
 	const short QUIT = 4;
 }

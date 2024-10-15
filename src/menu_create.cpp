@@ -1,6 +1,6 @@
 // Main Menu
 
-#include "dataHandler.hpp"
+#include "context.hpp"
 #include "bankAccount.hpp"
 #include "accounts/certificateOfDeposit.hpp"
 #include "accounts/savingsAccount.hpp"
@@ -15,7 +15,8 @@
 #include <fstream>
 
 //This function is called by main() in main.cpp, and is essentially the entry point for the program
-void menu_create::start(DataHandler<bankAccount>& db) {
+void menu_create::start(Context& cx) {
+    DataHandler<bankAccount> db = cx.bdb();
 	int option = 0;
     do {
         clearScreen();

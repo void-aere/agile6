@@ -1,11 +1,12 @@
 # Add all new cpp-hpp combo names to this list!
-SYMBOLS = exceptionHandler helpers mainmenu menu_create menu_edit menu_list menu_search accounts/bankAccount accounts/certificateOfDeposit accounts/checkingAccount accounts/highInterestChecking accounts/highInterestSavings accounts/noChargeChecking accounts/savingsAccount accounts/serviceChargeChecking accounts/bankTools
+SYMBOLS = context users exceptionHandler helpers mainmenu menu_create menu_edit menu_list menu_search accounts/bankAccount accounts/certificateOfDeposit accounts/checkingAccount accounts/highInterestChecking accounts/highInterestSavings accounts/noChargeChecking accounts/savingsAccount accounts/serviceChargeChecking
 
 ENTRYPOINT = main
 
 # Configure where things go
 OUT_DIR = out
 SRC_DIR = src
+SUB_DIRS = accounts
 EXE = run-me
 
 GPPFLAGS = -std=c++20 -Wall -Werror -Wpedantic -Isrc -iquote src/accounts

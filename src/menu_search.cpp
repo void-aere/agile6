@@ -7,8 +7,9 @@
 // This is the Search Menu called by mainmenu::start
 // It prompts the user to decide whether they would like
 // to search by Account Holder's Name, or Account Number
-void menu_search::start(DataHandler<bankAccount>& db)
-{
+void menu_search::start(Context& cx) {
+    DataHandler<bankAccount> db = cx.bdb();
+
     int choice = 0;
 
     do 
@@ -31,9 +32,9 @@ void menu_search::start(DataHandler<bankAccount>& db)
 
         // Process the user's choice
         switch (choice) {
-            case 1: queryAndEditByName(db); // Search by account holder's name
+            case 1: queryAndEditByName(cx); // Search by account holder's name
                     break;  
-            case 2: queryAndEditByAccountNumber(db); // Search by account number
+            case 2: queryAndEditByAccountNumber(cx); // Search by account number
                     break;
             //case 3: mainmenu::start(*db); // Return to the main menu
                     //return;
@@ -46,7 +47,8 @@ void menu_search::start(DataHandler<bankAccount>& db)
 }
 
 // Search by Account Holder Name and then Edit
-void menu_search::queryAndEditByName(DataHandler<bankAccount>& db) {
+void menu_search::queryAndEditByName(Context& cx) {
+    DataHandler<bankAccount> db = cx.bdb();
 
     clearScreen();
 
@@ -57,7 +59,7 @@ void menu_search::queryAndEditByName(DataHandler<bankAccount>& db) {
     std::getline(std::cin, name);  // Get the full name input from the user
 
     // Search for matching accounts by name
-    //TODO fix
+    // TODO fix
     std::vector<bankAccount*> accounts = *db.getEntries();
 
     // Check if any accounts were found
@@ -121,7 +123,9 @@ void menu_search::queryAndEditByName(DataHandler<bankAccount>& db) {
 
 
 // Search by Account Number and then Edit
-void menu_search::queryAndEditByAccountNumber(DataHandler<bankAccount>& db) {
+void menu_search::queryAndEditByAccountNumber(Context& cx) {
+    DataHandler<bankAccount> db = cx.bdb();
+
     int accountNumber;
 
     // Prompt the user to enter the account number

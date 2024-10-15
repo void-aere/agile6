@@ -6,9 +6,9 @@
 #include "helpers.hpp"
 #include <iostream>
 
-void menu_list::start(DataHandler<bankAccount>& db) {
+void menu_list::start(Context& cx) {
     clearScreen();
-    menu_list::print(db);
+    menu_list::print(cx.bdb());
     waitForInput();
     return;
 }
