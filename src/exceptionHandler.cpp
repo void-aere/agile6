@@ -1,5 +1,7 @@
 #include "exceptionHandler.hpp"
 
+using std::string;
+
 exceptionHandler::exceptionHandler()
 {
 	message = string("The program has run into a problem. Please quit the program and try again.");

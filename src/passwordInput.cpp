@@ -2,8 +2,9 @@
 #include <iostream>
 #include <termios.h>
 #include <unistd.h>
-#include "passwordInput.h"
+#include "passwordInput.hpp"
 
+using std::cout, std::endl;
 
 void getPassword(char* password) {
 

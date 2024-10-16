@@ -1,31 +1,29 @@
 #pragma once
 
 #include <string>
-using std::string;
 
 //UI tools / formatting / string tools
 void clearScreen();
 void waitForInput();
-string printMoney(float val);
-string chop(const string& str, int width);
-string pad(int width); //literally just <width> spaces
-string lowercase(const string& str); //return a lowercased version of str
-int searchraw(const string& source, const string& query);
+std::string chop(const std::string& str, int width);
+std::string pad(int width); //literally just <width> spaces
+std::string lowercase(const std::string& str); //return a lowercased version of str
+int searchraw(const std::string& source, const std::string& query);
 
 //Getting user input
-string inputString();
-string inputString(const string& prompt);
+std::string inputString();
+std::string inputString(const std::string& prompt);
 int inputInt();
-int inputInt(const string& prompt);
+int inputInt(const std::string& prompt);
 float inputFloat();
-float inputFloat(const string& prompt);
+float inputFloat(const std::string& prompt);
 double inputDouble();
-double inputDouble(const string& prompt);
+double inputDouble(const std::string& prompt);
 int getMenuOption(int high); //gets a menu selection option between 1 and $high
 int getMenuOptionAuto(int high); //works better but will return -1 on error
 void ignoreLine(); // refined usage of cin.ignore()
-bool confirm(const string& prompt); // Get user confirmation (y/n)
+bool confirm(const std::string& prompt); // Get user confirmation (y/n)
 
 //Working with dates
-string currentDate();
-bool valiDate(const string& date); //validate a date (mm-dd-yyyy)
+std::string currentDate();
+bool valiDate(const std::string& date); //validate a date (mm-dd-yyyy)

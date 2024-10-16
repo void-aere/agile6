@@ -4,12 +4,10 @@
 #include <fstream>
 #include <iostream>
 
-using std::string;
-using json = nlohmann::json;
-namespace fs = std::filesystem;
-
 template <class DataType>
-DataHandler<DataType>::DataHandler(const string &dataDir) {
+DataHandler<DataType>::DataHandler(const std::string &dataDir) {
+    namespace fs = std::filesystem;
+
     this->dataDir = dataDir;
 
     // Initialize data directory if it doesn't exist
@@ -26,6 +24,8 @@ DataHandler<DataType>::~DataHandler() {
 
 template <class DataType>
 void DataHandler<DataType>::loadData() {
+    namespace fs = std::filesystem;
+
     // TODO: only load files modified since last call
 
     // Scan dataDir
@@ -37,7 +37,7 @@ void DataHandler<DataType>::loadData() {
         if (dirEntry.path().extension() == ".json") {
             std::fstream file;
             file.open(dirEntry.path());
-            json data = json::parse(file);
+            nlohmann::json data = nlohmann::json::parse(file);
             file.close();
 
             DataType* newEntry = DataType::fromJson(data);
@@ -75,6 +75,8 @@ void DataHandler<DataType>::saveData() {
 
 template <class DataType>
 void DataHandler<DataType>::saveToJson(const DataType* entry) {
+    namespace fs = std::filesystem;
+    
     fs::path path = dataDir + "/" + entry->getFilename();
     if (fs::exists(path)) fs::remove(path);
 
@@ -109,6 +111,8 @@ size_t DataHandler<DataType>::getIndexByID(const int id) {
 
 template <class DataType>
 bool DataHandler<DataType>::assume(int id) {
+    namespace fs = std::filesystem;
+
     fs::path path = _getLockPath(id);
     if (fs::exists(path)) return false;
 
@@ -119,6 +123,8 @@ bool DataHandler<DataType>::assume(int id) {
 
 template <class DataType>
 void DataHandler<DataType>::relinquish(int id) {
+    namespace fs = std::filesystem;
+
     fs::path path = _getLockPath(id);
     if (fs::exists(path)) fs::remove(path);
 }

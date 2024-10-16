@@ -2,15 +2,14 @@
 
 #include "dataHandler.hpp"
 #include <iostream>
-using std::string;
 
 class exceptionHandler {
 	private:
-		string message;
+		std::string message;
 
 	public:
 		exceptionHandler();
-		exceptionHandler(string);
+		exceptionHandler(std::string);
 		~exceptionHandler();
 
 		void what();
