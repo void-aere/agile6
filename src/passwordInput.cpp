@@ -2,7 +2,7 @@
 #include <iostream>
 #include <termios.h>
 #include <unistd.h>
-#include "password_input.h"
+#include "passwordInput.h"
 
 
 void getPassword(char* password) {
