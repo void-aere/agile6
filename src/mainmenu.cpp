@@ -46,7 +46,7 @@ void mainmenu::login(Context& cx) {
         for (auto user : users) {
             if (user->getUsername() != username) continue;
 
-            if (user->checkPassword(password)) {
+            if (user->checkHash(hashword(password))) {
                 // Successful login
                 cx.setUser(user);
                 std::cout << "Successfully logged in." << std::endl;
@@ -65,7 +65,7 @@ void mainmenu::login(Context& cx) {
 
 // Put menu text (without 'pick your option' prompt) here
 void mainmenu::print(Context& cx) {
-    std::cout << "Welcome to Bank Program Main Menu, " << cx.user()->getName() << "\n"
+    std::cout << "Welcome to Bank Program Main Menu, \"" << cx.user()->getName() << "\"\n"
         << "[1] Create a Bank Account\n"
         << "[2] Edit a Bank Account\n"
         << "[3] View All Database Accounts\n"

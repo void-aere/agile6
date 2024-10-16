@@ -44,7 +44,6 @@ class UserAccount {
         std::string getUsername() const;
         std::string getName() const;
         bool checkHash(const size_t hash);
-        bool checkPassword(const std::string& password);
 
         void setUsername(const std::string& username);
         void setName(const std::string& name);

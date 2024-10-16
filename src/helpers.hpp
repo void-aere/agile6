@@ -2,7 +2,7 @@
 
 #include <string>
 
-//UI tools / formatting / string tools
+// UI tools / formatting / string tools
 void clearScreen();
 void waitForInput();
 std::string chop(const std::string& str, int width);
@@ -10,7 +10,7 @@ std::string pad(int width); //literally just <width> spaces
 std::string lowercase(const std::string& str); //return a lowercased version of str
 int searchraw(const std::string& source, const std::string& query);
 
-//Getting user input
+// Getting user input
 std::string inputString();
 std::string inputString(const std::string& prompt);
 int inputInt();
@@ -24,6 +24,9 @@ int getMenuOptionAuto(int high); //works better but will return -1 on error
 void ignoreLine(); // refined usage of cin.ignore()
 bool confirm(const std::string& prompt); // Get user confirmation (y/n)
 
-//Working with dates
+// Working with dates
 std::string currentDate();
 bool valiDate(const std::string& date); //validate a date (mm-dd-yyyy)
+
+// Password tools
+size_t hashword(const std::string& word); // compute a string's hash

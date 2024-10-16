@@ -3,6 +3,7 @@
 #include <iostream>
 #include <limits>
 #include <chrono>
+#include <unordered_map>
 
 using std::string;
 using std::cout, std::cin, std::endl;
@@ -318,4 +319,10 @@ bool valiDate(const string& date) {
 		else if (!isdigit(cdate[i])) return false;
 	}
 	return true;
+}
+
+size_t hashword(const string& word) {
+    // TBH I don't really know what's happening here
+    std::hash<string> hash;
+    return hash(word);
 }

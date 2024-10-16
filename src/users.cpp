@@ -1,7 +1,6 @@
 #include "users.hpp"
 
 #include <algorithm>
-#include <unordered_map>
 
 using std::string;
 
@@ -46,12 +45,6 @@ string UserAccount::getUsername() const { return this->username; }
 string UserAccount::getName() const { return this->name; }
 
 bool UserAccount::checkHash(const size_t hash) { return this->pwdHash == hash; }
-
-bool UserAccount::checkPassword(const string& password) {
-    std::hash<string> hasher;
-
-    return checkHash(hasher(password));
-}
 
 void UserAccount::setPwdHash(const size_t hash) { this->pwdHash = hash; }
 

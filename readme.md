@@ -8,6 +8,12 @@
 
 Note: `make clean` removes all compiler output.
 
+### Need to Compute a Hash?
+
+The executable has a special mode for calculating an arbitrary sequence's hash.\
+Simply the run the executable with parameters "hashword" and the word(s) you want to hash.\
+For example: `./run-me hashword <words>`
+
 ### Best Practices for Git
 
 - Don't stage your `.vscode` or other environment-specific files for commit.
