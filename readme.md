@@ -34,3 +34,15 @@ For example: `./run-me hashword <words>`
 
 - DataHandler has been changed into a templated class, so it can be used for loading and saving data other than just bank accounts.
 - This was done in preparation for the user account database, and the incorporation of both databases into a context class.
+
+#### 241015-01
+
+- Implemented the Context class, replacing (or rather encapsulating) the DataHandlers for both bank and user accounts.
+- See `context.hpp` for more information.
+
+#### 241015-02
+
+- Added a login menu to run in front of the main menu.
+- Since there is currently no way to create user accounts except by rawdogging new json files, also added a temporary admin account to the record.
+    - username: `admin`
+    - password: `admin`
