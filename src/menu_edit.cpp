@@ -1,6 +1,6 @@
 // Main Menu
 
-#include "dataHandler.hpp"
+#include "context.hpp"
 #include "bankAccount.hpp"
 #include "menu_edit.hpp"
 #include "helpers.hpp"
@@ -8,22 +8,24 @@
 #include <fstream>
 
 //This function is called by main() in main.cpp, and is essentially the entry point for the program
-void menu_edit::start(DataHandler& db) {
+void menu_edit::start(Context& cx) {
+    DataHandler<bankAccount>* db = cx.bdb();
+
     clearScreen();
     menu_edit::print();
     int accountNumber = inputInt("Provide an account number to modify: ");
 
-    bankAccount* modify = db.getAccountByID(accountNumber);
+    bankAccount* modify = db->getEntryByID(accountNumber);
 
     if (modify == nullptr) {
         printf("Invalid account number.");
         return;
     }
 
-    if (db.assume(accountNumber)) {
+    if (db->assume(accountNumber)) {
         modify->editAccountMenu();
-        db.saveToJson(modify);
-        db.relinquish(accountNumber);
+        db->saveToJson(modify);
+        db->relinquish(accountNumber);
     } else {
         printf("Account is busy.");
     }

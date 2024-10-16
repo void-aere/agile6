@@ -6,18 +6,18 @@
 #include "helpers.hpp"
 #include <iostream>
 
-void menu_list::start(DataHandler& db) {
+void menu_list::start(Context& cx) {
     clearScreen();
-    menu_list::print(db);
+    menu_list::print(cx);
     waitForInput();
     return;
 }
 
-void menu_list::print(DataHandler& db) {
+void menu_list::print(Context& cx) {
     std::cout << "List All Bank Accounts\n" << std::endl;
 
-    db.loadData();
-    for (bankAccount* account : *(db.getAccounts())) {
+    cx.bdb()->loadData();
+    for (bankAccount* account : *(cx.bdb()->getEntries())) {
         account->print();
     }
 

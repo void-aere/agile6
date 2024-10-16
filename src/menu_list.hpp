@@ -1,9 +1,9 @@
 #pragma once
 
-#include "dataHandler.hpp"
+#include "context.hpp"
 
 namespace menu_list {
-	void start(DataHandler& db);
-	void print(DataHandler& db);
+	void start(Context& cx);
+	void print(Context& cx);
 	const short QUIT = 4;
 }

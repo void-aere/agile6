@@ -4,6 +4,13 @@
 #include "bankAccount.hpp"
 #include "helpers.hpp"
 
+#include "certificateOfDeposit.hpp"
+#include "highInterestChecking.hpp"
+#include "highInterestSavings.hpp"
+#include "noChargeChecking.hpp"
+#include "savingsAccount.hpp"
+#include "serviceChargeChecking.hpp"
+
 using std::cout, std::endl;
 
 bankAccount::bankAccount(string name, int accountNumber, double balance) {
@@ -17,6 +24,8 @@ bankAccount::~bankAccount() { }
 int bankAccount::getAccountNumber() const {
 	return accountNumber;
 }
+
+int bankAccount::getID() const { return getAccountNumber(); }
 
 double bankAccount::getBalance() const {
 	return balance;
@@ -46,6 +55,25 @@ void bankAccount::print() const {
 	//std::cout << std::setw(40) << " balance : $" << balance << std::endl;
 
 	std::cout << name << " " << accountNumber << " balance : $" << balance << std::endl;
+}
+
+bankAccount* bankAccount::fromJson(const nlohmann::json& data) {
+    // Skip this object if it doesn't have the "type" tag
+    if (!data.contains("type")) return nullptr;
+    std::string type = data.at("type");
+
+    bankAccount* newAccount = nullptr;
+
+    // Unfortunately I can't think of a more abstract polymorphic way to instantiate bank accounts
+    // If you've got any ideas feel free to play around with them
+    if      (type == "certificateOfDeposit")  newAccount = new certificateOfDeposit(data);
+    else if (type == "highInterestChecking")  newAccount = new highInterestChecking(data);
+    else if (type == "highInterestSavings")   newAccount = new highInterestSavings(data);
+    else if (type == "noChargeChecking")      newAccount = new noChargeChecking(data);
+    else if (type == "savingsAccount")        newAccount = new savingsAccount(data);
+    else if (type == "serviceChargeChecking") newAccount = new serviceChargeChecking(data);
+
+    return newAccount; 
 }
 
 string bankAccount::getFilename() const {

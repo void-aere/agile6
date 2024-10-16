@@ -1,32 +1,33 @@
 #pragma once
 
-#include "accounts/bankAccount.hpp"
 #include <string>
 #include <vector>
 #include <nlohmann/json.hpp>
 
+template <class DataType>
 class DataHandler {
     private:
-        std::vector<bankAccount *> accounts;
+        std::vector<DataType *> entries;
         std::string dataDir;
 
     public:
         DataHandler(const std::string &dataDir);
         ~DataHandler();
+
+        // Loading and Saving
         void loadData();
         void saveData();
-        bankAccount* buildFromJSON(const nlohmann::json &data);
-        void saveToJson(const bankAccount* account);
-	bool checkForDB();
-        std::vector<bankAccount*>* getAccounts();
-        std::vector<bankAccount*> getAccountsByName(const std::string& name);
-        std::vector<bankAccount*> getAccountsByType(const std::string& type);
-        bankAccount* getAccountByID(const int id);
-        bankAccount* getAccountByName(const std::string& name);
-        size_t getIndexByID(const int id);
-        bankAccount* search(const std::string& query);
+        void saveToJson(const DataType* entry);
         
+        // Accessing Members
+        std::vector<DataType*>* getEntries();
+        DataType* getEntryByID(const int id);
+        size_t getIndexByID(const int id);
+        
+        // Deadlock
         bool assume(int id);
         void relinquish(int id);
         std::string _getLockPath(int id);
 };
+
+#include <dataHandler.ipp>

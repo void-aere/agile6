@@ -3,10 +3,6 @@
 #include <iostream>
 #include <limits>
 #include <chrono>
-// #include <iomanip>
-// #include <format>
-// #include <cmath>
-// #include <cctype>
 
 using std::string;
 using std::cout, std::cin, std::endl;
@@ -17,12 +13,7 @@ using std::cout, std::cin, std::endl;
  * This function can be used anywhere to overwrite whatever's been printed.
 */
 void clearScreen() {
-    if (system("cls") == 0) {
-	
-    }
-    else {
-        std::cout << "\033[2J\033[1;1H";
-    }
+    if (!system("cls") == 0) std::cout << "\033[2J\033[1;1H";
 }
 
 //Use this if you want to use getline() after using cin >>
@@ -57,12 +48,7 @@ bool confirm(const string& prompt) {
 */
 void waitForInput() {
 	cout << "Press RETURN to continue";
-	//ignoreLine();
 	cin.get();
-	//cout << (cin.peek() == EOF) << endl;
-	//ignoreLine();
-	//cout << cin.peek(); //WHY THE FUCK DOES THIS WORK!!! (it don't)
-	//cin.get();
 }
 
 /**
@@ -311,12 +297,8 @@ int getMenuOptionAuto(int high) {
  * @returns The date, in the format "mm-dd-yyy" as desired by serendipity.
 */
 string currentDate() {
-	// I have *no idea* how this works
 	auto const now = std::chrono::current_zone()
 		->to_local(std::chrono::system_clock::now());
-//	return format("{:%Y-%m-%d}", now);	// yy-mm-dd
-//	return format("{:%m/%d/%Y}", now);	// mm/dd/yyyy
-//	return format("{:%x}", now);		// mm/dd/yy
 	return format("{:%m-%d-%Y}", now);	// mm-dd-yyyy
 }
 
@@ -330,10 +312,8 @@ string currentDate() {
 */
 bool valiDate(const string& date) {
 	const char* cdate = date.c_str();
-//	cout << "cdate: " << cdate << endl;
 	
 	for (int i = 0; (size_t)i < date.length(); i++) {
-		//cout << "current char: " << cdate[i] << endl;
 		if (i == 2 || i == 5) { if (cdate[i] != '-' && cdate[i] != '/') return false; }
 		else if (!isdigit(cdate[i])) return false;
 	}

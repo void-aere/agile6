@@ -8,6 +8,7 @@ class bankAccount {
 		bankAccount(std::string name, int accountNumber, double balance);
         virtual ~bankAccount();
 		int getAccountNumber() const;
+        int getID() const;
 		double getBalance() const;
 		std::string getName() const;
 		void setName(std::string name);
@@ -17,6 +18,7 @@ class bankAccount {
 		virtual void print() const;
 
         virtual nlohmann::json toJson() const = 0;
+        static bankAccount* fromJson(const nlohmann::json& data);
         std::string getFilename() const;
 
 		virtual void createAccountMenu();

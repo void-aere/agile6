@@ -21,3 +21,10 @@ Note: `make clean` removes all compiler output.
 - Obfuscate typeface for passwords (see bash text decoration).
 - Boxes with curved edges (see unicode Box Drawing block 256D, 256E).
 - This thing: 🯁🯂🯃.
+
+### Changelog
+
+#### 241014-01
+
+- DataHandler has been changed into a templated class, so it can be used for loading and saving data other than just bank accounts.
+- This was done in preparation for the user account database, and the incorporation of both databases into a context class.
