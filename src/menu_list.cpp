@@ -8,16 +8,16 @@
 
 void menu_list::start(Context& cx) {
     clearScreen();
-    menu_list::print(cx.bdb());
+    menu_list::print(cx);
     waitForInput();
     return;
 }
 
-void menu_list::print(DataHandler<bankAccount>& db) {
+void menu_list::print(Context& cx) {
     std::cout << "List All Bank Accounts\n" << std::endl;
 
-    db.loadData();
-    for (bankAccount* account : *(db.getEntries())) {
+    cx.bdb()->loadData();
+    for (bankAccount* account : *(cx.bdb()->getEntries())) {
         account->print();
     }
 

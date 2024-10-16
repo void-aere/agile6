@@ -28,12 +28,12 @@ void Context::setUserHandler(DataHandler<UserAccount>* handler) {
     this->userHandler = handler;
 }
 
-DataHandler<bankAccount>& Context::bdb() {
-    return *(this->bankHandler);
+DataHandler<bankAccount>* Context::bdb() {
+    return this->bankHandler;
 }
 
-DataHandler<UserAccount>& Context::udb() {
-    return *(this->userHandler);
+DataHandler<UserAccount>* Context::udb() {
+    return this->userHandler;
 }
 
 UserAccount& Context::user() {

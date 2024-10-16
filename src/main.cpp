@@ -16,8 +16,8 @@ int main() {
         context->setBankHandler(new DataHandler<bankAccount>("env/bank"));
         context->setUserHandler(new DataHandler<UserAccount>("env/user"));
 
-        context->bdb().loadData();
-        context->udb().loadData();
+        context->bdb()->loadData();
+        context->udb()->loadData();
 
         mainmenu::start(*context);
 

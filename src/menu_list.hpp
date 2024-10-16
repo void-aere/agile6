@@ -4,6 +4,6 @@
 
 namespace menu_list {
 	void start(Context& cx);
-	void print(DataHandler<bankAccount>& db);
+	void print(Context& cx);
 	const short QUIT = 4;
 }

@@ -16,7 +16,7 @@
 
 //This function is called by main() in main.cpp, and is essentially the entry point for the program
 void menu_create::start(Context& cx) {
-    DataHandler<bankAccount> db = cx.bdb();
+    DataHandler<bankAccount>* db = cx.bdb();
 	int option = 0;
     do {
         clearScreen();
@@ -28,43 +28,43 @@ void menu_create::start(Context& cx) {
             case 1: {
                 bankAccount* add = new certificateOfDeposit("no-name", 0, 0);
                 add->createAccountMenu();
-                db.getEntries()->push_back(add);
-                db.saveToJson(add);
+                db->getEntries()->push_back(add);
+                db->saveToJson(add);
                 break;
             }
             case 2: {
                 bankAccount* add = new highInterestChecking("no-name", 0, 0);
                 add->createAccountMenu();
-                db.getEntries()->push_back(add);
-                db.saveToJson(add);
+                db->getEntries()->push_back(add);
+                db->saveToJson(add);
                 break;
             }
             case 3: {
                 bankAccount* add = new highInterestSavings("no-name", 0, 0);
                 add->createAccountMenu();
-                db.getEntries()->push_back(add);
-                db.saveToJson(add);
+                db->getEntries()->push_back(add);
+                db->saveToJson(add);
                 break;
             }
             case 4: {
                 bankAccount* add = new noChargeChecking("no-name", 0, 0);
                 add->createAccountMenu();
-                db.getEntries()->push_back(add);
-                db.saveToJson(add);
+                db->getEntries()->push_back(add);
+                db->saveToJson(add);
                 break;
             }
             case 5: {
                 bankAccount* add = new serviceChargeChecking("no-name", 0, 0);
                 add->createAccountMenu();
-                db.getEntries()->push_back(add);
-                db.saveToJson(add);
+                db->getEntries()->push_back(add);
+                db->saveToJson(add);
                 break;
             }
             case 6: {
                 bankAccount* add = new savingsAccount("no-name", 0, 0);
                 add->createAccountMenu();
-                db.getEntries()->push_back(add);
-                db.saveToJson(add);
+                db->getEntries()->push_back(add);
+                db->saveToJson(add);
                 break;
             }
         }

@@ -22,7 +22,7 @@ class Context {
         void setBankHandler(DataHandler<bankAccount>* handler);
         void setUserHandler(DataHandler<UserAccount>* handler);
 
-        DataHandler<bankAccount>& bdb();
-        DataHandler<UserAccount>& udb();
+        DataHandler<bankAccount>* bdb();
+        DataHandler<UserAccount>* udb();
         UserAccount& user();
 };

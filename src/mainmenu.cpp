@@ -23,6 +23,7 @@ void mainmenu::start(Context& cx) {
 			case 2: menu_search::start(cx); break;
 			case 3: menu_list::start(cx); break;
 		}
+
 	} while (option != mainmenu::QUIT);
 }
 
