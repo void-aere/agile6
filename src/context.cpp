@@ -6,9 +6,9 @@ Context::Context(const std::string& dataDir) {
 }
 
 Context::~Context() {
+    currentUser = nullptr;
     delete bankHandler;
     delete userHandler;
-    delete currentUser;
 }
 
 bool Context::checkDataDir() {
