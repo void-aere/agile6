@@ -25,6 +25,7 @@ enum UserType {
 class UserAccount {
     protected:
         int id;
+        std::string username;
         std::string name;
         size_t pwdHash; // Instead of ever storing passwords in plaintext, store their hashes
         UserType userType;
@@ -32,7 +33,7 @@ class UserAccount {
         std::vector<int> bankAccounts; // Stores bank account numbers, not account objects
 
     public:
-        UserAccount(const std::string& name, const size_t pwdHash);
+        UserAccount(const std::string& username, const size_t pwdHash);
         UserAccount(const nlohmann::json& data);
 
         static UserAccount* fromJson(const nlohmann::json& data);
@@ -41,9 +42,12 @@ class UserAccount {
 
         int getID() const;
         std::string getUsername() const;
+        std::string getName() const;
         bool checkHash(const size_t hash);
+        bool checkPassword(const std::string& password);
 
-        void setUsername(const std::string& name);
+        void setUsername(const std::string& username);
+        void setName(const std::string& name);
         void setPwdHash(const size_t hash);
         void _setID(int id);
         

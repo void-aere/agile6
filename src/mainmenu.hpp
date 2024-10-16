@@ -5,6 +5,7 @@
 
 namespace mainmenu {
 	void start(Context& cx);
-	void print();
+    void login(Context& cx);
+	void print(Context& cx);
 	const short QUIT = 4;
 }

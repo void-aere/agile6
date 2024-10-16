@@ -1,8 +1,9 @@
+#include "passwordInput.hpp"
+
 #include <stdio.h>
 #include <iostream>
 #include <termios.h>
 #include <unistd.h>
-#include "passwordInput.hpp"
 
 using std::cout, std::endl;
 

@@ -1,17 +1,19 @@
 #include "users.hpp"
 
 #include <algorithm>
+#include <unordered_map>
 
 using std::string;
 
-UserAccount::UserAccount(const string& name, const size_t pwdHash) {
-    this->name = name;
+UserAccount::UserAccount(const string& username, const size_t pwdHash) {
+    this->username = username;
     this->pwdHash = pwdHash;
 }
 
 UserAccount::UserAccount(const nlohmann::json& data)
-    : UserAccount(data.at("name"), data.at("pwdHash")) {
+    : UserAccount(data.at("username"), data.at("pwdHash")) {
     this->id = data.at("id");
+    this->name = data.at("name");
     this->userType = data.at("userType");
     this->permissions = (std::vector<Permission>)data.at("permissions");
     this->bankAccounts = (std::vector<int>)data.at("bankAccounts");
@@ -24,6 +26,7 @@ UserAccount* UserAccount::fromJson(const nlohmann::json& data) {
 nlohmann::json UserAccount::toJson() const {
     return nlohmann::json {
         {"id", id},
+        {"username", username},
         {"name", name},
         {"pwdHash", pwdHash},
         {"userType", userType},
@@ -38,13 +41,23 @@ std::string UserAccount::getFilename() const {
 
 int UserAccount::getID() const { return this->id; }
 
-string UserAccount::getUsername() const { return this->name; }
+string UserAccount::getUsername() const { return this->username; }
+
+string UserAccount::getName() const { return this->name; }
 
 bool UserAccount::checkHash(const size_t hash) { return this->pwdHash == hash; }
 
+bool UserAccount::checkPassword(const string& password) {
+    std::hash<string> hasher;
+
+    return checkHash(hasher(password));
+}
+
 void UserAccount::setPwdHash(const size_t hash) { this->pwdHash = hash; }
 
-void UserAccount::setUsername(const string& name) { this->name = name; }
+void UserAccount::setUsername(const string& username) { this->username = username; }
+
+void UserAccount::setName(const string& name) { this->name = name; }
 
 void UserAccount::_setID(int id) { this->id = id; }
 

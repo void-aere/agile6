@@ -19,6 +19,7 @@ int main() {
         context->bdb()->loadData();
         context->udb()->loadData();
 
+        mainmenu::login(*context);
         mainmenu::start(*context);
 
         delete context;
