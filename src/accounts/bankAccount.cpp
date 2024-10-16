@@ -11,7 +11,7 @@
 #include "savingsAccount.hpp"
 #include "serviceChargeChecking.hpp"
 
-using std::cout, std::endl;
+using std::string, std::cout, std::endl;
 
 bankAccount::bankAccount(string name, int accountNumber, double balance) {
 	this->name = name;
