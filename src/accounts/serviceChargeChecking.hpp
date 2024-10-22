@@ -21,8 +21,13 @@ class serviceChargeChecking: public checkingAccount {
 		void print() const;
 
         nlohmann::json toJson() const;
-		void createAccountMenu();
-		void editAccountMenu();
+
+		virtual void createAccountMenu();
+		virtual void viewAccount();
+		virtual void editAccountMenu();
+		virtual void oldEditAccountMenu();
+
+		const short QUIT = 4;
 
 	protected:
 		double serviceChargeAmount;

@@ -15,8 +15,13 @@ class highInterestChecking : public noChargeChecking {
 		virtual void print() const;
 
         nlohmann::json toJson() const;
+
 		virtual void createAccountMenu();
+		virtual void viewAccount();
 		virtual void editAccountMenu();
+		virtual void oldEditAccountMenu();
+		
+		const short QUIT = 4;
 
 	private:
 		static const double INTEREST_RATE;

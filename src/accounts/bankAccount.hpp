@@ -22,7 +22,11 @@ class bankAccount {
         std::string getFilename() const;
 
 		virtual void createAccountMenu();
+		virtual void viewAccount();
 		virtual void editAccountMenu();
+		virtual void oldEditAccountMenu();
+
+		const short QUIT = 4;
 
 	protected:
 		int accountNumber;

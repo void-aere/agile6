@@ -81,14 +81,55 @@ void noChargeChecking::createAccountMenu() {
 	std::cout << "Account has been created!\n";
 }
 
+void noChargeChecking::viewAccount() {
+	std::cout << "Account Name: " << getName() << endl;
+	std::cout << "Account Number: " << getAccountNumber() << endl;
+	std::cout << "Account Balance: " << getBalance() << endl;
+	std::cout << "Minimum Balance: " << getMinimumBalance() << endl;
+	// std::cout << "Interest Rate: " << getInterestRate() << endl;
+}
+
 void noChargeChecking::editAccountMenu() {
+	int option = 0;
+	do {
+		clearScreen();
+		std::cout << "Here are the current account (noChargeChecking) details:\n";
+		viewAccount();
+
+		std::cout << "What would you like to do?\n"
+			   	 << "[1] Deposit Money\n"
+					 << "[2] Withdraw Money\n"
+					 << "[3] Change Name\n"
+					 << "[4] Exit\n";
+
+		option = getMenuOptionAuto(4);
+				
+		double tempAmount = 0.0;
+
+		if (option == 1) {
+			std::cout << "Enter the amount you would like to deposit: ";
+			tempAmount = inputDouble();
+			deposit(tempAmount);
+		}
+		else if (option == 2) {
+			std::cout << "Enter the amount you would like to withdraw: ";
+			tempAmount = inputDouble();
+			withdraw(tempAmount);
+		}
+		else if (option == 3) {
+			std::cout << "Enter the new name of the account: ";
+			string newName = inputString();
+			setName(newName);
+		}
+
+	} while (option != noChargeChecking::QUIT);
+		
+}
+
+
+void noChargeChecking::oldEditAccountMenu() {
 	bool prompt = false;
-	std::cout << "Here are the current account details:\n";
-	std::cout << "Account Name: " << name << endl;
-	std::cout << "Account Number: " << accountNumber << endl;
-	std::cout << "Account Balance: " << balance << endl;
-	std::cout << "Minimum Balance: " << minimumBalance << endl;
-	std::cout << "Interest Rate: " << interestRate << endl;
+	viewAccount();
 
 	prompt = confirm("\nWould you like to edit Account Name? (Y/N): ");
 	if (prompt)
@@ -121,11 +162,7 @@ void noChargeChecking::editAccountMenu() {
 	}
 
 	std::cout << "\nHere are the new account details:\n";
-	std::cout << "Account Name: " << name << endl;
-	std::cout << "Account Number: " << accountNumber << endl;
-	std::cout << "Account Balance: " << balance << endl;
-	std::cout << "Minimum Balance: " << minimumBalance << endl;
-	std::cout << "Interest Rate: " << interestRate << endl;
+	viewAccount();
 
 	return;
 }

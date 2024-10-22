@@ -91,13 +91,55 @@ void bankAccount::createAccountMenu() {
 	std::cout << "Account has been created!\n";
 }
 
-void bankAccount::editAccountMenu() {
-	bool prompt = false;
-	std::cout << "Here are the current account details:\n";
-	std::cout << "Account Name: " << name << endl;
-	std::cout << "Account Number: " << accountNumber << endl;
-	std::cout << "Account Balance: " << balance << endl;
+void bankAccount::viewAccount() {
+	std::cout << "Account Name: " << getName() << endl;
+	std::cout << "Account Number: " << getID() << endl;
+	std::cout << "Account Balance: " << getBalance() << endl;
+}
 
+void bankAccount::editAccountMenu() {
+	int option = 0;
+	do {
+		clearScreen();
+		std::cout << "Here are the current account (bankAccount) details:\n";
+		viewAccount();
+
+		std::cout << "What would you like to do?\n"
+			   	 << "[1] Deposit Money\n"
+					 << "[2] Withdraw Money\n"
+					 << "[3] Change Name\n"
+					 << "[4] Exit\n";
+
+		option = getMenuOptionAuto(4);
+				
+		double tempAmount = 0.0;
+
+		if (option == 1) {
+			std::cout << "Enter the amount you would like to deposit: ";
+			tempAmount = inputDouble();
+			deposit(tempAmount);
+		}
+		else if (option == 2) {
+			std::cout << "Enter the amount you would like to withdraw: ";
+			tempAmount = inputDouble();
+			withdraw(tempAmount);
+		}
+		else if (option == 3) {
+			std::cout << "Enter the new name of the account: ";
+			string newName = inputString();
+			setName(newName);
+		}
+
+	} while (option != bankAccount::QUIT);
+		
+}
+
+void bankAccount::oldEditAccountMenu() {
+	bool prompt = false;
+	
+	std::cout << "Here are the current account details:\n";
+	viewAccount();
+	
 	prompt = confirm("\nWould you like to edit Account Name? (Y/N): ");
 	if (prompt) {
 		name = inputString("Enter the new Account Name: ");
@@ -116,9 +158,7 @@ void bankAccount::editAccountMenu() {
 	}
 
 	std::cout << "\nHere are the new account details:\n";
-	std::cout << "Account Name: " << name << endl;
-	std::cout << "Account Number: " << accountNumber << endl;
-	std::cout << "Account Balance: " << balance << endl << endl;
+	viewAccount();
 
 	return;
 }

@@ -16,8 +16,13 @@ class savingsAccount : public bankAccount {
 		virtual void print() const;
 
         virtual nlohmann::json toJson() const;
+
 		virtual void createAccountMenu();
+		virtual void viewAccount();
 		virtual void editAccountMenu();
+		virtual void oldEditAccountMenu();
+
+		const short QUIT = 4;
 
 	protected:
 		double interestRate;
