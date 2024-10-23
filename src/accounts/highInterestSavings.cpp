@@ -59,7 +59,7 @@ void highInterestSavings::createAccountMenu() {
 
 	name = inputString("Account Name: ");
 
-	accountNumber = inputDouble("Account Number: ");
+	accountNumber = bankAccount::generateAccountNumber(); // Generate random account number
 
 	balance = inputDouble("Account Balance: ");
 
@@ -85,11 +85,11 @@ void highInterestSavings::editAccountMenu() {
 		name = inputString("Enter the new Account Name: ");
 	}
 
-	prompt = confirm("\nWould you like to edit Account Number? (Y/N): ");
-	if (prompt)
-	{
-			accountNumber = inputDouble("Enter the new Account Number: ");
-	}
+	//prompt = confirm("\nWould you like to edit Account Number? (Y/N): ");
+	//if (prompt)
+	//{
+	//		accountNumber = inputDouble("Enter the new Account Number: ");
+	//}
 
 	prompt = confirm("\nWould you like to edit Account Balance? (Y/N): ");
 	if (prompt)
