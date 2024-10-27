@@ -20,7 +20,7 @@ class highInterestSavings : public savingsAccount {
 		virtual void editAccountMenu();
 		virtual void oldEditAccountMenu();
 		
-		const short QUIT = 4;
+		const short QUIT = 6;
 	
 	protected:
 		double minimumBalance;

@@ -74,7 +74,6 @@ void highInterestChecking::createAccountMenu() {
 }
 
 void highInterestChecking::viewAccount() {
-	std::cout << "Here are the current account details:\n";
 	std::cout << "Account Name: " << getName() << endl;
 	std::cout << "Account Number: " << getID() << endl;
 	std::cout << "Account Balance: " << getBalance() << endl;
@@ -89,13 +88,17 @@ void highInterestChecking::editAccountMenu() {
 		std::cout << "Here are the current account (highInterestChecking) details:\n";
 		viewAccount();
 
-		std::cout << "What would you like to do?\n"
+		std::cout << "\nWhat would you like to do?\n"
 			   	 << "[1] Deposit Money\n"
 					 << "[2] Withdraw Money\n"
 					 << "[3] Change Name\n"
-					 << "[4] Exit\n";
+					 << "[4] Change Minimum Balance\n"
+					 << "[5] Change Interest Rate\n"
+				    << "[6] Write Check\n"
+					 << "[7] Create Monthly Statement\n"
+					 << "[8] Exit\n\n";
 
-		option = getMenuOptionAuto(4);
+		option = getMenuOptionAuto(8);
 				
 		double tempAmount = 0.0;
 
@@ -113,6 +116,24 @@ void highInterestChecking::editAccountMenu() {
 			std::cout << "Enter the new name of the account: ";
 			string newName = inputString();
 			setName(newName);
+		}
+		else if (option == 4) {
+			std::cout << "Enter the new minimum balance for the account: ";
+			tempAmount = inputDouble();
+			setMinimumBalance(tempAmount);
+		}
+		else if (option == 5) {
+			std::cout << "Enter the new interest rate for the account: ";
+			tempAmount = inputDouble();
+			setInterestRate(tempAmount);
+		}
+		else if (option == 6) {
+			std::cout << "Enter the amount of the check being written: ";
+			tempAmount = inputDouble();
+			writeCheck(tempAmount);
+		}
+		else if (option == 7) {
+			createMonthlyStatement();
 		}
 
 	} while (option != highInterestChecking::QUIT);

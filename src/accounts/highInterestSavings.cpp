@@ -85,13 +85,15 @@ void highInterestSavings::editAccountMenu() {
 		std::cout << "Here are the current account (highInterestSavings) details:\n";
 		viewAccount();
 
-		std::cout << "What would you like to do?\n"
+		std::cout << "\nWhat would you like to do?\n"
 			   	 << "[1] Deposit Money\n"
 					 << "[2] Withdraw Money\n"
 					 << "[3] Change Name\n"
-					 << "[4] Exit\n";
+					 << "[4] Change Interest Rate\n"
+					 << "[5] Create Monthly Statement\n"
+					 << "[6] Exit\n\n";
 
-		option = getMenuOptionAuto(4);
+		option = getMenuOptionAuto(6);
 				
 		double tempAmount = 0.0;
 
@@ -109,6 +111,14 @@ void highInterestSavings::editAccountMenu() {
 			std::cout << "Enter the new name of the account: ";
 			string newName = inputString();
 			setName(newName);
+		}
+		else if (option == 4) {
+			std::cout << "Enter the new interest rate for the account: ";
+			string newName = inputString();
+			setInterestRate(tempAmount);
+		}
+		else if (option == 5) {
+			createMonthlyStatement();
 		}
 
 	} while (option != highInterestSavings::QUIT);

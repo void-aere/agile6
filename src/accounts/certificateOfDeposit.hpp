@@ -28,7 +28,7 @@ class certificateOfDeposit : public bankAccount {
 		virtual void editAccountMenu();
 		virtual void oldEditAccountMenu();
 
-		const short QUIT = 4;
+		const short QUIT = 7;
 
 
 	private:

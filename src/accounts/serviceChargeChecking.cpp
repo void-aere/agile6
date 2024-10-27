@@ -123,15 +123,21 @@ void serviceChargeChecking::editAccountMenu() {
 		std::cout << "Here are the current account (serviceChargeChecking) details:\n";
 		viewAccount();
 
-		std::cout << "What would you like to do?\n"
-			   	 << "[1] Deposit Money\n"
-					 << "[2] Withdraw Money\n"
+		std::cout << "\nWhat would you like to do?\n"
+			   	 << "[1] Deposit\n"
+					 << "[2] Withdraw\n"
 					 << "[3] Change Name\n"
-					 << "[4] Exit\n";
+					 << "[4] Change Charge Amount\n"
+					 << "[5] Change Checks Exceeded Amount\n"
+					 << "[6] Change Checks Written Amount\n"
+				 	 << "[7] Write Check\n"
+					 << "[8] Create Monthly Statement\n"
+					 << "[9] Exit\n\n";
 
-		option = getMenuOptionAuto(4);
+		option = getMenuOptionAuto(9);
 				
 		double tempAmount = 0.0;
+		int tempInt = 0;
 
 		if (option == 1) {
 			std::cout << "Enter the amount you would like to deposit: ";
@@ -148,6 +154,30 @@ void serviceChargeChecking::editAccountMenu() {
 			string newName = inputString();
 			setName(newName);
 		}
+		else if (option == 4) {
+			std::cout << "Enter the new service charge amount for the account: ";
+			tempAmount = inputDouble();
+			setServiceChargeAmount(tempAmount);
+		}
+		else if (option == 5) {
+			std::cout << "Enter the new service charge checks exceeded amount for the account: ";
+			tempAmount = inputDouble();
+			setServiceChargeChecksExceeded(tempAmount);
+		}
+		else if (option == 6) {
+			std::cout << "Enter the new amount of checks written for the account: ";
+			tempInt = inputInt();
+			setChecksWritten(tempInt);
+		}
+		else if (option == 7) {
+			std::cout << "Enter the amount of the check being written: ";
+			tempAmount = inputDouble();
+			writeCheck(tempAmount);
+		}
+		else if (option == 8) {
+			createMonthlyStatement();
+		}
+		
 
 	} while (option != serviceChargeChecking::QUIT);
 		

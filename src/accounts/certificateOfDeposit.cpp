@@ -127,15 +127,19 @@ void certificateOfDeposit::editAccountMenu() {
 		std::cout << "Here are the current account (certificateOfDeposit) details:\n";
 		viewAccount();
 	
-		std::cout << "What would you like to do?\n"
+		std::cout << "\nWhat would you like to do?\n"
 					 << "[1] Deposit\n"
 					 << "[2] Withdraw\n"
 					 << "[3] Change Name\n"
-					 << "[4] Exit\n";
+					 << "[4] Change Interest Rate\n"
+					 << "[5] Change Maturity Month\n"
+					 << "[6] Create Monthly Statement\n"
+					 << "[7] Exit\n\n";
 			
-		option = getMenuOptionAuto(4);
+		option = getMenuOptionAuto(7);
 		
 		double  tempAmount = 0.0;
+		int tempInt = 0;
 
 		if (option == 1) {
 			std::cout << "Enter the amount you would like to deposit: ";
@@ -151,6 +155,19 @@ void certificateOfDeposit::editAccountMenu() {
 			std::cout << "Enter the new name of the account: ";
 			string newName = inputString();
 			setName(newName);
+		}
+		else if (option == 4) {
+			std::cout << "Enter the new interest rate for the account: ";
+			tempAmount = inputDouble();
+			setInterestRate(tempAmount);
+		}
+		else if (option == 5) {
+			std::cout << "Enter the new maturity month for the account: ";
+			tempInt = inputInt();
+			setMaturityMonth(tempInt);
+		}
+		else if (option == 6) {
+			createMonthlyStatement();
 		}
 
 	} while (option != certificateOfDeposit::QUIT);

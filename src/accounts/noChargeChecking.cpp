@@ -96,13 +96,16 @@ void noChargeChecking::editAccountMenu() {
 		std::cout << "Here are the current account (noChargeChecking) details:\n";
 		viewAccount();
 
-		std::cout << "What would you like to do?\n"
-			   	 << "[1] Deposit Money\n"
-					 << "[2] Withdraw Money\n"
+		std::cout << "\nWhat would you like to do?\n"
+			   	 << "[1] Deposit\n"
+					 << "[2] Withdraw\n"
 					 << "[3] Change Name\n"
-					 << "[4] Exit\n";
+				    << "[4] Change Minimum Balance\n"
+					 << "[5] Write Check\n"
+				  	 << "[6] Create Monthly Statement\n"
+					 << "[7] Exit\n\n";
 
-		option = getMenuOptionAuto(4);
+		option = getMenuOptionAuto(7);
 				
 		double tempAmount = 0.0;
 
@@ -120,6 +123,19 @@ void noChargeChecking::editAccountMenu() {
 			std::cout << "Enter the new name of the account: ";
 			string newName = inputString();
 			setName(newName);
+		}
+		else if (option == 4) {
+			std::cout << "Enter the new minimum balance for the account: ";
+			tempAmount = inputDouble();
+			setMinimumBalance(tempAmount);
+		}
+		else if (option == 5) {
+			std::cout << "Enter the amount of the check being written: ";
+			tempAmount = inputDouble();
+			writeCheck(tempAmount);
+		}
+		else if (option == 6) {
+			createMonthlyStatement();
 		}
 
 	} while (option != noChargeChecking::QUIT);

@@ -27,7 +27,7 @@ class serviceChargeChecking: public checkingAccount {
 		virtual void editAccountMenu();
 		virtual void oldEditAccountMenu();
 
-		const short QUIT = 4;
+		const short QUIT = 9;
 
 	protected:
 		double serviceChargeAmount;

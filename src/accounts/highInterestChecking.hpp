@@ -21,7 +21,7 @@ class highInterestChecking : public noChargeChecking {
 		virtual void editAccountMenu();
 		virtual void oldEditAccountMenu();
 		
-		const short QUIT = 4;
+		const short QUIT = 8;
 
 	private:
 		static const double INTEREST_RATE;

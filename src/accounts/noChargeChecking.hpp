@@ -23,7 +23,7 @@ class noChargeChecking : public checkingAccount {
 		virtual void editAccountMenu();
 		virtual void oldEditAccountMenu();
 
-		const short QUIT = 4;
+		const short QUIT = 7;
 
 	protected:
 		double minimumBalance;
