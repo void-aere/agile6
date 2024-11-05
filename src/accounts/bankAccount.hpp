@@ -16,6 +16,7 @@ class bankAccount {
 		void deposit(double amount);
 		virtual void createMonthlyStatement() = 0;
 		virtual void print() const;
+		int generateAccountNumber();
 
         virtual nlohmann::json toJson() const = 0;
         static bankAccount* fromJson(const nlohmann::json& data);
@@ -32,6 +33,7 @@ class bankAccount {
 		int accountNumber;
 		std::string name;
 		double balance;
+
 };
 
 
