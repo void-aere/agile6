@@ -57,6 +57,9 @@ json highInterestSavings::toJson() const {
 
 void highInterestSavings::createAccountMenu() {
 
+	std::cout << "Please enter the details for the High Interest Savings account you would like to create:\n";
+
+
 	name = inputString("Account Name: ");
 
 	accountNumber = bankAccount::generateAccountNumber(); // Generate random account number
@@ -67,7 +70,9 @@ void highInterestSavings::createAccountMenu() {
 
 	// minimumBalance = inputDouble("Minimum Balance: ");
 
-	std::cout << "Account has been created!\n";
+	std::cout << "\nAccount has been created!\n"
+				 << "Press RETURN to continue";
+	std::cin.ignore();
 }
 
 void highInterestSavings::viewAccount() {

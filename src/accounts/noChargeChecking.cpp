@@ -68,6 +68,8 @@ json noChargeChecking::toJson() const {
 
 void noChargeChecking::createAccountMenu() {
 
+	std::cout << "Please enter the details for the No Charge Checking account you would like to create:\n";
+
 	name = inputString("Account Name: ");
 
 	accountNumber = bankAccount::generateAccountNumber(); // Generate random account number
@@ -78,7 +80,9 @@ void noChargeChecking::createAccountMenu() {
 
 	// interestRate = inputDouble("Interest Rate: ");
 
-	std::cout << "Account has been created!\n";
+	std::cout << "\nAccount has been created!\n"
+				 << "Press RETURN to continue";
+	std::cin.ignore();
 }
 
 void noChargeChecking::viewAccount() {

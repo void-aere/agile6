@@ -92,13 +92,18 @@ string bankAccount::getFilename() const {
 // function.
 void bankAccount::createAccountMenu() {
 
+	std::cout << "Please enter the details for the Bank Account you would like to create:\n";
+
 	name = inputString("Account Name: ");
 
 	balance = inputDouble("Account Balance: ");
 
 	accountNumber = bankAccount::generateAccountNumber(); // Generate random account number
 
-	std::cout << "Account has been created!\n";
+	std::cout << "Account has been created!\n"
+				 << "Press RETURN to continue";
+	std::cin.ignore();
+				
 }
 
 void bankAccount::viewAccount() {

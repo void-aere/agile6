@@ -59,6 +59,8 @@ json highInterestChecking::toJson() const {
 
 void highInterestChecking::createAccountMenu() {
 
+	std::cout << "Please enter the details for the High Interest Checking account you would like to create:\n";
+
 	name = inputString("Account Name: ");
 
 	accountNumber = bankAccount::generateAccountNumber(); // Generate random account number
@@ -70,7 +72,9 @@ void highInterestChecking::createAccountMenu() {
 
 	// interestRate = inputDouble("Interest Rate: ");
 
-	std::cout << "Account has been created!\n";
+	std::cout << "\nAccount has been created!\n"
+				 << "Press RETURN to continue";
+	std::cin.ignore();
 }
 
 void highInterestChecking::viewAccount() {

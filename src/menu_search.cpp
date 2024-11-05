@@ -1,6 +1,7 @@
 #include "dataHandler.hpp"
 #include "bankAccount.hpp"
 #include "menu_search.hpp"
+#include "mainmenu.hpp"
 #include "helpers.hpp"
 #include <iostream>
 
@@ -15,11 +16,14 @@ void menu_search::start(Context& cx) {
         // Clear the Screen
         clearScreen();
 
+		  // Display program heading and user status
+		  mainmenu::printHeader(cx);
+
         // Display the menu options
         std::cout << "Search and Edit Menu\n";
-        std::cout << "[1]  Find by Account Holder's Name\n";
-        std::cout << "[2]  Find by Account Number\n";
-        std::cout << "[3]  Return to Main Menu\n";
+        std::cout << "[1] Find by Account Holder's Name\n";
+        std::cout << "[2] Find by Account Number\n";
+        std::cout << "[3] Return to Main Menu\n\n";
 
         // Get user input
         choice = getMenuOptionAuto(3);
@@ -40,6 +44,8 @@ void menu_search::queryAndEditByName(Context& cx) {
     DataHandler<bankAccount>* db = cx.bdb();
 
     clearScreen();
+
+	 mainmenu::printHeader(cx);
 
     std::string name;
 
@@ -71,6 +77,9 @@ void menu_search::queryAndEditByName(Context& cx) {
 
             // Lock the file for editing
             if (db->assume(accountNumber)) {
+					 // Print header
+					 mainmenu::printHeader(cx);
+
                 // Call the edit account menu on the chosen account
                 selectedAccount->editAccountMenu();
 
@@ -112,6 +121,10 @@ void menu_search::queryAndEditByAccountNumber(Context& cx) {
 
     int accountNumber;
 
+	 clearScreen();
+
+	 mainmenu::printHeader(cx);
+
     // Prompt the user to enter the account number
     accountNumber = inputInt("Enter the account number to search: ");
 
@@ -130,6 +143,8 @@ void menu_search::queryAndEditByAccountNumber(Context& cx) {
 
             // If the user chooses to edit, invoke the edit account menu
             if (editChoice) {
+					 mainmenu::printHeader(cx); 
+
                 selectedAccount->editAccountMenu();
 
                 // Save the updated account to the .json file

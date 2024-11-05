@@ -59,6 +59,8 @@ json savingsAccount::toJson() const {
 
 void savingsAccount::createAccountMenu() {
 
+	std::cout << "Please enter the details for the Savings account you would like to create:\n";
+
 	name = inputString("Account Name: ");
 
 	accountNumber = bankAccount::generateAccountNumber(); // Generate random account number
@@ -67,7 +69,9 @@ void savingsAccount::createAccountMenu() {
 
 	// interestRate = inputDouble("Interest Rate: ");
 
-	std::cout << "Account has been created!\n";
+	std::cout << "\nAccount has been created!\n"
+				 << "Press RETURN to continue";
+	std::cin.ignore();
 }
 
 void savingsAccount::viewAccount() {

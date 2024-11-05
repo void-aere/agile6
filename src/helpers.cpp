@@ -145,7 +145,7 @@ string inputString() {
  * @return The next string.
 */
 string inputString(const string &prompt) {
-    cout << prompt << endl;
+    cout << prompt;
 	string out;
 	getline(cin, out);
 	return out;

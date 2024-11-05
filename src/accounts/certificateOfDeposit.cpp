@@ -102,6 +102,9 @@ json certificateOfDeposit::toJson() const {
 
 void certificateOfDeposit::createAccountMenu() {
 
+	std::cout << "Please enter the details for the Certificate of Deposit account you would like to create:\n";
+
+
 	name = inputString("Account Name: ");
 
 	balance = inputDouble("Account Balance: ");
@@ -112,9 +115,13 @@ void certificateOfDeposit::createAccountMenu() {
 
 	maturityMonth = inputInt("Maturity Month: ");
 
-	currentMonth = inputInt("Current Month:");
+	currentMonth = inputInt("Current Month: ");
 
-	std::cout << "Account has been created!\n";
+	std::cout << "\nAccount has been created!\n"
+				 << "Press RETURN to continue";
+
+	std::cin.ignore();
+
 }
 
 void certificateOfDeposit::viewAccount() {
