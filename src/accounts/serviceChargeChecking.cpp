@@ -120,10 +120,11 @@ void serviceChargeChecking::viewAccount() {
 	std::cout << "Checks Written: " << getChecksWritten() << endl;
 }
 
-void serviceChargeChecking::editAccountMenu() {
+void serviceChargeChecking::editAccountMenu(Context& cx) {
 	int option = 0;
 	do {
 		clearScreen();
+		mainmenu::printHeader(cx);
 		std::cout << "Here are the current account (serviceChargeChecking) details:\n";
 		viewAccount();
 

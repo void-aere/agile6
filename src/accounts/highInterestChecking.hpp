@@ -1,6 +1,7 @@
 #pragma once
 
 #include "noChargeChecking.hpp"
+#include "mainmenu.hpp"
 
 class highInterestChecking : public noChargeChecking {
 	public:
@@ -18,7 +19,7 @@ class highInterestChecking : public noChargeChecking {
 
 		virtual void createAccountMenu();
 		virtual void viewAccount();
-		virtual void editAccountMenu();
+		virtual void editAccountMenu(Context& cx);
 		virtual void oldEditAccountMenu();
 		
 		const short QUIT = 8;

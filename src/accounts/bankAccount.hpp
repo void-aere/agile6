@@ -2,6 +2,9 @@
 
 #include <string>
 #include <nlohmann/json.hpp>
+#include "context.hpp"
+
+class Context;
 
 class bankAccount {
 	public:
@@ -24,7 +27,7 @@ class bankAccount {
 
 		virtual void createAccountMenu();
 		virtual void viewAccount();
-		virtual void editAccountMenu();
+		virtual void editAccountMenu(Context& cx);
 		virtual void oldEditAccountMenu();
 
 		const short QUIT = 4;

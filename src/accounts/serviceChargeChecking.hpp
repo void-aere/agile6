@@ -1,6 +1,7 @@
 #pragma once
 
 #include "checkingAccount.hpp"
+#include "mainmenu.hpp"
 
 class serviceChargeChecking: public checkingAccount {
 	public:
@@ -24,7 +25,7 @@ class serviceChargeChecking: public checkingAccount {
 
 		virtual void createAccountMenu();
 		virtual void viewAccount();
-		virtual void editAccountMenu();
+		virtual void editAccountMenu(Context& cx);
 		virtual void oldEditAccountMenu();
 
 		const short QUIT = 9;

@@ -2,6 +2,7 @@
 
 #include <string>
 #include "bankAccount.hpp"
+#include "mainmenu.hpp"
 
 class savingsAccount : public bankAccount {
 	public:
@@ -19,7 +20,7 @@ class savingsAccount : public bankAccount {
 
 		virtual void createAccountMenu();
 		virtual void viewAccount();
-		virtual void editAccountMenu();
+		virtual void editAccountMenu(Context& cx);
 		virtual void oldEditAccountMenu();
 
 		const short QUIT = 6;

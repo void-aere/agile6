@@ -1,6 +1,7 @@
 #pragma once
 
 #include "savingsAccount.hpp"
+#include "mainmenu.hpp"
 
 class highInterestSavings : public savingsAccount {
 	public:
@@ -17,7 +18,7 @@ class highInterestSavings : public savingsAccount {
 
 		virtual void createAccountMenu();
 		virtual void viewAccount();
-		virtual void editAccountMenu();
+		virtual void editAccountMenu(Context& cx);
 		virtual void oldEditAccountMenu();
 		
 		const short QUIT = 6;

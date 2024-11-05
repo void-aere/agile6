@@ -133,10 +133,11 @@ void certificateOfDeposit::viewAccount() {
 	std::cout << "Current Month: " << getCurrentMonth() << endl;
 }
 
-void certificateOfDeposit::editAccountMenu() {
+void certificateOfDeposit::editAccountMenu(Context& cx) {
 	int option = 0;
 	do {
 		clearScreen();
+		mainmenu::printHeader(cx);
 		std::cout << "Here are the current account (certificateOfDeposit) details:\n";
 		viewAccount();
 	

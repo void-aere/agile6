@@ -1,9 +1,12 @@
 #pragma once
+
 #include "dataHandler.hpp"
 #include "accounts/bankAccount.hpp"
 #include "users.hpp"
 
 #include <string>
+
+class bankAccount;
 
 class Context {
     private:

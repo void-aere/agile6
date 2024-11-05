@@ -85,10 +85,11 @@ void highInterestChecking::viewAccount() {
 	std::cout << "Interest Rate: " << getInterestRate() << endl;
 }
 
-void highInterestChecking::editAccountMenu() {
+void highInterestChecking::editAccountMenu(Context& cx) {
 	int option = 0;
 	do {
 		clearScreen();
+		mainmenu::printHeader(cx);
 		std::cout << "Here are the current account (highInterestChecking) details:\n";
 		viewAccount();
 

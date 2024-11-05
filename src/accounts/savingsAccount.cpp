@@ -82,10 +82,11 @@ void savingsAccount::viewAccount() {
 
 }
 
-void savingsAccount::editAccountMenu() {
+void savingsAccount::editAccountMenu(Context& cx) {
 	int option = 0;
 	do {
 		clearScreen();
+		mainmenu::printHeader(cx);
 		std::cout << "Here are the current account (savingsAccount) details:\n";
 		viewAccount();
 

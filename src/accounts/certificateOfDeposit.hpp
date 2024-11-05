@@ -1,6 +1,7 @@
 #pragma once
 
 #include "bankAccount.hpp"
+#include "mainmenu.hpp"
 
 class certificateOfDeposit : public bankAccount {
 	public:
@@ -25,7 +26,7 @@ class certificateOfDeposit : public bankAccount {
 
 		virtual void createAccountMenu();
 		virtual void viewAccount();
-		virtual void editAccountMenu();
+		virtual void editAccountMenu(Context& cx);
 		virtual void oldEditAccountMenu();
 
 		const short QUIT = 7;

@@ -83,10 +83,11 @@ void highInterestSavings::viewAccount() {
 	std::cout << "Minimum Balance: " << getMinimumBalance() << endl;
 }
 
-void highInterestSavings::editAccountMenu() {
+void highInterestSavings::editAccountMenu(Context& cx) {
 	int option = 0;
 	do {
 		clearScreen();
+		mainmenu::printHeader(cx);
 		std::cout << "Here are the current account (highInterestSavings) details:\n";
 		viewAccount();
 

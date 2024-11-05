@@ -93,10 +93,11 @@ void noChargeChecking::viewAccount() {
 	// std::cout << "Interest Rate: " << getInterestRate() << endl;
 }
 
-void noChargeChecking::editAccountMenu() {
+void noChargeChecking::editAccountMenu(Context& cx) {
 	int option = 0;
 	do {
 		clearScreen();
+		mainmenu::printHeader(cx);
 		std::cout << "Here are the current account (noChargeChecking) details:\n";
 		viewAccount();
 

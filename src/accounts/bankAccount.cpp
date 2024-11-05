@@ -10,6 +10,7 @@
 #include "noChargeChecking.hpp"
 #include "savingsAccount.hpp"
 #include "serviceChargeChecking.hpp"
+#include "mainmenu.hpp"
 
 using std::string, std::cout, std::endl;
 
@@ -92,7 +93,7 @@ string bankAccount::getFilename() const {
 // function.
 void bankAccount::createAccountMenu() {
 
-	std::cout << "Please enter the details for the Bank Account you would like to create:\n";
+	std::cout << "Please enter the details for the bank account you would like to create:\n";
 
 	name = inputString("Account Name: ");
 
@@ -112,10 +113,11 @@ void bankAccount::viewAccount() {
 	std::cout << "Account Balance: " << getBalance() << endl;
 }
 
-void bankAccount::editAccountMenu() {
+void bankAccount::editAccountMenu(Context& cx) {
 	int option = 0;
 	do {
 		clearScreen();
+		mainmenu::printHeader(cx);
 		std::cout << "Here are the current account (bankAccount) details:\n";
 		viewAccount();
 

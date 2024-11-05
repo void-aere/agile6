@@ -81,7 +81,7 @@ void menu_search::queryAndEditByName(Context& cx) {
 					 mainmenu::printHeader(cx);
 
                 // Call the edit account menu on the chosen account
-                selectedAccount->editAccountMenu();
+                selectedAccount->editAccountMenu(cx);
 
                 // Save the updated account to the .json file
                 db->saveToJson(selectedAccount);
@@ -145,7 +145,7 @@ void menu_search::queryAndEditByAccountNumber(Context& cx) {
             if (editChoice) {
 					 mainmenu::printHeader(cx); 
 
-                selectedAccount->editAccountMenu();
+                selectedAccount->editAccountMenu(cx);
 
                 // Save the updated account to the .json file
                 db->saveToJson(selectedAccount);
