@@ -102,6 +102,9 @@ json certificateOfDeposit::toJson() const {
 
 void certificateOfDeposit::createAccountMenu() {
 
+	std::cout << "Please enter the details for the Certificate of Deposit account you would like to create:\n";
+
+
 	name = inputString("Account Name: ");
 
 	balance = inputDouble("Account Balance: ");
@@ -112,20 +115,83 @@ void certificateOfDeposit::createAccountMenu() {
 
 	maturityMonth = inputInt("Maturity Month: ");
 
-	currentMonth = inputInt("Current Month:");
+	currentMonth = inputInt("Current Month: ");
 
-	std::cout << "Account has been created!\n";
+	std::cout << "\nAccount has been created!\n"
+				 << "Press RETURN to continue";
+
+	std::cin.ignore();
+
 }
 
-void certificateOfDeposit::editAccountMenu() {
+void certificateOfDeposit::viewAccount() {
+	std::cout << "Account Name: " << getName() << endl;
+	std::cout << "Account Number: " << getID() << endl;
+	std::cout << "Account Balance: " << getBalance() << endl;
+	std::cout << "Interest Rate: " << getInterestRate() << endl;
+	std::cout << "Maturity Month: " << getMaturityMonth() << endl;
+	std::cout << "Current Month: " << getCurrentMonth() << endl;
+}
+
+void certificateOfDeposit::editAccountMenu(Context& cx) {
+	int option = 0;
+	do {
+		clearScreen();
+		mainmenu::printHeader(cx);
+		std::cout << "Here are the current account (certificateOfDeposit) details:\n";
+		viewAccount();
+	
+		std::cout << "\nWhat would you like to do?\n"
+					 << "[1] Deposit\n"
+					 << "[2] Withdraw\n"
+					 << "[3] Change Name\n"
+					 << "[4] Change Interest Rate\n"
+					 << "[5] Change Maturity Month\n"
+					 << "[6] Create Monthly Statement\n"
+					 << "[7] Exit\n\n";
+			
+		option = getMenuOptionAuto(7);
+		
+		double  tempAmount = 0.0;
+		int tempInt = 0;
+
+		if (option == 1) {
+			std::cout << "Enter the amount you would like to deposit: ";
+			tempAmount = inputDouble();
+			deposit(tempAmount);
+		}
+		else if (option == 2) {
+			std::cout << "Enter the amount you would like to withdraw: ";
+			tempAmount = inputDouble();
+			withdraw(tempAmount);
+		}
+		else if (option == 3) {
+			std::cout << "Enter the new name of the account: ";
+			string newName = inputString();
+			setName(newName);
+		}
+		else if (option == 4) {
+			std::cout << "Enter the new interest rate for the account: ";
+			tempAmount = inputDouble();
+			setInterestRate(tempAmount);
+		}
+		else if (option == 5) {
+			std::cout << "Enter the new maturity month for the account: ";
+			tempInt = inputInt();
+			setMaturityMonth(tempInt);
+		}
+		else if (option == 6) {
+			createMonthlyStatement();
+		}
+
+	} while (option != certificateOfDeposit::QUIT);
+}
+
+
+void certificateOfDeposit::oldEditAccountMenu() {
 	bool prompt = false;
 	std::cout << "Here are the current account details:\n";
-	std::cout << "Account Name: " << name << endl;
-	std::cout << "Account Number: " << accountNumber << endl;
-	std::cout << "Account Balance: " << balance << endl;
-	std::cout << "Interest Rate: " << interestRate << endl;
-	std::cout << "Maturity Month: " << maturityMonth << endl;
-	std::cout << "Current Month: " << currentMonth << endl;
+	viewAccount();
 
 
 	prompt = confirm("\nWould you like to edit Account Name? (Y/N): ");
@@ -165,12 +231,7 @@ void certificateOfDeposit::editAccountMenu() {
 	}
 
 	std::cout << "\nHere are the new account details:\n";
-	std::cout << "Account Name: " << name << endl;
-	std::cout << "Account Number: " << accountNumber << endl;
-	std::cout << "Account Balance: " << balance << endl;
-	std::cout << "Interest Rate: " << interestRate << endl;
-	std::cout << "Maturity Month: " << maturityMonth << endl;
-	std::cout << "Current Month: " << currentMonth << endl;
+	viewAccount();
 
 	return;
 }

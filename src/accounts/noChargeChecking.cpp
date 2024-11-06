@@ -68,6 +68,8 @@ json noChargeChecking::toJson() const {
 
 void noChargeChecking::createAccountMenu() {
 
+	std::cout << "Please enter the details for the No Charge Checking account you would like to create:\n";
+
 	name = inputString("Account Name: ");
 
 	accountNumber = bankAccount::generateAccountNumber(); // Generate random account number
@@ -78,17 +80,77 @@ void noChargeChecking::createAccountMenu() {
 
 	// interestRate = inputDouble("Interest Rate: ");
 
-	std::cout << "Account has been created!\n";
+	std::cout << "\nAccount has been created!\n"
+				 << "Press RETURN to continue";
+	std::cin.ignore();
 }
 
-void noChargeChecking::editAccountMenu() {
+void noChargeChecking::viewAccount() {
+	std::cout << "Account Name: " << getName() << endl;
+	std::cout << "Account Number: " << getAccountNumber() << endl;
+	std::cout << "Account Balance: " << getBalance() << endl;
+	std::cout << "Minimum Balance: " << getMinimumBalance() << endl;
+	// std::cout << "Interest Rate: " << getInterestRate() << endl;
+}
+
+void noChargeChecking::editAccountMenu(Context& cx) {
+	int option = 0;
+	do {
+		clearScreen();
+		mainmenu::printHeader(cx);
+		std::cout << "Here are the current account (noChargeChecking) details:\n";
+		viewAccount();
+
+		std::cout << "\nWhat would you like to do?\n"
+			   	 << "[1] Deposit\n"
+					 << "[2] Withdraw\n"
+					 << "[3] Change Name\n"
+				    << "[4] Change Minimum Balance\n"
+					 << "[5] Write Check\n"
+				  	 << "[6] Create Monthly Statement\n"
+					 << "[7] Exit\n\n";
+
+		option = getMenuOptionAuto(7);
+				
+		double tempAmount = 0.0;
+
+		if (option == 1) {
+			std::cout << "Enter the amount you would like to deposit: ";
+			tempAmount = inputDouble();
+			deposit(tempAmount);
+		}
+		else if (option == 2) {
+			std::cout << "Enter the amount you would like to withdraw: ";
+			tempAmount = inputDouble();
+			withdraw(tempAmount);
+		}
+		else if (option == 3) {
+			std::cout << "Enter the new name of the account: ";
+			string newName = inputString();
+			setName(newName);
+		}
+		else if (option == 4) {
+			std::cout << "Enter the new minimum balance for the account: ";
+			tempAmount = inputDouble();
+			setMinimumBalance(tempAmount);
+		}
+		else if (option == 5) {
+			std::cout << "Enter the amount of the check being written: ";
+			tempAmount = inputDouble();
+			writeCheck(tempAmount);
+		}
+		else if (option == 6) {
+			createMonthlyStatement();
+		}
+
+	} while (option != noChargeChecking::QUIT);
+		
+}
+
+
+void noChargeChecking::oldEditAccountMenu() {
 	bool prompt = false;
-	std::cout << "Here are the current account details:\n";
-	std::cout << "Account Name: " << name << endl;
-	std::cout << "Account Number: " << accountNumber << endl;
-	std::cout << "Account Balance: " << balance << endl;
-	std::cout << "Minimum Balance: " << minimumBalance << endl;
-	std::cout << "Interest Rate: " << interestRate << endl;
+	viewAccount();
 
 	prompt = confirm("\nWould you like to edit Account Name? (Y/N): ");
 	if (prompt)
@@ -121,11 +183,7 @@ void noChargeChecking::editAccountMenu() {
 	}
 
 	std::cout << "\nHere are the new account details:\n";
-	std::cout << "Account Name: " << name << endl;
-	std::cout << "Account Number: " << accountNumber << endl;
-	std::cout << "Account Balance: " << balance << endl;
-	std::cout << "Minimum Balance: " << minimumBalance << endl;
-	std::cout << "Interest Rate: " << interestRate << endl;
+	viewAccount();
 
 	return;
 }

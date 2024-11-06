@@ -2,6 +2,9 @@
 
 #include <string>
 #include <nlohmann/json.hpp>
+#include "context.hpp"
+
+class Context;
 
 class bankAccount {
 	public:
@@ -23,7 +26,11 @@ class bankAccount {
         std::string getFilename() const;
 
 		virtual void createAccountMenu();
-		virtual void editAccountMenu();
+		virtual void viewAccount();
+		virtual void editAccountMenu(Context& cx);
+		virtual void oldEditAccountMenu();
+
+		const short QUIT = 4;
 
 	protected:
 		int accountNumber;

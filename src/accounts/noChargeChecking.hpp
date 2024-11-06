@@ -1,6 +1,7 @@
 #pragma once
 
 #include "checkingAccount.hpp"
+#include "mainmenu.hpp"
 
 class noChargeChecking : public checkingAccount {
 	public:
@@ -17,8 +18,13 @@ class noChargeChecking : public checkingAccount {
 		virtual void print() const;
 
         virtual nlohmann::json toJson() const;
+
 		virtual void createAccountMenu();
-		virtual void editAccountMenu();
+		virtual void viewAccount();
+		virtual void editAccountMenu(Context& cx);
+		virtual void oldEditAccountMenu();
+
+		const short QUIT = 7;
 
 	protected:
 		double minimumBalance;

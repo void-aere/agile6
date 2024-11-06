@@ -2,6 +2,7 @@
 
 #include "context.hpp"
 #include "bankAccount.hpp"
+#include "mainmenu.hpp"
 #include "menu_edit.hpp"
 #include "helpers.hpp"
 #include <iostream>
@@ -23,7 +24,8 @@ void menu_edit::start(Context& cx) {
     }
 
     if (db->assume(accountNumber)) {
-        modify->editAccountMenu();
+		  clearScreen();
+        modify->editAccountMenu(cx);
         db->saveToJson(modify);
         db->relinquish(accountNumber);
     } else {

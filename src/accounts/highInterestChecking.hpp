@@ -1,6 +1,7 @@
 #pragma once
 
 #include "noChargeChecking.hpp"
+#include "mainmenu.hpp"
 
 class highInterestChecking : public noChargeChecking {
 	public:
@@ -15,8 +16,13 @@ class highInterestChecking : public noChargeChecking {
 		virtual void print() const;
 
         nlohmann::json toJson() const;
+
 		virtual void createAccountMenu();
-		virtual void editAccountMenu();
+		virtual void viewAccount();
+		virtual void editAccountMenu(Context& cx);
+		virtual void oldEditAccountMenu();
+		
+		const short QUIT = 8;
 
 	private:
 		static const double INTEREST_RATE;

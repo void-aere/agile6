@@ -1,6 +1,7 @@
 #pragma once
 
 #include "checkingAccount.hpp"
+#include "mainmenu.hpp"
 
 class serviceChargeChecking: public checkingAccount {
 	public:
@@ -21,8 +22,13 @@ class serviceChargeChecking: public checkingAccount {
 		void print() const;
 
         nlohmann::json toJson() const;
-		void createAccountMenu();
-		void editAccountMenu();
+
+		virtual void createAccountMenu();
+		virtual void viewAccount();
+		virtual void editAccountMenu(Context& cx);
+		virtual void oldEditAccountMenu();
+
+		const short QUIT = 9;
 
 	protected:
 		double serviceChargeAmount;

@@ -22,6 +22,7 @@ class DataHandler {
         // Accessing Members
         std::vector<DataType*>* getEntries();
         DataType* getEntryByID(const int id);
+        std::vector<DataType*> getAccountsByName(const std::string& name);
         size_t getIndexByID(const int id);
         
         // Deadlock

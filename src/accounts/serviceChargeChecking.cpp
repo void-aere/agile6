@@ -92,6 +92,8 @@ json serviceChargeChecking::toJson() const {
 
 void serviceChargeChecking::createAccountMenu() {
 
+	std::cout << "Please enter the details for the Service Charge Checking account you would like to create:\n";
+
 	name = inputString("Account Name: ");
 
 	accountNumber = bankAccount::generateAccountNumber(); // Generate random account number
@@ -104,18 +106,92 @@ void serviceChargeChecking::createAccountMenu() {
 
 	checksWritten = inputInt("Checks Written: ");
 
-	std::cout << "Account has been created!\n";
+	std::cout << "\nAccount has been created!\n"
+				 << "Press RETURN to continue";
+	std::cin.ignore();
 }
 
-void serviceChargeChecking::editAccountMenu() {
+void serviceChargeChecking::viewAccount() {
+	std::cout << "Account Name: " << getName() << endl;
+	std::cout << "Account Number: " << getID() << endl;
+	std::cout << "Account Balance: " << getBalance() << endl;
+	std::cout << "Service Charge Amount: " << getServiceChargeAmount() << endl;
+	std::cout << "Service Charge Checks Exceeded: " << getServiceChargeChecksExceeded() << endl;
+	std::cout << "Checks Written: " << getChecksWritten() << endl;
+}
+
+void serviceChargeChecking::editAccountMenu(Context& cx) {
+	int option = 0;
+	do {
+		clearScreen();
+		mainmenu::printHeader(cx);
+		std::cout << "Here are the current account (serviceChargeChecking) details:\n";
+		viewAccount();
+
+		std::cout << "\nWhat would you like to do?\n"
+			   	 << "[1] Deposit\n"
+					 << "[2] Withdraw\n"
+					 << "[3] Change Name\n"
+					 << "[4] Change Charge Amount\n"
+					 << "[5] Change Checks Exceeded Amount\n"
+					 << "[6] Change Checks Written Amount\n"
+				 	 << "[7] Write Check\n"
+					 << "[8] Create Monthly Statement\n"
+					 << "[9] Exit\n\n";
+
+		option = getMenuOptionAuto(9);
+				
+		double tempAmount = 0.0;
+		int tempInt = 0;
+
+		if (option == 1) {
+			std::cout << "Enter the amount you would like to deposit: ";
+			tempAmount = inputDouble();
+			deposit(tempAmount);
+		}
+		else if (option == 2) {
+			std::cout << "Enter the amount you would like to withdraw: ";
+			tempAmount = inputDouble();
+			withdraw(tempAmount);
+		}
+		else if (option == 3) {
+			std::cout << "Enter the new name of the account: ";
+			string newName = inputString();
+			setName(newName);
+		}
+		else if (option == 4) {
+			std::cout << "Enter the new service charge amount for the account: ";
+			tempAmount = inputDouble();
+			setServiceChargeAmount(tempAmount);
+		}
+		else if (option == 5) {
+			std::cout << "Enter the new service charge checks exceeded amount for the account: ";
+			tempAmount = inputDouble();
+			setServiceChargeChecksExceeded(tempAmount);
+		}
+		else if (option == 6) {
+			std::cout << "Enter the new amount of checks written for the account: ";
+			tempInt = inputInt();
+			setChecksWritten(tempInt);
+		}
+		else if (option == 7) {
+			std::cout << "Enter the amount of the check being written: ";
+			tempAmount = inputDouble();
+			writeCheck(tempAmount);
+		}
+		else if (option == 8) {
+			createMonthlyStatement();
+		}
+		
+
+	} while (option != serviceChargeChecking::QUIT);
+		
+}
+
+void serviceChargeChecking::oldEditAccountMenu() {
 	bool prompt = false;
 	std::cout << "Here are the current account details:\n";
-	std::cout << "Account Name: " << name << endl;
-	std::cout << "Account Number: " << accountNumber << endl;
-	std::cout << "Account Balance: " << balance << endl;
-	std::cout << "Service Charge Amount: " << serviceChargeAmount << endl;
-	std::cout << "Service Charge Checks Exceeded: " << serviceChargeChecksExceeded << endl;
-	std::cout << "Checks Written: " << checksWritten << endl;
+	viewAccount();
 	
 	prompt = confirm("\nWould you like to edit Account Name? (Y/N): ");
 	if (prompt)
@@ -154,12 +230,7 @@ void serviceChargeChecking::editAccountMenu() {
 	}
 
 	std::cout << "\nHere are the new account details:\n";
-	std::cout << "Account Name: " << name << endl;
-	std::cout << "Account Number: " << accountNumber << endl;
-	std::cout << "Account Balance: " << balance << endl;
-	std::cout << "Service Charge Amount: " << serviceChargeAmount << endl;
-	std::cout << "Service Charge Checks Exceeded: " << serviceChargeChecksExceeded << endl;
-	std::cout << "Checks Written: " << checksWritten << endl;
+	viewAccount();
 
 	return;
 }

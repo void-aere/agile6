@@ -1,6 +1,7 @@
 #pragma once
 
 #include "savingsAccount.hpp"
+#include "mainmenu.hpp"
 
 class highInterestSavings : public savingsAccount {
 	public:
@@ -14,8 +15,13 @@ class highInterestSavings : public savingsAccount {
 		void print() const;
 
         nlohmann::json toJson() const;
-		void createAccountMenu();
-		void editAccountMenu();
+
+		virtual void createAccountMenu();
+		virtual void viewAccount();
+		virtual void editAccountMenu(Context& cx);
+		virtual void oldEditAccountMenu();
+		
+		const short QUIT = 6;
 	
 	protected:
 		double minimumBalance;

@@ -10,6 +10,7 @@
 #include "accounts/savingsAccount.hpp"
 #include "accounts/serviceChargeChecking.hpp"
 #include "menu_create.hpp"
+#include "mainmenu.hpp"
 #include "helpers.hpp"
 #include <iostream>
 #include <fstream>
@@ -20,6 +21,7 @@ void menu_create::start(Context& cx) {
 	int option = 0;
     do {
         clearScreen();
+		  mainmenu::printHeader(cx);
         menu_create::print();
         option = getMenuOptionAuto(menu_create::QUIT);
         if (option == -1) continue;
@@ -27,6 +29,8 @@ void menu_create::start(Context& cx) {
         switch (option) {
             case 1: {
                 bankAccount* add = new certificateOfDeposit("no-name", 0, 0);
+					 clearScreen();
+					 mainmenu::printHeader(cx);
                 add->createAccountMenu();
                 db->getEntries()->push_back(add);
                 db->saveToJson(add);
@@ -34,6 +38,8 @@ void menu_create::start(Context& cx) {
             }
             case 2: {
                 bankAccount* add = new highInterestChecking("no-name", 0, 0);
+					 clearScreen();
+					 mainmenu::printHeader(cx);
                 add->createAccountMenu();
                 db->getEntries()->push_back(add);
                 db->saveToJson(add);
@@ -41,6 +47,8 @@ void menu_create::start(Context& cx) {
             }
             case 3: {
                 bankAccount* add = new highInterestSavings("no-name", 0, 0);
+					 clearScreen();
+					 mainmenu::printHeader(cx);
                 add->createAccountMenu();
                 db->getEntries()->push_back(add);
                 db->saveToJson(add);
@@ -48,6 +56,8 @@ void menu_create::start(Context& cx) {
             }
             case 4: {
                 bankAccount* add = new noChargeChecking("no-name", 0, 0);
+					 clearScreen();
+					 mainmenu::printHeader(cx);
                 add->createAccountMenu();
                 db->getEntries()->push_back(add);
                 db->saveToJson(add);
@@ -55,6 +65,8 @@ void menu_create::start(Context& cx) {
             }
             case 5: {
                 bankAccount* add = new serviceChargeChecking("no-name", 0, 0);
+					 clearScreen();
+					 mainmenu::printHeader(cx);
                 add->createAccountMenu();
                 db->getEntries()->push_back(add);
                 db->saveToJson(add);
@@ -62,6 +74,8 @@ void menu_create::start(Context& cx) {
             }
             case 6: {
                 bankAccount* add = new savingsAccount("no-name", 0, 0);
+					 clearScreen();
+					 mainmenu::printHeader(cx);
                 add->createAccountMenu();
                 db->getEntries()->push_back(add);
                 db->saveToJson(add);

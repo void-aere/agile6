@@ -1,6 +1,7 @@
 #pragma once
 
 #include "bankAccount.hpp"
+#include "mainmenu.hpp"
 
 class certificateOfDeposit : public bankAccount {
 	public:
@@ -22,8 +23,13 @@ class certificateOfDeposit : public bankAccount {
 		void print() const;
 
         nlohmann::json toJson() const;
-		void createAccountMenu();
-		void editAccountMenu();
+
+		virtual void createAccountMenu();
+		virtual void viewAccount();
+		virtual void editAccountMenu(Context& cx);
+		virtual void oldEditAccountMenu();
+
+		const short QUIT = 7;
 
 
 	private:

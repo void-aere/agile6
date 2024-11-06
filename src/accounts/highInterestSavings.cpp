@@ -57,6 +57,9 @@ json highInterestSavings::toJson() const {
 
 void highInterestSavings::createAccountMenu() {
 
+	std::cout << "Please enter the details for the High Interest Savings account you would like to create:\n";
+
+
 	name = inputString("Account Name: ");
 
 	accountNumber = bankAccount::generateAccountNumber(); // Generate random account number
@@ -67,17 +70,71 @@ void highInterestSavings::createAccountMenu() {
 
 	// minimumBalance = inputDouble("Minimum Balance: ");
 
-	std::cout << "Account has been created!\n";
+	std::cout << "\nAccount has been created!\n"
+				 << "Press RETURN to continue";
+	std::cin.ignore();
 }
 
-void highInterestSavings::editAccountMenu() {
+void highInterestSavings::viewAccount() {
+	std::cout << "Account Name: " << getName() << endl;
+	std::cout << "Account Number: " << getID() << endl;
+	std::cout << "Account Balance: " << getBalance() << endl;
+	std::cout << "Interest Rate: " << getInterestRate() << endl;
+	std::cout << "Minimum Balance: " << getMinimumBalance() << endl;
+}
+
+void highInterestSavings::editAccountMenu(Context& cx) {
+	int option = 0;
+	do {
+		clearScreen();
+		mainmenu::printHeader(cx);
+		std::cout << "Here are the current account (highInterestSavings) details:\n";
+		viewAccount();
+
+		std::cout << "\nWhat would you like to do?\n"
+			   	 << "[1] Deposit Money\n"
+					 << "[2] Withdraw Money\n"
+					 << "[3] Change Name\n"
+					 << "[4] Change Interest Rate\n"
+					 << "[5] Create Monthly Statement\n"
+					 << "[6] Exit\n\n";
+
+		option = getMenuOptionAuto(6);
+				
+		double tempAmount = 0.0;
+
+		if (option == 1) {
+			std::cout << "Enter the amount you would like to deposit: ";
+			tempAmount = inputDouble();
+			deposit(tempAmount);
+		}
+		else if (option == 2) {
+			std::cout << "Enter the amount you would like to withdraw: ";
+			tempAmount = inputDouble();
+			withdraw(tempAmount);
+		}
+		else if (option == 3) {
+			std::cout << "Enter the new name of the account: ";
+			string newName = inputString();
+			setName(newName);
+		}
+		else if (option == 4) {
+			std::cout << "Enter the new interest rate for the account: ";
+			string newName = inputString();
+			setInterestRate(tempAmount);
+		}
+		else if (option == 5) {
+			createMonthlyStatement();
+		}
+
+	} while (option != highInterestSavings::QUIT);
+		
+}
+
+
+void highInterestSavings::oldEditAccountMenu() {
 	bool prompt = false;
-	std::cout << "Here are the current account details:\n";
-	std::cout << "Account Name: " << name << endl;
-	std::cout << "Account Number: " << accountNumber << endl;
-	std::cout << "Account Balance: " << balance << endl;
-	std::cout << "Interest Rate: " << interestRate << endl;
-	std::cout << "Minimum Balance: " << minimumBalance << endl;
+	viewAccount();
 
 	prompt = confirm("\nWould you like to edit Account Name? (Y/N): ");
 	if (prompt)
@@ -110,11 +167,7 @@ void highInterestSavings::editAccountMenu() {
 	}
 
 	std::cout << "\nHere are the new account details:\n";
-	std::cout << "Account Name: " << name << endl;
-	std::cout << "Account Number: " << accountNumber << endl;
-	std::cout << "Account Balance: " << balance << endl;
-	std::cout << "Interest Rate: " << interestRate << endl;
-	std::cout << "Minimum Balance: " << minimumBalance << endl;
+	viewAccount();
 
 	return;
 }

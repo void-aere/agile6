@@ -1,6 +1,7 @@
 #include "dataHandler.hpp"
 #include "bankAccount.hpp"
 #include "menu_search.hpp"
+#include "mainmenu.hpp"
 #include "helpers.hpp"
 #include <iostream>
 
@@ -15,11 +16,14 @@ void menu_search::start(Context& cx) {
         // Clear the Screen
         clearScreen();
 
+		  // Display program heading and user status
+		  mainmenu::printHeader(cx);
+
         // Display the menu options
         std::cout << "Search and Edit Menu\n";
-        std::cout << "[1]  Find by Account Holder's Name\n";
-        std::cout << "[2]  Find by Account Number\n";
-        std::cout << "[3]  Return to Main Menu\n";
+        std::cout << "[1] Find by Account Holder's Name\n";
+        std::cout << "[2] Find by Account Number\n";
+        std::cout << "[3] Return to Main Menu\n\n";
 
         // Get user input
         choice = getMenuOptionAuto(3);
@@ -35,74 +39,72 @@ void menu_search::start(Context& cx) {
     } while (choice != menu_search::QUIT);
 }
 
-// Search by Account Holder Name and then Edit
 void menu_search::queryAndEditByName(Context& cx) {
     DataHandler<bankAccount>* db = cx.bdb();
 
     clearScreen();
-
-    std::string name;
+    mainmenu::printHeader(cx);
 
     // Prompt the user to enter the account holder's name
-    name = inputString("Enter the account holder's name to search: ");
+    std::string name = inputString("Enter the account holder's name to search: ");
 
-    // Search for matching accounts by name
-    // TODO fix
-    std::vector<bankAccount*> accounts = *(db->getEntries());
+    // Retrieve all matching accounts by name
+    std::vector<bankAccount*> matchingAccounts = db->getAccountsByName(name);
 
     // Check if any accounts were found
-    if (!accounts.empty()) {
-        std::cout << "Accounts found:\n";
+    if (!matchingAccounts.empty()) {
+        std::cout << "Accounts found for account holder \"" << name << "\":\n";
 
         // List all matching accounts with an index number
-        for (size_t i = 0; i < accounts.size(); ++i) {
+        for (size_t i = 0; i < matchingAccounts.size(); ++i) {
             std::cout << (i + 1) << ". ";
-            accounts[i]->print();  // Assuming bankAccount has a print() method
+            matchingAccounts[i]->print();  // Assuming bankAccount has a print() method
         }
 
-        // Ask the user if they want to edit any of the listed accounts
-        int choice = 0;
-        choice = inputInt("Enter the index number of the account you'd like to edit (0 to skip): ");
+        // Ask the user to select an account for editing
+        int choice = inputInt("Enter the index number of the account you'd like to edit (0 to skip): ");
 
-        // Validate the input
-        if (choice > 0 && choice <= static_cast<int>(accounts.size())) {
-            bankAccount* selectedAccount = accounts[choice - 1];
+        // Validate the input and check if a valid account index was selected
+        if (choice > 0 && choice <= static_cast<int>(matchingAccounts.size())) {
+            bankAccount* selectedAccount = matchingAccounts[choice - 1];
             int accountNumber = selectedAccount->getAccountNumber();
 
             // Lock the file for editing
             if (db->assume(accountNumber)) {
-                // Call the edit account menu on the chosen account
-                selectedAccount->editAccountMenu();
+                // Confirm the user's choice to edit
+                bool editChoice = confirm("Would you like to edit this account? (Y/N): ");
 
-                // Save the updated account to the .json file
-                db->saveToJson(selectedAccount);
+                if (editChoice) {
+                    mainmenu::printHeader(cx);
 
-                // Release the lock on the file
-                db->relinquish(accountNumber);
+                    // Open the edit menu for the selected account
+                    selectedAccount->editAccountMenu(cx);
 
-                std::cout << "Changes saved successfully.\n";
-            } 
-            else 
-            {
+                    // Save the updated account to the .json file
+                    db->saveToJson(selectedAccount);
+
+                    // Release the lock on the file
+                    db->relinquish(accountNumber);
+
+                    std::cout << "Changes saved successfully.\n";
+                } else {
+                    std::cout << "No changes were made to the account.\n";
+
+                    // Release the lock in case the user decides not to edit
+                    db->relinquish(accountNumber);
+                }
+            } else {
                 std::cout << "Account is currently being modified by another user.\n";
             }
-        } 
-        
-        else 
-        {
+        } else {
             std::cout << "No account selected for editing." << std::endl;
         }
-
-    } 
-    else 
-    {
+    } else {
         // Handle case where no accounts were found
         std::cout << "No accounts found for account holder: " << name << std::endl;
     }
 
-
     waitForInput();
-    return;
 }
 
 
@@ -111,6 +113,10 @@ void menu_search::queryAndEditByAccountNumber(Context& cx) {
     DataHandler<bankAccount>* db = cx.bdb();
 
     int accountNumber;
+
+	 clearScreen();
+
+	 mainmenu::printHeader(cx);
 
     // Prompt the user to enter the account number
     accountNumber = inputInt("Enter the account number to search: ");
@@ -130,7 +136,9 @@ void menu_search::queryAndEditByAccountNumber(Context& cx) {
 
             // If the user chooses to edit, invoke the edit account menu
             if (editChoice) {
-                selectedAccount->editAccountMenu();
+					 mainmenu::printHeader(cx); 
+
+                selectedAccount->editAccountMenu(cx);
 
                 // Save the updated account to the .json file
                 db->saveToJson(selectedAccount);
