@@ -33,6 +33,7 @@ void mainmenu::start(Context& cx) {
                         account->print();
                     }
                     cx.bdb()->saveData();
+                    logAction(cx.user()->getName(), "Simulated all bank accounts");
                     waitForInput();
                 }
                 break;
