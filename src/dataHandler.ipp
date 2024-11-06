@@ -101,6 +101,19 @@ DataType* DataHandler<DataType>::getEntryByID(const int id) {
 }
 
 template <class DataType>
+std::vector<DataType*> DataHandler<DataType>::getAccountsByName(const std::string& name) {
+    std::vector<DataType*> matchingAccounts;
+
+    for (DataType* entry : entries) {
+        if (entry->getName() == name) {  
+            matchingAccounts.push_back(entry);
+        }
+    }
+
+    return matchingAccounts;
+}
+
+template <class DataType>
 size_t DataHandler<DataType>::getIndexByID(const int id) {
     for (size_t i = 0; i < entries.size(); i++) {
         if (entries[i]->getID() == id) return i;
