@@ -8,3 +8,4 @@
 void logAction(const std::string &username, const std::string &action);
 
 #endif // LOGGER_HPP
+
