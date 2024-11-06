@@ -9,14 +9,18 @@ using json = nlohmann::json;
 const double certificateOfDeposit::INTEREST_RATE = 0.05;
 const double certificateOfDeposit::MATURITY_MONTH = 6;
 
+
+// First constructor (for creating a new Certificate of Deposit)
 certificateOfDeposit::certificateOfDeposit(string name, int accountNumber, double balance)
 	: certificateOfDeposit(name, accountNumber, balance, INTEREST_RATE, MATURITY_MONTH, 0) {
 }
 
+// Second constructor (for creating a new Certificate of Deposit with interest rate and maturity month)
 certificateOfDeposit::certificateOfDeposit(string name, int accountNumber, double balance, double interestRate, int maturityMonth)
 	: certificateOfDeposit(name, accountNumber, balance, interestRate, maturityMonth, 0) {
 }
 
+// Third constructor (for creating a new Certificate of Deposit with all parameters)
 certificateOfDeposit::certificateOfDeposit(std::string name, int accountNumber, double balance, double interestRate, int maturityMonth, int currentMonth) 
     : bankAccount(name, accountNumber, balance) {
         this->interestRate = interestRate;
@@ -24,9 +28,11 @@ certificateOfDeposit::certificateOfDeposit(std::string name, int accountNumber, 
         this->currentMonth = currentMonth;
 }
 
+// Load from JSON constructor
 certificateOfDeposit::certificateOfDeposit(const json &j) 
     : certificateOfDeposit(j.at("name"), j.at("accountNumber"), j.at("balance"), j.at("interestRate"), j.at("maturityMonth"), j.at("currentMonth")) {
 }
+
 
 certificateOfDeposit::~certificateOfDeposit() { }
 
@@ -98,9 +104,9 @@ void certificateOfDeposit::createAccountMenu() {
 
 	name = inputString("Account Name: ");
 
-	accountNumber = inputDouble("Account Number: ");
-
 	balance = inputDouble("Account Balance: ");
+
+	accountNumber = bankAccount::generateAccountNumber(); // Generate random account number
 
 	// interestRate = inputDouble("Interest Rate: ");
 
@@ -128,11 +134,11 @@ void certificateOfDeposit::editAccountMenu() {
 		name = inputString("Enter the new Account Name: ");
 	}
 
-	prompt = confirm("\nWould you like to edit Account Number? (Y/N): ");
-	if (prompt)
-	{
-			accountNumber = inputDouble("Enter the new Account Number: ");
-	}
+	//prompt = confirm("\nWould you like to edit Account Number? (Y/N): ");
+	//if (prompt)
+	//{
+	//		accountNumber = inputDouble("Enter the new Account Number: ");
+	//}
 
 	prompt = confirm("\nWould you like to edit Account Balance? (Y/N): ");
 	if (prompt)
