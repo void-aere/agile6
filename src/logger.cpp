@@ -1,5 +1,5 @@
 // Logger.cpp
-#include "Logger.hpp"
+#include "logger.hpp"
 #include <iostream>
 #include <fstream>
 #include <chrono>
