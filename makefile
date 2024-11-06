@@ -1,5 +1,6 @@
 # Add all new cpp-hpp combo names to this list!
 SYMBOLS = passwordInput context users exceptionHandler helpers mainmenu menu_create menu_edit menu_list menu_search accounts/bankAccount accounts/certificateOfDeposit accounts/checkingAccount accounts/highInterestChecking accounts/highInterestSavings accounts/noChargeChecking accounts/savingsAccount accounts/serviceChargeChecking logger
+TEMPLATES = dataHandler
 
 ENTRYPOINT = main
 
@@ -24,7 +25,7 @@ ${OUT_DIR}/accounts:
 	mkdir ${OUT_DIR}/accounts
 
 # Assemble an executble from the compiled objects
-${OUT_DIR}/${EXE}: ${OUT_DIR}/${ENTRYPOINT}.o $(addprefix ${OUT_DIR}/, $(SYMBOLS:=.o))
+${OUT_DIR}/${EXE}: ${OUT_DIR}/${ENTRYPOINT}.o $(addprefix ${OUT_DIR}/, $(SYMBOLS:=.o)) $(addsuffix .hpp, ${SRC_DIR}/${TEMPLATES}) $(addsuffix .ipp, ${SRC_DIR}/${TEMPLATES})
 	g++ ${GPPFLAGS} ${OUT_DIR}/*.o ${OUT_DIR}/accounts/*.o -o ${OUT_DIR}/${EXE}
 
 # Compile the main function separately from other modules
