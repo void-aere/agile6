@@ -7,7 +7,7 @@
 #include <sstream>
 
 void logAction(const std::string &username, const std::string &action) {
-    std::ofstream logFile("access_log.txt", std::ios::app);
+    std::ofstream logFile("env/access_log.txt", std::ios::app);
     
     if (!logFile) {
         std::cerr << "Error opening log file!" << std::endl;
