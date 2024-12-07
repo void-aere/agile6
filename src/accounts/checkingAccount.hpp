@@ -2,6 +2,7 @@
 
 #include <string>
 #include "bankAccount.hpp"
+#include "logger.hpp"
 
 class checkingAccount : public bankAccount {
 	public:

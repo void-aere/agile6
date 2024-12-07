@@ -5,6 +5,8 @@
 #include "menu_create.hpp"
 #include "menu_edit.hpp"
 #include "menu_list.hpp"
+#include "menu_logsLogin.hpp"
+#include "menu_logsAccount.hpp"
 #include "menu_search.hpp"
 #include "helpers.hpp"
 #include "passwordInput.hpp"
@@ -13,7 +15,7 @@
 
 //This function is called by main() in main.cpp, and is essentially the entry point for the program
 void mainmenu::start(Context& cx) {
-    int hack_quit = (cx.user()->hasPermission(WRITE_ALL_BANK_ACCOUNTS)) ? 5 : 4;
+    int hack_quit = (cx.user()->hasPermission(WRITE_ALL_BANK_ACCOUNTS)) ? 7 : 4;
 
 	int option = 0;
 	do {
@@ -27,29 +29,42 @@ void mainmenu::start(Context& cx) {
 			case 1: menu_create::start(cx); break;
 			case 2: menu_search::start(cx); break;
 			case 3: menu_list::start(cx); break;
-            case 4: {
-                if (hack_quit == 5) {
-                    for (bankAccount *account : *(cx.bdb()->getEntries())) {
-                        account->createMonthlyStatement();
-                        account->print();
-                    }
-                    cx.bdb()->saveData();
-                    logAction(cx.user()->getName(), "Simulated all bank accounts");
-                    waitForInput();
-                }
-                break;
+         case 4: {
+         	if (hack_quit == 7) {
+            	for (bankAccount *account : *(cx.bdb()->getEntries())) {
+               	account->createMonthlyStatement();
+                  account->print();
+               }
+            	cx.bdb()->saveData();
+					std::cout << "Simulated all bank accounts." << std::endl;
+            	logAction(cx.user()->getName(), "Simulated all bank accounts.");
+            	waitForInput();
             }
+         	break;
+         }
+			case 5: if (hack_quit == 7) {
+				menu_logsLogin::start(cx); 
+				break;
+			}
+			case 6: menu_logsAccount::start(cx); break;
 		}
 
 	} while (option != hack_quit);
+
+	logAction(cx.user()->getName(), "Successfully logged out!");
+	std::cout << "Successfully logged out." << std::endl;
 }
 
 void mainmenu::login(Context& cx) {
     std::vector<UserAccount*> users = *(cx.udb()->getEntries());
 
+    bool passFail = false;
+
     do {
         clearScreen();
         
+			// Displaying header manually here to show without login information
+		  std::cout << "\033[92m";
 		  std::cout << R"( 
  $$$$$$\   $$$$$$\  $$$$$$\ $$\       $$$$$$$$\        $$$$$$\        $$$$$$$\   $$$$$$\  $$\   $$\ $$\   $$\
 $$  __$$\ $$  __$$\ \_$$  _|$$ |      $$  _____|      $$  __$$\       $$  __$$\ $$  __$$\ $$$\  $$ |$$ | $$  |
@@ -61,12 +76,14 @@ $$ |  $$ |\$$$$$$  |$$$$$$\ $$$$$$$$\ $$$$$$$$\        $$$$$$  |      $$$$$$$  |
 \__|  \__| \______/ \______|\________|\________|       \______/       \_______/ \__|  \__|\__|  \__|\__|  \__|
 )";
 		  std::cout << "===============================================================================================================\n\n";
-
+		  std::cout << "\033[97m";
         std::cout << "Enter username:\t";
         std::string username = inputString();
 
         char password[MAX_PASSWORD_LENGTH];
         getPassword(password);
+
+		  passFail = false;
 
         std::cout << std::endl;
 
@@ -82,9 +99,13 @@ $$ |  $$ |\$$$$$$  |$$$$$$\ $$$$$$$$\ $$$$$$$$\        $$$$$$  |      $$$$$$$  |
                 return;
             }
 
+				logAction(username, "Failed to login - incorrect password!");
+			   passFail = true;
             // The username existed but the password was wrong; don't bother continuing
             break;
         }
+		  if (!passFail)
+		  	 logAction(username, "Failed to login - username not found!");
 
         std::cout << "Incorrect username or password." << std::endl;
         waitForInput();
@@ -101,16 +122,24 @@ void mainmenu::print(Context& cx) {
         << "[4] Exit\n" << std::endl;
 
     else
-    std::cout << "Welcome to Bank Program Main Menu, \"" << cx.user()->getName() << "\"\n"
+	 {
+	 	std::cout << "\033[93m";
+    	std::cout << "**MANAGER FUNCTIONALITY ENABLED**\n\n";
+		std::cout << "\033[97m";
+		std::cout <<"Welcome to Bank Program Main Menu, \"" << cx.user()->getName() << "\"\n"
         << "[1] Create a Bank Account\n"
         << "[2] Edit a Bank Account\n"
         << "[3] View All Database Accounts\n"
         << "[4] Simulate Month\n"
-        << "[5] Exit\n" << std::endl;
+		  << "[5] View Login Logs\n"
+		  << "[6] View Account Logs\n"
+        << "[7] Exit\n" << std::endl;
+	 }
 }
 
 // Function to print program header as well as current user's username and account level
 void mainmenu::printHeader(Context& cx) {
+	std::cout << "\033[92m";
 	std::cout << R"( 
  $$$$$$\   $$$$$$\  $$$$$$\ $$\       $$$$$$$$\        $$$$$$\        $$$$$$$\   $$$$$$\  $$\   $$\ $$\   $$\
 $$  __$$\ $$  __$$\ \_$$  _|$$ |      $$  _____|      $$  __$$\       $$  __$$\ $$  __$$\ $$$\  $$ |$$ | $$  |
@@ -124,6 +153,7 @@ $$ |  $$ |\$$$$$$  |$$$$$$\ $$$$$$$$\ $$$$$$$$\        $$$$$$  |      $$$$$$$  |
 	std::cout << "===============================================================================================================\n";
 	std::cout << "Current User: " << cx.user()->getName() << std::endl;
 	std::cout << "===============================================================================================================\n\n";
+	std::cout << "\033[97m";
 
 
 }

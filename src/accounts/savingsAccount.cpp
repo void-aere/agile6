@@ -2,6 +2,7 @@
 #include "helpers.hpp"
 #include <iostream>
 #include <iomanip>
+#include "logger.hpp"
 
 using std::string, std::cout, std::endl;
 using json = nlohmann::json;
@@ -57,7 +58,7 @@ json savingsAccount::toJson() const {
     };
 }
 
-void savingsAccount::createAccountMenu() {
+void savingsAccount::createAccountMenu(Context& cx) {
 
 	std::cout << "Please enter the details for the Savings account you would like to create:\n";
 
@@ -71,6 +72,10 @@ void savingsAccount::createAccountMenu() {
 
 	std::cout << "\nAccount has been created!\n"
 				 << "Press RETURN to continue";
+
+	std::string logMessage = "Account (" + name + ") was created.";
+	logAction(cx.user()->getName(), logMessage, 1);
+
 	std::cin.ignore();
 }
 
@@ -84,6 +89,10 @@ void savingsAccount::viewAccount() {
 
 void savingsAccount::editAccountMenu(Context& cx) {
 	int option = 0;
+	
+	std::string logMessage = "Began editing account (" + name + ")...";
+	logAction(cx.user()->getName(), logMessage, 1);
+
 	do {
 		clearScreen();
 		mainmenu::printHeader(cx);
@@ -128,6 +137,9 @@ void savingsAccount::editAccountMenu(Context& cx) {
 		
 
 	} while (option != savingsAccount::QUIT);
+
+	logMessage = "Finished editing account (" + name + ")!";
+	logAction(cx.user()->getName(), logMessage, 1);
 		
 }
 

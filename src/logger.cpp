@@ -6,13 +6,30 @@
 #include <iomanip>
 #include <sstream>
 
-void logAction(const std::string &username, const std::string &action) {
-    std::ofstream logFile("env/access_log.txt", std::ios::app);
-    
-    if (!logFile) {
+void logAction(const std::string &username, const std::string &action, const int logType) {
+
+	 std::ofstream logFile;
+			
+	 if (logType == 1)
+	 {
+		logFile.open("env/account_log.txt", std::ios::app);
+		
+    	if (!logFile) {
         std::cerr << "Error opening log file!" << std::endl;
         return;
-    }
+    	}
+	 }
+	 else
+	 {
+		logFile.open("env/access_log.txt", std::ios::app);
+		
+		
+      if (!logFile) {
+        std::cerr << "Error opening log file!" << std::endl;
+        return;
+      }
+	 }
+    
     
     // Get the current time using chrono
     auto currentTime = std::chrono::system_clock::now();

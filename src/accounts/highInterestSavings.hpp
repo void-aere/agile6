@@ -16,7 +16,7 @@ class highInterestSavings : public savingsAccount {
 
         nlohmann::json toJson() const;
 
-		virtual void createAccountMenu();
+		virtual void createAccountMenu(Context& cx);
 		virtual void viewAccount();
 		virtual void editAccountMenu(Context& cx);
 		virtual void oldEditAccountMenu();

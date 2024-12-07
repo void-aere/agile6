@@ -1,12 +1,10 @@
-// #include "helpers.hpp"
+#include "helpers.hpp"
 #include "mainmenu.hpp"
 #include "context.hpp"
 #include "dataHandler.hpp"
 #include "exceptionHandler.hpp"
 #include "accounts/bankAccount.hpp"
 
-
-#include "helpers.hpp"
 int main(int argc, char *argv[]) {
     // Maybe compute a word's hash
     if (argc >= 2 && strcmp(argv[1], "hashword") == 0) {

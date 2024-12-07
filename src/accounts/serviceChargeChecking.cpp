@@ -2,6 +2,7 @@
 #include "helpers.hpp"
 #include <iomanip>
 #include <iostream>
+#include "logger.hpp"
 
 using std::string, std::cout, std::endl;
 using json = nlohmann::json;
@@ -90,7 +91,7 @@ json serviceChargeChecking::toJson() const {
     };
 }
 
-void serviceChargeChecking::createAccountMenu() {
+void serviceChargeChecking::createAccountMenu(Context& cx) {
 
 	std::cout << "Please enter the details for the Service Charge Checking account you would like to create:\n";
 
@@ -108,6 +109,10 @@ void serviceChargeChecking::createAccountMenu() {
 
 	std::cout << "\nAccount has been created!\n"
 				 << "Press RETURN to continue";
+
+	std::string logMessage = "Account (" + name + ") was created.";
+	logAction(cx.user()->getName(), logMessage, 1);
+
 	std::cin.ignore();
 }
 
@@ -122,6 +127,10 @@ void serviceChargeChecking::viewAccount() {
 
 void serviceChargeChecking::editAccountMenu(Context& cx) {
 	int option = 0;
+	
+	std::string logMessage = "Began editing account (" + name + ")...";
+	logAction(cx.user()->getName(), logMessage, 1);
+
 	do {
 		clearScreen();
 		mainmenu::printHeader(cx);
@@ -185,6 +194,9 @@ void serviceChargeChecking::editAccountMenu(Context& cx) {
 		
 
 	} while (option != serviceChargeChecking::QUIT);
+
+	logMessage = "Finished editing account (" + name + ")!";
+	logAction(cx.user()->getName(), logMessage, 1);
 		
 }
 

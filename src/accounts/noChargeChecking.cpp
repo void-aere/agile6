@@ -2,6 +2,7 @@
 #include "helpers.hpp"
 #include <iomanip>
 #include <iostream>
+#include "logger.hpp"
 
 using std::string, std::cout, std::endl;
 using json = nlohmann::json;
@@ -66,7 +67,7 @@ json noChargeChecking::toJson() const {
     };
 }
 
-void noChargeChecking::createAccountMenu() {
+void noChargeChecking::createAccountMenu(Context& cx) {
 
 	std::cout << "Please enter the details for the No Charge Checking account you would like to create:\n";
 
@@ -82,6 +83,10 @@ void noChargeChecking::createAccountMenu() {
 
 	std::cout << "\nAccount has been created!\n"
 				 << "Press RETURN to continue";
+
+	std::string logMessage = "Account (" + name + ") was created.";
+	logAction(cx.user()->getName(), logMessage, 1);
+
 	std::cin.ignore();
 }
 
@@ -95,6 +100,10 @@ void noChargeChecking::viewAccount() {
 
 void noChargeChecking::editAccountMenu(Context& cx) {
 	int option = 0;
+
+	std::string logMessage = "Began editing account (" + name + ")...";
+	logAction(cx.user()->getName(), logMessage, 1);
+
 	do {
 		clearScreen();
 		mainmenu::printHeader(cx);
@@ -144,7 +153,9 @@ void noChargeChecking::editAccountMenu(Context& cx) {
 		}
 
 	} while (option != noChargeChecking::QUIT);
-		
+
+	logMessage = "Finished editing account (" + name + ")!";
+	logAction(cx.user()->getName(), logMessage, 1);
 }
 
 

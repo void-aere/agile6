@@ -1,5 +1,6 @@
 #include "certificateOfDeposit.hpp"
 #include "helpers.hpp"
+#include "logger.hpp"
 #include <iostream>
 #include <iomanip>
 
@@ -100,7 +101,7 @@ json certificateOfDeposit::toJson() const {
     };
 }
 
-void certificateOfDeposit::createAccountMenu() {
+void certificateOfDeposit::createAccountMenu(Context &cx) {
 
 	std::cout << "Please enter the details for the Certificate of Deposit account you would like to create:\n";
 
@@ -120,6 +121,9 @@ void certificateOfDeposit::createAccountMenu() {
 	std::cout << "\nAccount has been created!\n"
 				 << "Press RETURN to continue";
 
+	std::string logMessage = "Account (" + name + ") was created.";
+	logAction(cx.user()->getName(), logMessage, 1);
+
 	std::cin.ignore();
 
 }
@@ -135,6 +139,10 @@ void certificateOfDeposit::viewAccount() {
 
 void certificateOfDeposit::editAccountMenu(Context& cx) {
 	int option = 0;
+
+	std::string logMessage = "Began editing account (" + name + ")...";
+	logAction(cx.user()->getName(), logMessage, 1);
+
 	do {
 		clearScreen();
 		mainmenu::printHeader(cx);
@@ -185,6 +193,9 @@ void certificateOfDeposit::editAccountMenu(Context& cx) {
 		}
 
 	} while (option != certificateOfDeposit::QUIT);
+
+	logMessage = "Finished editing account (" + name + ")!";
+	logAction(cx.user()->getName(), logMessage, 1);
 }
 
 

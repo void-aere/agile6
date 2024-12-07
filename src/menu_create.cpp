@@ -3,6 +3,7 @@
 #include "context.hpp"
 #include "bankAccount.hpp"
 #include "accounts/certificateOfDeposit.hpp"
+#include "accounts/checkingAccount.hpp"
 #include "accounts/savingsAccount.hpp"
 #include "accounts/highInterestChecking.hpp"
 #include "accounts/highInterestSavings.hpp"
@@ -31,7 +32,7 @@ void menu_create::start(Context& cx) {
                 bankAccount* add = new certificateOfDeposit("no-name", 0, 0);
 					 clearScreen();
 					 mainmenu::printHeader(cx);
-                add->createAccountMenu();
+                add->createAccountMenu(cx);
                 db->getEntries()->push_back(add);
                 db->saveToJson(add);
                 break;
@@ -40,7 +41,7 @@ void menu_create::start(Context& cx) {
                 bankAccount* add = new highInterestChecking("no-name", 0, 0);
 					 clearScreen();
 					 mainmenu::printHeader(cx);
-                add->createAccountMenu();
+                add->createAccountMenu(cx);
                 db->getEntries()->push_back(add);
                 db->saveToJson(add);
                 break;
@@ -49,7 +50,7 @@ void menu_create::start(Context& cx) {
                 bankAccount* add = new highInterestSavings("no-name", 0, 0);
 					 clearScreen();
 					 mainmenu::printHeader(cx);
-                add->createAccountMenu();
+                add->createAccountMenu(cx);
                 db->getEntries()->push_back(add);
                 db->saveToJson(add);
                 break;
@@ -58,7 +59,7 @@ void menu_create::start(Context& cx) {
                 bankAccount* add = new noChargeChecking("no-name", 0, 0);
 					 clearScreen();
 					 mainmenu::printHeader(cx);
-                add->createAccountMenu();
+                add->createAccountMenu(cx);
                 db->getEntries()->push_back(add);
                 db->saveToJson(add);
                 break;
@@ -67,7 +68,7 @@ void menu_create::start(Context& cx) {
                 bankAccount* add = new serviceChargeChecking("no-name", 0, 0);
 					 clearScreen();
 					 mainmenu::printHeader(cx);
-                add->createAccountMenu();
+                add->createAccountMenu(cx);
                 db->getEntries()->push_back(add);
                 db->saveToJson(add);
                 break;
@@ -76,7 +77,7 @@ void menu_create::start(Context& cx) {
                 bankAccount* add = new savingsAccount("no-name", 0, 0);
 					 clearScreen();
 					 mainmenu::printHeader(cx);
-                add->createAccountMenu();
+                add->createAccountMenu(cx);
                 db->getEntries()->push_back(add);
                 db->saveToJson(add);
                 break;
