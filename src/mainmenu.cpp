@@ -17,7 +17,7 @@
 
 //This function is called by main() in main.cpp, and is essentially the entry point for the program
 void mainmenu::start(Context& cx) {
-    int hack_quit = (cx.user()->hasPermission(WRITE_ALL_BANK_ACCOUNTS)) ? 7 : 4;
+    int hack_quit = (cx.user()->hasPermission(WRITE_ALL_BANK_ACCOUNTS)) ? 8 : 4;
 
 	int option = 0;
 	do {
