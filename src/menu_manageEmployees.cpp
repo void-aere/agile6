@@ -1,11 +1,21 @@
 #include "context.hpp"
 #include "helpers.hpp"
 #include "logger.hpp"
+#include <string>
+#include <cctype>
 #include <random>
 #include <iostream>
 #include <fstream>
 
 namespace menu_manageEmployees {
+
+    std::string removePunctuation(const std::string& input) {
+    std::string result = input;
+    result.erase(std::remove_if(result.begin(), result.end(),
+                                [](char ch) { return !std::isalnum(ch); }),
+                 result.end());
+    return result;
+}
 
     int generateRandomID() {
     static std::mt19937 generator(std::random_device{}());
@@ -66,25 +76,36 @@ namespace menu_manageEmployees {
         }
 
         // Deserialize existing data
-        std::string username, name, password;
-        int permissions;
+        std:: string name, username, password;
+        std::string bracket, IDlabel, IDitself, usernameLabel, usernameItself, nameLabel, nameItself, permissionsLabel, permissionsItself;
+        //int permissions;
         // Parsing
-        file >> username >> name >> permissions; 
+        file >> bracket >> IDlabel >> IDitself >> usernameLabel >> usernameItself >> nameLabel >> nameItself >> permissionsLabel >> permissionsItself; 
+
+        // Remove punctation
+        IDitself = removePunctuation(IDitself);
+        usernameItself = removePunctuation(usernameItself);
+        nameItself = removePunctuation(nameItself);
+        permissionsItself = removePunctuation(permissionsItself);
+
+        //std::cout << "Line 73# bracket_" << bracket << " IDlabel_ " << IDlabel << " IDitself_ " << IDitself;
+        //std::cout << " usernameLabel_ " << usernameLabel << "usernameItself_ " << usernameItself << " nameLabel_ "<< nameLabel << " nameItself_ " << nameItself;
+        //std:: cout << " permissionsLabel_ "<< permissionsLabel << " permissionsItself_ " << permissionsItself << std::endl; 
         file.close();
 
         // Edit employee details
-        std::cout << "Editing employee: " << name << " (" << username << ")\n";
+        std::cout << "Editing employee: " << nameItself << " (" << usernameItself << ")\n";
         std::cout << "Enter new username (or press ENTER to keep current): ";
         std::string newUsername = inputString();
-        if (!newUsername.empty()) username = newUsername;
+        if (!newUsername.empty()) usernameItself = newUsername;
 
-        std::cout << "Enter new password (or press ENTER to keep current): ";
+        std::cout << "Enter new password (MUST enter new password): ";
         std::string newPassword = inputString();
         if (!newPassword.empty()) password = newPassword;
 
         std::cout << "Enter new permissions (or press ENTER to keep current): ";
         std::string newPermissions = inputString();
-        if (!newPermissions.empty()) permissions = std::stoi(newPermissions);
+        if (!newPermissions.empty()) permissionsItself = std::stoi(newPermissions);
 
         // Update employee data
         std::ofstream outFile(filepath);
@@ -95,11 +116,11 @@ namespace menu_manageEmployees {
 
         outFile << "{\n"
                 << "  \"id\": " << id << ",\n"
-                << "  \"username\": \"" << username << "\",\n"
-                << "  \"name\": \"" << name << "\",\n"
-                << "  \"permissions\": [" << permissions << "],\n"
+                << "  \"username\": \"" << usernameItself << "\",\n"
+                << "  \"name\": \"" << nameItself << "\",\n"
+                << "  \"permissions\": [" << permissionsItself << "],\n"
                 << "  \"pwdHash\": " << hashword(password) << ",\n"
-                << "  \"userType\": 1\n"
+                << "  \"userType\": 1,\n"
                 << "  \"bankAccounts\": []\n"
                 << "}\n";
 
