@@ -24,6 +24,9 @@ class DataHandler {
         DataType* getEntryByID(const int id);
         std::vector<DataType*> getAccountsByName(const std::string& name);
         size_t getIndexByID(const int id);
+
+        // Adding new users
+        bool addEntry(const DataType& entry);
         
         // Deadlock
         bool assume(int id);

@@ -11,6 +11,33 @@ Context::~Context() {
     delete userHandler;
 }
 
+bool Context::createUser(const UserAccount& userAccount) {
+    if (userHandler) {
+        userHandler->getEntries()->push_back(new UserAccount(userAccount));
+        userHandler->saveData();
+        return true;
+    }
+    return false;
+}
+
+void Context::addUser(UserAccount* user) {
+    // Use addEntry to add the user
+    userHandler->addEntry(*user); 
+}
+
+
+void Context::updateUser(UserAccount* user) {
+    if (userHandler) {
+        size_t index = userHandler->getIndexByID(user->getID());
+        if (index != (size_t)-1) {
+            delete userHandler->getEntries()->at(index);
+            userHandler->getEntries()->at(index) = user;
+            userHandler->saveData();
+        }
+    }
+}
+
+
 bool Context::checkDataDir() {
     namespace fs = std::filesystem;
 

@@ -23,9 +23,14 @@ class Context {
 	    bool checkDataDir();
         bool loggedIn() const;
 
+        bool createUser(const UserAccount& userAccount);
+
         void setBankHandler(DataHandler<bankAccount>* handler);
         void setUserHandler(DataHandler<UserAccount>* handler);
         void setUser(UserAccount* user);
+
+        void addUser(UserAccount* user);
+        void updateUser(UserAccount* user);
 
         DataHandler<bankAccount>* bdb();
         DataHandler<UserAccount>* udb();

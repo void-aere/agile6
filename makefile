@@ -1,5 +1,5 @@
 # Add all new cpp-hpp combo names to this list!
-SYMBOLS = passwordInput context users exceptionHandler helpers mainmenu menu_create menu_edit menu_list menu_logsLogin menu_logsAccount menu_search accounts/bankAccount accounts/certificateOfDeposit accounts/checkingAccount accounts/highInterestChecking accounts/highInterestSavings accounts/noChargeChecking accounts/savingsAccount accounts/serviceChargeChecking logger
+SYMBOLS = passwordInput context users exceptionHandler helpers mainmenu menu_create menu_edit menu_list menu_logsLogin menu_logsAccount menu_search menu_manageEmployees menu_createUser accounts/bankAccount accounts/certificateOfDeposit accounts/checkingAccount accounts/highInterestChecking accounts/highInterestSavings accounts/noChargeChecking accounts/savingsAccount accounts/serviceChargeChecking logger
 TEMPLATES = dataHandler
 
 ENTRYPOINT = main

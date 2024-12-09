@@ -23,6 +23,15 @@ DataHandler<DataType>::~DataHandler() {
 }
 
 template <class DataType>
+bool DataHandler<DataType>::addEntry(const DataType& entry) {
+    DataType* newEntry = new DataType(entry);
+    entries.push_back(newEntry);
+    saveToJson(newEntry);
+    return true;
+}
+
+
+template <class DataType>
 void DataHandler<DataType>::loadData() {
     namespace fs = std::filesystem;
 

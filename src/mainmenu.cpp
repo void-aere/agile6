@@ -8,6 +8,8 @@
 #include "menu_logsLogin.hpp"
 #include "menu_logsAccount.hpp"
 #include "menu_search.hpp"
+#include "menu_manageEmployees.hpp"
+#include "menu_createUser.hpp"
 #include "helpers.hpp"
 #include "passwordInput.hpp"
 #include <iostream>
@@ -47,6 +49,11 @@ void mainmenu::start(Context& cx) {
 				break;
 			}
 			case 6: menu_logsAccount::start(cx); break;
+			case 7: if (cx.user()->hasPermission(WRITE_ALL_BANK_ACCOUNTS)) {
+    			menu_manageEmployees::start(cx); 
+    			break;
+}
+
 		}
 
 	} while (option != hack_quit);
@@ -131,9 +138,10 @@ void mainmenu::print(Context& cx) {
         << "[2] Edit a Bank Account\n"
         << "[3] View All Database Accounts\n"
         << "[4] Simulate Month\n"
-		  << "[5] View Login Logs\n"
-		  << "[6] View Account Logs\n"
-        << "[7] Exit\n" << std::endl;
+		<< "[5] View Login Logs\n"
+		<< "[6] View Account Logs\n"
+    	<< "[7] Manage Employee Logins\n"
+    	<< "[8] Exit\n" << std::endl;
 	 }
 }
 
