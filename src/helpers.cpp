@@ -4,6 +4,7 @@
 #include <limits>
 #include <chrono>
 #include <unordered_map>
+#include <random>
 
 using std::string;
 using std::cout, std::cin, std::endl;
@@ -325,4 +326,11 @@ size_t hashword(const string& word) {
     // TBH I don't really know what's happening here
     std::hash<string> hash;
     return hash(word);
+}
+
+int generateAccountNumber() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distr(100000, 999999);
+    return distr(gen);
 }

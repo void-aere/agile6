@@ -30,3 +30,4 @@ bool valiDate(const std::string& date); //validate a date (mm-dd-yyyy)
 
 // Password tools
 size_t hashword(const std::string& word); // compute a string's hash
+int generateAccountNumber();

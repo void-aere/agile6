@@ -1,6 +1,7 @@
 #include "context.hpp"
 #include "helpers.hpp"
 #include "logger.hpp"
+#include "users.hpp"
 #include <string>
 #include <cctype>
 #include <random>
@@ -35,52 +36,35 @@ namespace menu_manageEmployees {
         std::cout << "Enter permissions level (0 for basic, 1 for intermediate): ";
         permissions = inputInt();
 
-        int id = generateRandomID();  // Function to generate a unique ID
-        std::string filepath = "./env/user/" + std::to_string(id) + ".json";
+        // Create the user in memory
+        UserAccount user(username, hashword(password));
+        user.setName(name);
+        user.grantPermission(Permission(permissions));
 
-        std::ofstream file(filepath);
-        if (!file.is_open()) {
-            std::cerr << "Error creating employee file!" << std::endl;
-            return;
-        }
+        // Add user to the registry. Next time it saves, this user will be saved with it.
+        cx.createUser(user);
 
-        // Serialize employee data
-        file << "{\n"
-            << "  \"id\": " << id << ",\n"
-            << "  \"username\": \"" << username << "\",\n"
-            << "  \"name\": \"" << name << "\",\n"
-            << "  \"permissions\": [" << permissions << "],\n"
-            << "  \"pwdHash\": " << hashword(password) << ",\n" 
-            << "  \"userType\": 1,\n"
-            << "  \"bankAccounts\": []\n"
-            << "}\n";
-
-
-        file.close();
         logAction(cx.user()->getName(), "Created new employee: " + username);
         std::cout << "Employee account created successfully!" << std::endl;
         waitForInput();
     }
 
     void editEmployeeAccount(Context& cx) {
-        int id;
         std::cout << "Enter employee ID to edit: ";
-        id = inputInt();
+        int id = inputInt();
 
-        std::string filepath = "./env/user/" + std::to_string(id) + ".json";
-        std::ifstream file(filepath);
-        if (!file.is_open()) {
+        UserAccount* user = cx.udb()->getEntryByID(id);
+
+        if (user == nullptr) {
             std::cerr << "Employee file not found!" << std::endl;
             waitForInput();
             return;
         }
 
         // Deserialize existing data
-        std:: string name, username, password;
         std::string bracket, IDlabel, IDitself, usernameLabel, usernameItself, nameLabel, nameItself, permissionsLabel, permissionsItself;
         //int permissions;
         // Parsing
-        file >> bracket >> IDlabel >> IDitself >> usernameLabel >> usernameItself >> nameLabel >> nameItself >> permissionsLabel >> permissionsItself; 
 
         // Remove punctation
         IDitself = removePunctuation(IDitself);
@@ -91,41 +75,29 @@ namespace menu_manageEmployees {
         //std::cout << "Line 73# bracket_" << bracket << " IDlabel_ " << IDlabel << " IDitself_ " << IDitself;
         //std::cout << " usernameLabel_ " << usernameLabel << "usernameItself_ " << usernameItself << " nameLabel_ "<< nameLabel << " nameItself_ " << nameItself;
         //std:: cout << " permissionsLabel_ "<< permissionsLabel << " permissionsItself_ " << permissionsItself << std::endl; 
-        file.close();
 
         // Edit employee details
-        std::cout << "Editing employee: " << nameItself << " (" << usernameItself << ")\n";
+        std::cout << "Editing employee: " << user->getUsername() << " (" << user->getName() << ")\n";
+
+        std::string name = inputString("Enter new name (or press ENTER to keep current):");
+        if (!name.empty()) user->setName(name);
+
         std::cout << "Enter new username (or press ENTER to keep current): ";
         std::string newUsername = inputString();
-        if (!newUsername.empty()) usernameItself = newUsername;
+        if (!newUsername.empty()) user->setUsername(newUsername);
 
         std::cout << "Enter new password (MUST enter new password): ";
         std::string newPassword = inputString();
-        if (!newPassword.empty()) password = newPassword;
+        if (!newPassword.empty()) user->setPwdHash(hashword(newPassword));
 
         std::cout << "Enter new permissions (or press ENTER to keep current): ";
         std::string newPermissions = inputString();
         if (!newPermissions.empty()) permissionsItself = std::stoi(newPermissions);
 
         // Update employee data
-        std::ofstream outFile(filepath);
-        if (!outFile.is_open()) {
-            std::cerr << "Error saving employee file!" << std::endl;
-            return;
-        }
+        cx.udb()->saveData();
 
-        outFile << "{\n"
-                << "  \"id\": " << id << ",\n"
-                << "  \"username\": \"" << usernameItself << "\",\n"
-                << "  \"name\": \"" << nameItself << "\",\n"
-                << "  \"permissions\": [" << permissionsItself << "],\n"
-                << "  \"pwdHash\": " << hashword(password) << ",\n"
-                << "  \"userType\": 1,\n"
-                << "  \"bankAccounts\": []\n"
-                << "}\n";
-
-        outFile.close();
-        logAction(cx.user()->getName(), "Edited employee: " + username);
+        logAction(cx.user()->getName(), "Edited employee: " + user->getUsername());
         std::cout << "Employee account updated successfully!" << std::endl;
         waitForInput();
     }

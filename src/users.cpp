@@ -1,4 +1,5 @@
 #include "users.hpp"
+#include "helpers.hpp"
 
 #include <algorithm>
 
@@ -7,6 +8,7 @@ using std::string;
 UserAccount::UserAccount(const string& username, const size_t pwdHash) {
     this->username = username;
     this->pwdHash = pwdHash;
+    this->id = generateAccountNumber();
 }
 
 UserAccount::UserAccount(const nlohmann::json& data)
